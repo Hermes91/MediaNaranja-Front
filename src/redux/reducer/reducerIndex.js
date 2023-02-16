@@ -4,6 +4,7 @@ import {
     GET_USERS,
     FILTER_BY_USER,
     FILTER_BY_STORE,
+    SEARCH_BY_CODE
   } from "../actions/actionIndex.js";
 export const initialState = {
         allTickets: [],
@@ -44,9 +45,15 @@ export default function reducer(state = initialState, action) {
     case FILTER_BY_STORE:
       return {
         ...state,
-        filterProducts: action.payload,
+        filterTickets: action.payload,
       };
     
+      case SEARCH_BY_CODE:
+        return {
+          ...state,
+          filterTickets: action.payload,
+        }
+
     default:
       return {
         ...state,
