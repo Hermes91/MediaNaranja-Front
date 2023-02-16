@@ -1,10 +1,12 @@
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 export const GET_TICKETS = "GET_TICKETS";
 export const GET_STORES = "GET_STORES";
 export const GET_USERS = "GET_USERS";
 export const FILTER_BY_USER = "FILTER_BY_USER";
 export const FILTER_BY_STORE = "FILTER_BY_STORE";
+export const SEARCH_BY_CODE = 'SEARCH_BY_CODE';
 
 export const getTickets = () => {
     return async function (dispatch) {
@@ -34,3 +36,15 @@ export const filterByStore = (almacen) => {
     dispatch({ type: FILTER_BY_STORE, payload: ticketsResponse.data });
   };
 };
+
+export const searchByCode = (code) => {
+  return async function ( dispatch ) {
+    try {
+      const searchResponse = await axios.get(`/tickets/?code=${code}`);
+      dispatch({ type: SEARCH_BY_CODE, payload: searchResponse.data });
+    } catch (error) {
+      console.error("Ticket not found: ",error);
+      toast.warn('El código ingresado no le corresponde a ningún ticket');
+    }
+  };
+  }
