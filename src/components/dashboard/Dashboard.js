@@ -256,7 +256,7 @@ function DashboardContent() {
                 setGraphShow(false);
                 setdepositShow(false);
                 setrecentShow(false);
-                setordersShow(false);
+                setordersShow(true);
                 setClientsShow(false);
                 setproductsShow(false);
               }}

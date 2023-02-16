@@ -12,7 +12,7 @@ export default function NavBar() {
                 <img src={MNlogo} alt="La Media Naranja" />
             </div>
             <div className={s.timers}>
-                <CountDownTimer date="03/24/2023" />
+                <CountDownTimer date="03/23/2023" />
             </div>
             <div className={s.userProfile}>
                 <h3 >User Name</h3>
