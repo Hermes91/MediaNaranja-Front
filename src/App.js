@@ -2,7 +2,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./components/dashboard/Dashboard";
 import NavBar from "./components/Navbar/Navbar";
-import Home from './components/Home/Home'
+import Home from "./components/Home/Home";
 
 function App() {
   return (
@@ -12,8 +12,8 @@ function App() {
           <Route exact path="/" element={<NavBar />} />
         </Routes>
         <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route path="/admin" element={<Dashboard />} /
+          <Route exact path="/" element={<Home />} />
+          <Route path="/admin" element={<Dashboard />} />
         </Routes>
       </div>
     </div>
