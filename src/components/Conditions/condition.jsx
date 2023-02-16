@@ -1,8 +1,16 @@
-import { React } from "react";
+import { Backdrop } from "@mui/material";
+import { React, useState } from "react";
+import CircularProgress from '@mui/material/CircularProgress';
 import s from '../Conditions/condition.module.css'
+import UserForm from "../UserForm/UserForm";
 
 export default function Condition() {
 
+    const [open, setOpen] = useState(false);
+
+    const handleToggle = () => {
+        setOpen(!open);
+    };
 
     return (
         <>
@@ -48,7 +56,14 @@ export default function Condition() {
                         imperdiet nibh eu, consectetur tellus. Donec a risus vestibulum, hendrerit libero
                         vehicula, vulputate felis.
                     </p>
-                    <div className={s.btn_bgstroke}>Únete ahora</div>
+                    <div className={s.btn_bgstroke} onClick={handleToggle}>Únete ahora</div>
+                    <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={open}
+                    >
+                        <UserForm
+                            handleClose={() => setOpen(false)}
+                        />
+                    </Backdrop>
                 </div>
             </section>
         </>

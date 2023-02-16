@@ -1,0 +1,62 @@
+.formContainer {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--secondary-orange);
+    padding: 10px;
+}
+
+.formContainer h3 {
+    display: block;
+    float: right;
+    margin-top: 3px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: transform 0.5s;
+}
+
+.formContainer h3:hover {
+    transform: scale(1.3);
+}
+
+.formBody {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formItem {
+    margin-top: 10px;
+
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    padding-bottom: 25px;
+    align-items: center;
+    width: 300px;
+}
+
+.formulario label {
+    display: flex;
+    align-self: flex-start;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.formulario input {
+    height: 30px;
+    width: 300px;
+}
+
+.formulario button {
+    width: 30%;
+}
+
+.formerror {
+    color: rgb(255, 229, 229);
+    margin-top: -15px;
+    font-size: 10pt;
+    width: 100%;
+}
