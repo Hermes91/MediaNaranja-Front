@@ -1,6 +1,8 @@
 import { React, useEffect, useState } from "react";
 import bannerImg from '../../assets/bannerSorteo.png'
 import bannerMobil from '../../assets/bannerMobil.png'
+import s from '../Home/Home.module.css'
+
 
 export default function Banner() {
     const [isDesktop, setDesktop] = useState(window.innerWidth > 1000);
@@ -14,16 +16,13 @@ export default function Banner() {
     });
 
 
-
-
     return (
-        <div>
+        <div className={s.bannImg}>
             {isDesktop ? (
                 <img src={bannerImg} alt="banner concurso La Media Naranja" />
             ) : (
                 <img src={bannerMobil} alt="banner La Media Naranja mobil" />
             )}
-
         </div>
     )
 

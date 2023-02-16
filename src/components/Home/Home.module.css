@@ -1,5 +1,26 @@
 .banner {
+    margin: 0;
+    display: flex;
+    background-image: url('../../assets/bgAbstract.jpg');
+    background-size: cover;
+    background-position: fixed;
     height: 400px;
+    justify-content: center;
 }
 
+.bannImg img {
+    margin-top: 2%;
+    border: solid 5pt rgb(255, 255, 255);
+}
 
+@media (orientation:portrait) {
+    .banner {
+        display: flex;
+        justify-content: center;
+        background-image: none;
+    }
+
+    .bannImg {
+        width: -25%;
+    }
+}

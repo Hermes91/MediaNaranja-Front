@@ -1,0 +1,46 @@
+.footerContainer {
+    height: 200px;
+    background-color: aliceblue;
+}
+
+.generalInfo {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3%;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.sociales {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 3%;
+
+}
+
+.sociales svg {
+    color: var(--main-orange);
+
+}
+
+.linkIcon {
+    scale: 2;
+}
+
+.linkIcon:hover {
+    color: var(--secondary-orange);
+    cursor: pointer;
+}
+
+.ubicaciones {
+    display: flex;
+    align-items: center;
+
+}
+
+.ubicaciones svg {
+    color: var(--secondary-orange);
+    width: 4em;
+    height: 2em;
+}
