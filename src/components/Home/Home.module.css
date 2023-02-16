@@ -11,6 +11,7 @@
 .bannImg img {
     margin-top: 2%;
     border: solid 5pt rgb(255, 255, 255);
+    
 }
 
 @media (orientation:portrait) {

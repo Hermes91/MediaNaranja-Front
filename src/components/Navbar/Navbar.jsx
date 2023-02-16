@@ -15,7 +15,7 @@ export default function NavBar() {
                 <CountDownTimer date="03/23/2023" />
             </div>
             <div className={s.userProfile}>
-                <h3 >User Name</h3>
+                <h3 >Ingresar mis cupones</h3>
             </div>
         </div>
     </>
