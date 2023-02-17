@@ -10,18 +10,18 @@ import style from '../SearchBar/SearchBar.module.css'
 
 export default function SearchBar() {
     const dispatch = useDispatch();
-    const [name, setName] = useState("");
+    const [ticket, setTicket] = useState("");
 
 
     const handleInput = (e) => {
         e.preventDefault();
-        setName(e.target.value);
+        setTicket(e.target.value);
     };
 
     const handleInputSubmit = (e) => {
         e.preventDefault();
-        dispatch(searchByCode(name));
-        setName("");
+        dispatch(searchByCode(ticket));
+        setTicket("");
     };
 
     return (
