@@ -8,7 +8,7 @@ import { searchByCode } from '../../redux/actions/actionIndex.js'
 import style from '../SearchBar/SearchBar.module.css'
 
 
-export default function SearchBar() {
+export default function SearchBarByCode() {
     const dispatch = useDispatch();
     const [ticket, setTicket] = useState("");
 

@@ -8,7 +8,7 @@ import { searchByEmail } from '../../redux/actions/actionIndex.js'
 import style from '../SearchBar/SearchBar.module.css'
 
 
-export default function SearchBar() {
+export default function SearchBarByEmail() {
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
 
