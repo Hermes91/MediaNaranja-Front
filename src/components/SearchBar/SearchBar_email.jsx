@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 // --importo actions que traiga by name-- //
-import { searchByCode } from '../../redux/actions/actionIndex.js'
+import { searchByEmail } from '../../redux/actions/actionIndex.js'
 
 // --importo style-- //
 import style from '../SearchBar/SearchBar.module.css'
@@ -10,18 +10,18 @@ import style from '../SearchBar/SearchBar.module.css'
 
 export default function SearchBar() {
     const dispatch = useDispatch();
-    const [ticket, setTicket] = useState("");
+    const [email, setEmail] = useState("");
 
 
     const handleInput = (e) => {
         e.preventDefault();
-        setTicket(e.target.value);
+        setEmail(e.target.value);
     };
 
     const handleInputSubmit = (e) => {
         e.preventDefault();
-        dispatch(searchByCode(ticket));
-        setTicket("");
+        dispatch(searchByEmail(email));
+        setEmail("");
     };
 
     return (
@@ -31,9 +31,9 @@ export default function SearchBar() {
                     <input
                         className={style.input}
                         onChange={(e) => handleInput(e)}
-                        placeholder='Código del ticket...'
-                        maxLength="50"
-                        value={ticket}
+                        placeholder='Email del usuario...'
+                        maxLength="40"
+                        value={email}
                     />
                     <input
                         onClick={(e) => handleInputSubmit(e)}
