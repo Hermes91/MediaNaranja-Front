@@ -51,7 +51,9 @@
 }
 
 .formulario button {
+    margin-top: 4%;
     width: 30%;
+    border-radius: 5px;
 }
 
 .formerror {
@@ -59,4 +61,12 @@
     margin-top: -15px;
     font-size: 10pt;
     width: 100%;
+}
+
+
+@media (orientation:portrait) {
+    .formContainer {
+        width: 70%;
+        margin-right: 90px;
+    }
 }
