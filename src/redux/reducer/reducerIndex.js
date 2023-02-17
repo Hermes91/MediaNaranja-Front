@@ -7,6 +7,7 @@
     FILTER_BY_STORE,
     SEARCH_BY_CODE,
     POST_USER,
+    SEARCH_BY_EMAIL
   } from "../actions/actionIndex.js";
 export const initialState = {
         allTickets: [],
@@ -14,6 +15,7 @@ export const initialState = {
         allUsers: [],
         store: "",
         filterTickets: [],
+        user: [],
         orderedChange: false,
       };
 
@@ -61,6 +63,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         filterTickets: action.payload,
       };
+
+      case SEARCH_BY_EMAIL:
+        return{
+          ...state,
+          user: action.payload
+        }
 
       case POST_USER:
         const newUser = action.payload; 

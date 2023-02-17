@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Await } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 export const GET_TICKETS = "GET_TICKETS";
@@ -9,6 +10,7 @@ export const FILTER_BY_USER = "FILTER_BY_USER";
 export const FILTER_BY_STORE = "FILTER_BY_STORE";
 export const SEARCH_BY_CODE = 'SEARCH_BY_CODE';
 export const POST_USER = 'POST_USER';
+export const SEARCH_BY_EMAIL = 'SEARCH_BY_EMAIL';
 
 export const getTickets = () => {
     return async function (dispatch) {
@@ -56,6 +58,17 @@ export const searchByCode = (code) => {
       toast.warn('El código ingresado no le corresponde a ningún ticket');
     }
   };
+}
+export const searchByEmail = (email) => {
+  return async function (dispatch) {
+    try {
+      const searchResponse = await axios.get(`/user/?email=${email}`);
+      dispatch({ type: SEARCH_BY_EMAIL, payload: searchResponse.data});
+    } catch (error) {
+      console.log('Email error ', error);
+      toast.warn('El email no se encuentra registrado en la base de datos');
+    }
+  }
 }
 
 export const postUser = (userInfo) => {
