@@ -1,3 +1,4 @@
+ import 
  {  GET_TICKETS,
     GET_STORES,
     GET_STORE,
@@ -15,27 +16,6 @@ export const initialState = {
         filterTickets: [],
         orderedChange: false,
       };
-
-export const initialState = {
-  allTickets: [],
-  allStores: [
-    "bello",
-    "apartado",
-    "envigado",
-    "parque berrio",
-    "pichincha",
-    "carabobo",
-    "cundinamarca",
-    "ayacucho",
-    "pereira",
-    "buenos aires",
-    "central",
-    "itagui",
-  ],
-  allUsers: [],
-  filterTickets: [],
-  orderedChange: false,
-};
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
