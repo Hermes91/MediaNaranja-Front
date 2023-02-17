@@ -4,7 +4,8 @@ import {
     GET_USERS,
     FILTER_BY_USER,
     FILTER_BY_STORE,
-    SEARCH_BY_CODE
+    SEARCH_BY_CODE,
+    POST_USER,
   } from "../actions/actionIndex.js";
 export const initialState = {
         allTickets: [],
@@ -53,6 +54,15 @@ export default function reducer(state = initialState, action) {
           ...state,
           filterTickets: action.payload,
         }
+
+      case POST_USER:
+        const newUser = action.payload; 
+        const allUsers = [...state.allUsers];
+        allUsers.push(newUser)
+        return {
+          ...state,
+          allUsers: [...allUsers],
+        };
 
     default:
       return {

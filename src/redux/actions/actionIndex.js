@@ -7,6 +7,7 @@ export const GET_USERS = "GET_USERS";
 export const FILTER_BY_USER = "FILTER_BY_USER";
 export const FILTER_BY_STORE = "FILTER_BY_STORE";
 export const SEARCH_BY_CODE = 'SEARCH_BY_CODE';
+export const POST_USER = 'POST_USER';
 
 export const getTickets = () => {
     return async function (dispatch) {
@@ -47,4 +48,16 @@ export const searchByCode = (code) => {
       toast.warn('El código ingresado no le corresponde a ningún ticket');
     }
   };
-  }
+}
+
+export const postUser = (userInfo) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post("/products", userInfo);
+      dispatch({ type: POST_USER, payload: response.config.data });
+    } catch (error) {
+      console.log(error.message);
+      dispatch({ type: POST_USER, payload: { data: [] } });
+    }
+  };
+};
