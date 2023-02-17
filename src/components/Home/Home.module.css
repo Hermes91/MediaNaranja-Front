@@ -3,7 +3,8 @@
     display: flex;
     background-image: url('../../assets/bgAbstract.jpg');
     background-size: cover;
-    background-position: fixed;
+    background-position: center;
+    background-attachment: fixed;
     height: 400px;
     justify-content: center;
 }
@@ -11,7 +12,7 @@
 .bannImg img {
     margin-top: 2%;
     border: solid 5pt rgb(255, 255, 255);
-    
+
 }
 
 @media (orientation:portrait) {
@@ -22,6 +23,10 @@
     }
 
     .bannImg {
-        width: -25%;
+        height: 200px;
+    }
+
+    .bannImg img {
+        width: 350px;
     }
 }

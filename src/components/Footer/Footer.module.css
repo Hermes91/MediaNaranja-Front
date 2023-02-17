@@ -42,3 +42,17 @@
     width: 4em;
     height: 2em;
 }
+
+
+@media (orientation:portrait) {
+    .generalInfo {
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
+    }
+
+    .ubicaciones svg {
+        display: none;
+    }
+
+}

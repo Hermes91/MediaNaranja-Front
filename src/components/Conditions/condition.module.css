@@ -57,22 +57,60 @@ p,
 }
 
 .ByC {
-    width: 40%;
+    width: 30%;
+    color: var(--secondary-orange);
+}
+
+.ByC h2 {
+    font-size: 36pt;
+    background-color: #ffebd5;
+    opacity: 1;
+    background-image: radial-gradient(#459ed5 1.6500000000000001px, #ffebd5 1.6500000000000001px);
+    background-size: 33px 33px;
+    height: 50%;
+    border-radius: 45px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    transition: transform 0.5s;
+}
+
+.ByC h2:hover {
+    transform: scale(1.1);
 }
 
 .textByC {
-    height: 400px;
-    overflow: scroll;
+    width: 80%;
     background-color: antiquewhite;
+    padding: 20px 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
 }
 
-.textByC li {
+.bycContainer li {
     font-size: 12pt;
     padding-top: 12pt;
-    list-style: none;
     text-align: start;
     color: var(--secondary-orange);
     padding-left: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: fit-content;
+}
+
+.bycContainer h3 {
+    display: block;
+    float: right;
+    margin-top: 7px;
+    margin-right: 150px;
+    cursor: pointer;
+    transition: transform 0.5s;
+    color: var(--secondary-orange);
+}
+
+.bycContainer h3:hover {
+    transform: scale(1.3);
 }
 
 @media (orientation:portrait) {
@@ -90,6 +128,38 @@ p,
         width: 80%;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .ByC h2 {
+        padding: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 5px;
+        width: 70%;
+        font-size: 24pt;
+    }
+
+    .textByC {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        padding-top: 30px;
+    }
+
+    .bycContainer {
+        display: flex;
+        justify-content: center;
+        margin-right: 70px;
+    }
+
+    .bycContainer li {
+        font-size: 10pt;
+        overflow: scroll;
+    }
+
+    .bycContainer h3 {
+        margin-left: 35%;
+        position: absolute;
     }
 
     .textParticipar {
