@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store/storeIndex";
 
-axios.defaults.baseURL = "https://concursos.medianaranja.com.co";
+axios.defaults.baseURL = "https://concursos.lamedianaranja.com.co";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

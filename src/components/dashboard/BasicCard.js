@@ -15,8 +15,11 @@ export default function BasicCard(props) {
         <Typography variant="h5" component="div">
           {props.name}
         </Typography>
+        <Typography sx={{ mt: 1.5 }} color="text.secondary">
+          Documento: {props.numDocumento}
+        </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Almacén: {props.store}
+          teléfono: {props.telephone}
         </Typography>
         <Typography variant="body2">
           Cupones: {props.coupons}
