@@ -1,6 +1,7 @@
 import {
     GET_TICKETS,
     GET_STORES,
+    GET_STORE,
     GET_USERS,
     FILTER_BY_USER,
     FILTER_BY_STORE,
@@ -8,8 +9,9 @@ import {
   } from "../actions/actionIndex.js";
 export const initialState = {
         allTickets: [],
-        allStores: ['bello', 'apartado', 'envigado', 'parque berrio', 'pichincha', 'carabobo', 'cundinamarca', 'ayacucho', 'pereira', 'buenos aires', 'central', 'itagui'],
+        allStores: [],
         allUsers: [],
+        store: "",
         filterTickets: [],
         orderedChange: false,
       };
@@ -27,8 +29,15 @@ export default function reducer(state = initialState, action) {
 
     case GET_STORES:
       return {
-        ...state.allStores
+        ...state,
+        allStores: action.payload
       };
+
+    // case GET_STORE:
+    //   return {
+    //     ...state,
+    //     store: action.payload.name
+    //   };
       
     case GET_USERS:
       return {
