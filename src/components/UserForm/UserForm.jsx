@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import validate from '../UserForm/validate'
 import s from './UserForm.module.css'
+import { postUser } from "../../redux/actions/actionIndex";
+import { useDispatch } from "react-redux";
 
 export default function UserForm({ handleClose }) {
-
+    const dispatch = useDispatch()
 
     const [input, setInput] = useState({
         email: "",
@@ -17,6 +19,14 @@ export default function UserForm({ handleClose }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        dispatch(postUser(input))
+        setInput({
+            email: "",
+            nombre: "",
+            numDocumento: "",
+            direccion: "",
+            telephone: "",
+        })
     }
 
     const handleChange = (e) => {

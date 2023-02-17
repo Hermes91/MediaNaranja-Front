@@ -61,7 +61,7 @@ export const searchByCode = (code) => {
 export const postUser = (userInfo) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post("/products", userInfo);
+      const response = await axios.post("/user", userInfo);
       dispatch({ type: POST_USER, payload: response.config.data });
     } catch (error) {
       console.log(error.message);
