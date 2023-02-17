@@ -1,5 +1,4 @@
-import {
-    GET_TICKETS,
+ {  GET_TICKETS,
     GET_STORES,
     GET_STORE,
     GET_USERS,
@@ -17,10 +16,29 @@ export const initialState = {
         orderedChange: false,
       };
 
-export default function reducer(state = initialState, action) { 
+export const initialState = {
+  allTickets: [],
+  allStores: [
+    "bello",
+    "apartado",
+    "envigado",
+    "parque berrio",
+    "pichincha",
+    "carabobo",
+    "cundinamarca",
+    "ayacucho",
+    "pereira",
+    "buenos aires",
+    "central",
+    "itagui",
+  ],
+  allUsers: [],
+  filterTickets: [],
+  orderedChange: false,
+};
 
+export default function reducer(state = initialState, action) {
   switch (action.type) {
-
     case GET_TICKETS:
       return {
         ...state,
@@ -57,12 +75,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         filterTickets: action.payload,
       };
-    
-      case SEARCH_BY_CODE:
-        return {
-          ...state,
-          filterTickets: action.payload,
-        }
+
+    case SEARCH_BY_CODE:
+      return {
+        ...state,
+        filterTickets: action.payload,
+      };
 
       case POST_USER:
         const newUser = action.payload; 
@@ -77,5 +95,5 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
       };
-    }
+  }
 }
