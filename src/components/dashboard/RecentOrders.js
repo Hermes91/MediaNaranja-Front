@@ -1,10 +1,11 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
+import { Pagination } from "./Pagination"
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers, filterByUser, getTickets } from "../../redux/actions/actionIndex";
 
@@ -27,9 +28,11 @@ function addTickets(allTickets, allUsers) {
       } 
     })
   }
-  console.log(allUsers)
   return allUsers
 }
+
+  const only15 = allUsers.slice(0, 15)
+
   return (
     <React.Fragment>
       <Title>Últimos usuarios registrados</Title>
@@ -42,7 +45,7 @@ function addTickets(allTickets, allUsers) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {addTickets(allTickets, allUsers).map((u) => (
+          {addTickets(allTickets, only15).map((u) => (
             <TableRow key={u.id}>
               <TableCell>{u.nombre}</TableCell>
               <TableCell>{u.email}</TableCell>
