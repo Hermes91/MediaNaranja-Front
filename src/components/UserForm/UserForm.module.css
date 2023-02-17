@@ -25,9 +25,12 @@
     align-items: center;
 }
 
+.formBody h2 {
+    width: 420px;
+}
+
 .formItem {
     margin-top: 10px;
-
 }
 
 .formulario {
@@ -69,4 +72,25 @@
         width: 70%;
         margin-right: 90px;
     }
+
+    .formBody {
+        width: 400px;
+    }
+
+    .formBody h2 {
+        width: 300px;
+    }
+
+    .formulario input {
+        height: 30px;
+        width: 200px;
+    }
+   
+    .formBody {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+    }
+    
 }
