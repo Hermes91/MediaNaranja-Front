@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState} from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -16,14 +16,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUsers } from "../../redux/actions/actionIndex";
 import BasicCard from "./BasicCard";
+import { Pagination } from "./Pagination"
 
 export default function Clients() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.allUsers);
+  const allUsers = useSelector((state) => state.allUsers);
+  const allTickets = useSelector((state) => state.allTickets);
   const tableRef = useRef(null);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [currentPage, setCurrentPage] = useState(1)
+  const [maxItems, setMaxItems] = useState(12)
 
   const { onDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
@@ -31,9 +35,21 @@ export default function Clients() {
     sheet: "Users",
   });
 
+  function addTickets(allTickets, allUsers) {
+    for (let i = 0; i < allUsers.length; i++) {
+      allUsers[i]["tickets"] = []
+      allTickets.map(t => {
+        if (allUsers[i].id === t.userId) {
+          allUsers[i]["tickets"].push(t)
+        } 
+      })
+    }
+    return allUsers
+  }
+
   useEffect(() => {
-    !users.length && dispatch(getUsers());
-  }, [users, dispatch]);
+    !allUsers.length && dispatch(getUsers());
+  }, [allUsers, dispatch]);
 
   const style = {
     position: "absolute",
@@ -49,6 +65,7 @@ export default function Clients() {
 
   return (
     <React.Fragment>
+      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} allUsers={allUsers} maxItems={maxItems}/>
       <Title>Usuarios registrados</Title>
       <Divider />
       <Button
@@ -75,14 +92,14 @@ export default function Clients() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((user) => (
+          {addTickets(allTickets, allUsers).map((user) => (
             <>
               <TableRow key={user.id}>
                 <TableCell onClick={handleOpen}>{user.numDocumento}</TableCell>
 
                 <TableCell>{user.nombre}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell align="center">{user.coupons}</TableCell>
+                <TableCell align="center">{user.tickets.length}</TableCell>
               </TableRow>
               <Modal
                 open={open}
