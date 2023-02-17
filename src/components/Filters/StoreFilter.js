@@ -10,8 +10,11 @@ import {
 
 export default function StoreFilter(){
   const allStores = useSelector(state => state.allStores)
-  console.log(allStores)
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    !allStores.length && dispatch(getStores())
+  }, [dispatch])
 
   const handleFilteredTicket = (e) => {
     dispatch(filterByStore(e.target.value));
@@ -19,8 +22,8 @@ export default function StoreFilter(){
 
   const storesList = allStores.map((store, id) => {
     return (
-      <option key={id} value={store}>
-        {store}
+      <option key={id} value={store.name}>
+        {store.name}
       </option>
     );
   });

@@ -1,11 +1,20 @@
-import {
-  GET_TICKETS,
-  GET_STORES,
-  GET_USERS,
-  FILTER_BY_USER,
-  FILTER_BY_STORE,
-  SEARCH_BY_CODE,
-} from "../actions/actionIndex.js";
+ {  GET_TICKETS,
+    GET_STORES,
+    GET_STORE,
+    GET_USERS,
+    FILTER_BY_USER,
+    FILTER_BY_STORE,
+    SEARCH_BY_CODE,
+    POST_USER,
+  } from "../actions/actionIndex.js";
+export const initialState = {
+        allTickets: [],
+        allStores: [],
+        allUsers: [],
+        store: "",
+        filterTickets: [],
+        orderedChange: false,
+      };
 
 export const initialState = {
   allTickets: [],
@@ -39,9 +48,16 @@ export default function reducer(state = initialState, action) {
 
     case GET_STORES:
       return {
-        ...state.allStores,
+        ...state,
+        allStores: action.payload
       };
 
+    // case GET_STORE:
+    //   return {
+    //     ...state,
+    //     store: action.payload.name
+    //   };
+      
     case GET_USERS:
       return {
         ...state,
@@ -65,6 +81,15 @@ export default function reducer(state = initialState, action) {
         ...state,
         filterTickets: action.payload,
       };
+
+      case POST_USER:
+        const newUser = action.payload; 
+        const allUsers = [...state.allUsers];
+        allUsers.push(newUser)
+        return {
+          ...state,
+          allUsers: [...allUsers],
+        };
 
     default:
       return {
