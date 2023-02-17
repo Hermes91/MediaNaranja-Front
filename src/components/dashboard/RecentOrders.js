@@ -1,67 +1,52 @@
-import * as React from "react";
+import React, {useEffect} from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
-
-function createData(id, date, name, email, coupons) {
-  return { id, date, name, email, coupons };
-}
-
-const rows = [
-  createData(
-    0,
-    "10 Feb, 2023",
-    "Elvis Presley",
-    "elvis@lamedianaranja.com.co",
-    3
-  ),
-  createData(
-    1,
-    "8 Feb, 2023",
-    "Paul McCartney",
-    "paul@lamedianaranja.com.co",
-    11
-  ),
-  createData(2, "8 Feb, 2023", "Tom Scholz", "tom@lamedianaranja.com.co", 2),
-  createData(
-    3,
-    "6 Feb, 2023",
-    "Michael Jackson",
-    "michael@lamedianaranja.com.co",
-    1
-  ),
-  createData(
-    4,
-    "6 Feb, 2023",
-    "Bruce Springsteen",
-    "bruce@lamedianaranja.com.co",
-    5
-  ),
-];
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers, filterByUser, getTickets } from "../../redux/actions/actionIndex";
 
 export default function RecentOrders() {
+  const allUsers = useSelector(state => state.allUsers)
+  const allTickets = useSelector(state => state.allTickets)
+  const dispatch = useDispatch();
+
+useEffect(() => {
+  !allUsers.length && dispatch(getUsers())
+  !allTickets.length && dispatch(getTickets())
+})
+
+function addTickets(allTickets, allUsers) {
+  for (let i = 0; i < allUsers.length; i++) {
+    allUsers[i]["tickets"] = []
+    allTickets.map(t => {
+      if (allUsers[i].id === t.userId) {
+        allUsers[i]["tickets"].push(t)
+      } 
+    })
+  }
+  console.log(allUsers)
+  return allUsers
+}
   return (
     <React.Fragment>
       <Title>Últimos usuarios registrados</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Fecha</TableCell>
             <TableCell>Nombre</TableCell>
             <TableCell>Correo electrónico</TableCell>
             <TableCell align="center">Cupones registrados</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.email}</TableCell>
-              <TableCell align="center">{row.coupons}</TableCell>
+          {addTickets(allTickets, allUsers).map((u) => (
+            <TableRow key={u.id}>
+              <TableCell>{u.nombre}</TableCell>
+              <TableCell>{u.email}</TableCell>
+              <TableCell align="center">{u.tickets.length}</TableCell>
             </TableRow>
           ))}
         </TableBody>
