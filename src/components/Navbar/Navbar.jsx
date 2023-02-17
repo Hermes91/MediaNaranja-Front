@@ -3,7 +3,9 @@ import s from './Navbar.module.css'
 import MNlogo from '../../assets/logo-2020.png'
 import CountDownTimer from './CountDownTimer'
 import { Backdrop } from "@mui/material";
-import UserForm from "../UserForm/UserForm";
+import CodeReg from "../Code/code";
+
+
 
 export default function NavBar() {
 
@@ -25,7 +27,7 @@ export default function NavBar() {
             </div>
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}>
-                <UserForm handleClose={() => setOpen(false)} />
+                <CodeReg handleClose={() => setOpen(false)} />
             </Backdrop>
         </div>
     </>)
