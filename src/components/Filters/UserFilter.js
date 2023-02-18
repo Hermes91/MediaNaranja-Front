@@ -12,17 +12,17 @@ import {
 export default function SearchbyUser() {
   // --Handels-- //
   const dispatch = useDispatch();
-    const [email, setEmail] = useState("");
+    const [numDocumento, setNumDocumento] = useState("");
 
     const handleInput = (e) => {
         e.preventDefault();
-        setEmail(e.target.value);
+        setNumDocumento(e.target.value);
     };
 
     const handleInputSubmit = (e) => {
         e.preventDefault();
-        dispatch(filterByUser(email));
-        setEmail("");
+        dispatch(filterByUser(numDocumento));
+        setNumDocumento("");
     };
   
   return (
@@ -32,7 +32,8 @@ export default function SearchbyUser() {
         onChange={(e) => handleInput(e)}
         placeholder='Search...'
         maxLength="40"
-        value={email}
+        type="number"
+        value={numDocumento}
       />
       <button
         onClick={(e) => handleInputSubmit(e)}
