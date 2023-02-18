@@ -7,12 +7,15 @@
     FILTER_BY_STORE,
     SEARCH_BY_CODE,
     POST_USER,
-    SEARCH_BY_EMAIL
+    POST_TICKET,
+    SEARCH_BY_EMAIL,
+    GET_STORES_DB
   } from "../actions/actionIndex.js";
 export const initialState = {
         allTickets: [],
-        allStores: [],
+        allStores: ['bello', 'apartado', 'envigado', 'parque berrio', 'pichincha', 'carabobo', 'cundinamarca', 'ayacucho', 'pereira', 'buenos aires', 'central', 'itagui'],
         allUsers: [],
+        storesDB: [],
         store: "",
         filterTickets: [],
         user: [],
@@ -28,11 +31,11 @@ export default function reducer(state = initialState, action) {
         filterTickets: action.payload,
       };
 
-    case GET_STORES:
+    case GET_STORES_DB: 
       return {
-        ...state,
-        allStores: action.payload
-      };
+        ...state, 
+        storesDB: action.payload
+      }
 
     // case GET_STORE:
     //   return {
@@ -77,6 +80,13 @@ export default function reducer(state = initialState, action) {
         return {
           ...state,
           allUsers: [...allUsers],
+          user: newUser
+        };
+
+      case POST_TICKET:
+        return {
+          ...state,
+          allTickets: [...state.allTickets, action.payload],
         };
 
     default:
