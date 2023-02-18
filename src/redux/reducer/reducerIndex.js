@@ -8,6 +8,7 @@
     SEARCH_BY_CODE,
     POST_USER,
     SEARCH_BY_EMAIL,
+    GET_ADMIN,
     PUT_ADMIN_COUNTDOWN,
     PUT_ADMIN_PW
   } from "../actions/actionIndex.js";

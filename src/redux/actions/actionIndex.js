@@ -22,26 +22,25 @@ export const getAdmin = () => {
 }
 
 export const putAdminPassword = (password) => {
+  return async function (dispatch) {
   try {
-    return async function (dispatch) {
       const adminRes = await axios.put("/admin", password);
       dispatch({ type: PUT_ADMIN_PW, payload: adminRes.data.form })
     } 
-  } catch (error) {
+   catch (error) {
     console.log(error);
-    dispatch({ type: PUT_ADMIN_PW, payload: { data: [] } });
+    }
   }
 }
 
 export const putAdminCountdown = (countdown) => {
+  return async function (dispatch) {
   try {
-    return async function (dispatch) {
       const adminRes = await axios.put("/admin", countdown);
       dispatch({ type: PUT_ADMIN_COUNTDOWN, payload: adminRes.data.form })
-    } 
-  } catch (error) {
+    } catch (error) {
     console.log(error);
-    dispatch({ type: PUT_ADMIN_COUNTDOWN, payload: { data: [] } });
+    }
   }
 }
 
