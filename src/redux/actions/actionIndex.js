@@ -10,6 +10,40 @@ export const FILTER_BY_STORE = "FILTER_BY_STORE";
 export const SEARCH_BY_CODE = 'SEARCH_BY_CODE';
 export const POST_USER = 'POST_USER';
 export const SEARCH_BY_EMAIL = 'SEARCH_BY_EMAIL';
+export const GET_ADMIN = 'GET_ADMIN';
+export const PUT_ADMIN_PW = 'PUT_ADMIN_PW';
+export const PUT_ADMIN_COUNTDOWN = 'PUT_ADMIN_COUNTDOWN';
+
+export const getAdmin = () => {
+  return async function (dispatch) {
+    const adminRes = await axios.get("/admin");
+    dispatch({ type: GET_ADMIN, payload: adminRes.data })
+  }
+}
+
+export const putAdminPassword = (password) => {
+  try {
+    return async function (dispatch) {
+      const adminRes = await axios.put("/admin", password);
+      dispatch({ type: PUT_ADMIN_PW, payload: adminRes.data.form })
+    } 
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: PUT_ADMIN_PW, payload: { data: [] } });
+  }
+}
+
+export const putAdminCountdown = (countdown) => {
+  try {
+    return async function (dispatch) {
+      const adminRes = await axios.put("/admin", countdown);
+      dispatch({ type: PUT_ADMIN_COUNTDOWN, payload: adminRes.data.form })
+    } 
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: PUT_ADMIN_COUNTDOWN, payload: { data: [] } });
+  }
+}
 
 export const getTickets = () => {
     return async function (dispatch) {

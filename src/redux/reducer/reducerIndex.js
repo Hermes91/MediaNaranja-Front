@@ -7,7 +7,9 @@
     FILTER_BY_STORE,
     SEARCH_BY_CODE,
     POST_USER,
-    SEARCH_BY_EMAIL
+    SEARCH_BY_EMAIL,
+    PUT_ADMIN_COUNTDOWN,
+    PUT_ADMIN_PW
   } from "../actions/actionIndex.js";
 export const initialState = {
         allTickets: [],
@@ -16,6 +18,7 @@ export const initialState = {
         store: "",
         filterTickets: [],
         user: [],
+        admin: {},
         orderedChange: false,
       };
 
@@ -79,6 +82,24 @@ export default function reducer(state = initialState, action) {
           allUsers: [...allUsers],
         };
 
+      case GET_ADMIN: 
+      return {
+        ...state,
+        admin: action.payload
+      }
+
+      case PUT_ADMIN_PW: 
+      return {
+        ...state,
+        admin: [...state.admin, state.admin[0].password = action.payload]
+      }
+
+      case PUT_ADMIN_COUNTDOWN: 
+      return {
+        ...state,
+        admin: [...state.admin, state.admin[0].countdown = action.payload]
+      }
+      
     default:
       return {
         ...state,
