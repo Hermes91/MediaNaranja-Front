@@ -15,15 +15,10 @@ export const SEARCH_BY_EMAIL = 'SEARCH_BY_EMAIL';
 export const GET_STORES_DB = 'GET_STORES_DB';
 
 export const getTickets = () => {
-    try {
       return async function (dispatch) {
         const ticketResponse = await axios.get(`/tickets`);
         dispatch({ type: GET_TICKETS, payload: ticketResponse.data });
       };
-    } catch (error) {
-      console.error(error);
-      toast.warn('El código ingresado no le corresponde a ningún ticket');
-    }
   };
 
 export const getUsers = () => {
