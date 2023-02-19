@@ -94,6 +94,20 @@ export default function reducer(state = initialState, action) {
           allTickets: [...state.allTickets, action.payload],
         };
 
+
+        case POST_TICKET:
+          return {
+            ...state,
+            allTickets: [...allTickets, action.payload]
+          }
+
+          case SEARCH_BY_DOCUMENT:
+            return {
+              ...state,
+              user: action.payload
+            }
+
+
       case GET_ADMIN: 
       console.log(action.payload)
       return {
@@ -113,6 +127,7 @@ export default function reducer(state = initialState, action) {
         admin: state.admin.countdown = action.payload
       }
       
+
     default:
       return {
         ...state,

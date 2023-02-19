@@ -12,6 +12,8 @@ export const SEARCH_BY_CODE = 'SEARCH_BY_CODE';
 export const POST_USER = 'POST_USER';
 export const POST_TICKET = 'POST_TICKET';
 export const SEARCH_BY_EMAIL = 'SEARCH_BY_EMAIL';
+export const POST_TICKET = "POST_TICKET";
+export const SEARCH_BY_DOCUMENT = 'SEARCH_BY_DOCUMENT';
 export const GET_STORES_DB = 'GET_STORES_DB';
 export const GET_ADMIN = 'GET_ADMIN';
 export const PUT_ADMIN_PW = 'PUT_ADMIN_PW';
@@ -46,6 +48,7 @@ export const putAdminCountdown = ({countdown, email}) => {
     }
   }
 }
+
 
 export const getTickets = () => {
       return async function (dispatch) {
@@ -118,6 +121,20 @@ export const postUser = (userInfo) => {
   };
 };
 
+
+
+export const searchByDocument = (document) => {
+  return async function (dispatch) {
+    try {
+      const searchResponse = await axios.get(`/user/?numDocumento=${document}`);
+      dispatch({ type: SEARCH_BY_DOCUMENT, payload: searchResponse.data});
+    } catch (error) {
+      console.log('Document error ', error);
+      toast.warn('El documento no se encuentra registrado en la base de datos');
+    }
+  }
+}
+
 export const postTicket = (ticketInfo) => {
   return async function (dispatch) {
     try {
@@ -130,3 +147,4 @@ export const postTicket = (ticketInfo) => {
     }
   };
 };
+
