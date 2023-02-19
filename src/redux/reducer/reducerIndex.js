@@ -1,20 +1,21 @@
-import {
-  GET_TICKETS,
-  GET_STORES,
-  GET_STORE,
-  GET_USERS,
-  FILTER_BY_USER,
-  FILTER_BY_STORE,
-  SEARCH_BY_CODE,
-  POST_USER,
-  SEARCH_BY_EMAIL,
-  GET_ADMIN,
-  PUT_ADMIN_COUNTDOWN,
-  PUT_ADMIN_PW,
-  POST_TICKET,
-  GET_STORES_DB,
-  SEARCH_BY_DOCUMENT
-} from "../actions/actionIndex.js";
+ import 
+ {  GET_TICKETS,
+    GET_STORES,
+    GET_STORE,
+    GET_USERS,
+    FILTER_BY_USER,
+    FILTER_BY_STORE,
+    SEARCH_BY_CODE,
+    POST_USER,
+    SEARCH_BY_EMAIL,
+    GET_ADMIN,
+    PUT_ADMIN_COUNTDOWN,
+    PUT_ADMIN_PW,
+    POST_TICKET,
+    GET_STORES_DB,
+    GET_USER_TICKETS
+
+  } from "../actions/actionIndex.js";
 export const initialState = {
   allTickets: [],
   allStores: ['bello', 'apartado', 'envigado', 'parque berrio', 'pichincha', 'carabobo', 'cundinamarca', 'ayacucho', 'pereira', 'buenos aires', 'central', 'itagui'],
@@ -127,6 +128,12 @@ export default function reducer(state = initialState, action) {
         admin: state.admin.countdown = action.payload
       }
 
+      case GET_USER_TICKETS:
+        return {
+          ...state,
+          filterTickets: action.payload
+        }
+      
 
     default:
       return {
