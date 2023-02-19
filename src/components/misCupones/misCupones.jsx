@@ -48,6 +48,7 @@ export default function MisCupones() {
                         open={open}>
                         <CodeRegister
                             handleClose={() => setOpen(false)}
+                            code
                         />
                     </Backdrop>
         </div>
