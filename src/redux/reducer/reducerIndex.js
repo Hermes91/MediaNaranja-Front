@@ -13,6 +13,7 @@
     PUT_ADMIN_PW,
     POST_TICKET,
     GET_STORES_DB,
+    GET_USER_TICKETS
 
   } from "../actions/actionIndex.js";
 export const initialState = {
@@ -126,6 +127,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         admin: state.admin.countdown = action.payload
       }
+
+      case GET_USER_TICKETS:
+        return {
+          ...state,
+          filterTickets: action.payload
+        }
       
 
     default:
