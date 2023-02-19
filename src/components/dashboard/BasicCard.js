@@ -6,6 +6,10 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 export default function BasicCard(props) {
+  const coupons = props.tickets.map((ticket) => {
+    return <div>{ticket.code}</div>;
+  });
+
   return (
     <Card sx={{ minWidth: 275, margin: 1 }}>
       <CardContent>
@@ -23,12 +27,13 @@ export default function BasicCard(props) {
         </Typography>
         <Typography variant="body2">
           Cupones: {props.coupons}
+          {coupons}
           <br />
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" sx={{ width: "100%" }}>
-          Ver cliente
+        <Button size="small" sx={{ width: "100%" }} onClick={props.onClose}>
+          CERRAR
         </Button>
       </CardActions>
     </Card>
