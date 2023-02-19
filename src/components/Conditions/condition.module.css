@@ -128,6 +128,7 @@ p,
         width: 80%;
         margin-left: auto;
         margin-right: auto;
+        overflow: scroll;
     }
 
     .ByC h2 {
@@ -142,23 +143,26 @@ p,
     .textByC {
         display: flex;
         flex-direction: column;
-        align-self: center;
-        padding-top: 30px;
+        width: fit-content;
+        padding: 0;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
 
     .bycContainer {
         display: flex;
         justify-content: center;
-        margin-right: 70px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .bycContainer li {
-        font-size: 10pt;
-        overflow: scroll;
+        font-size: 9pt;
     }
 
     .bycContainer h3 {
-        margin-left: 35%;
+        margin-left: 100%;
         position: absolute;
     }
 
