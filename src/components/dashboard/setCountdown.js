@@ -9,7 +9,7 @@ export default function SetCountDown() {
     const date = admin?.countdown?.split("T").join(" ").slice(0, -5)
 
     useEffect(() => {
-     if (!admin.countdown) {
+     if (!admin || !Object.keys(admin).length) {
          dispatch(getAdmin())
      }
     }, [dispatch, admin])
@@ -20,12 +20,13 @@ export default function SetCountDown() {
     }
 
     function handleOnClick(e){
-        e.preventDefault()
         var infoCountDown = {
             countdown: newCountdown,
             email: admin.email
         }
         dispatch(putAdminCountdown(infoCountDown))
+        dispatch(getAdmin())
+        setNewCountDown("")
     }
 
     return (
