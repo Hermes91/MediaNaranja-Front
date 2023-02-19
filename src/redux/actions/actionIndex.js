@@ -1,6 +1,5 @@
 import { Action } from "@remix-run/router";
 import axios from "axios";
-import { async } from "q";
 import { toast } from 'react-toastify';
 
 export const GET_TICKETS = "GET_TICKETS";
