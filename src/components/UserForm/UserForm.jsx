@@ -20,6 +20,7 @@ export default function UserForm({ handleClose }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(postUser(input))
+        localStorage.setItem("user", JSON.stringify(input));
         setInput({
             email: "",
             nombre: "",
