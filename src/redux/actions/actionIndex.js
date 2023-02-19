@@ -13,6 +13,39 @@ export const POST_USER = 'POST_USER';
 export const POST_TICKET = 'POST_TICKET';
 export const SEARCH_BY_EMAIL = 'SEARCH_BY_EMAIL';
 export const GET_STORES_DB = 'GET_STORES_DB';
+export const GET_ADMIN = 'GET_ADMIN';
+export const PUT_ADMIN_PW = 'PUT_ADMIN_PW';
+export const PUT_ADMIN_COUNTDOWN = 'PUT_ADMIN_COUNTDOWN';
+
+export const getAdmin = () => {
+  return async function (dispatch) {
+    const adminRes = await axios.get("/admin");
+    dispatch({ type: GET_ADMIN, payload: adminRes.data[0] })
+  }
+}
+
+export const putAdminPassword = (password) => {
+  return async function (dispatch) {
+  try {
+      const adminRes = await axios.put("/admin", password);
+      dispatch({ type: PUT_ADMIN_PW, payload: adminRes.data.form })
+    } 
+   catch (error) {
+    console.log(error);
+    }
+  }
+}
+
+export const putAdminCountdown = ({countdown, email}) => {
+  return async function (dispatch) {
+  try {
+      const adminRes = await axios.put("/admin", {countdown, email});
+      dispatch({ type: PUT_ADMIN_COUNTDOWN, payload: adminRes.data.form })
+    } catch (error) {
+    console.log(error);
+    }
+  }
+}
 
 export const getTickets = () => {
       return async function (dispatch) {

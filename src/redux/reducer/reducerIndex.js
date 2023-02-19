@@ -7,9 +7,13 @@
     FILTER_BY_STORE,
     SEARCH_BY_CODE,
     POST_USER,
-    POST_TICKET,
     SEARCH_BY_EMAIL,
-    GET_STORES_DB
+    GET_ADMIN,
+    PUT_ADMIN_COUNTDOWN,
+    PUT_ADMIN_PW,
+    POST_TICKET,
+    GET_STORES_DB,
+
   } from "../actions/actionIndex.js";
 export const initialState = {
         allTickets: [],
@@ -19,6 +23,7 @@ export const initialState = {
         store: "",
         filterTickets: [],
         user: [],
+        admin: {},
         orderedChange: false,
       };
 
@@ -89,6 +94,25 @@ export default function reducer(state = initialState, action) {
           allTickets: [...state.allTickets, action.payload],
         };
 
+      case GET_ADMIN: 
+      console.log(action.payload)
+      return {
+        ...state,
+        admin: action.payload
+      }
+
+      case PUT_ADMIN_PW: 
+      return {
+        ...state,
+        admin: state.admin.password = action.payload
+      }
+
+      case PUT_ADMIN_COUNTDOWN: 
+      return {
+        ...state,
+        admin: state.admin.countdown = action.payload
+      }
+      
     default:
       return {
         ...state,
