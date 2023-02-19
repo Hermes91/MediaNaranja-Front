@@ -6,28 +6,29 @@ import s from '../Code/code.module.css'
 import {getStores, postTicket, getTickets} from "../../redux/actions/actionIndex"
 
 
-function validate(input, allTickets) {
-    const error = {}
-    const isBlankSpace = new RegExp("^\\s+$")
-    if (!input.code || isBlankSpace.test(input.code)) { error.code = 'Ingrese un código válido' }
-    else if (input.code.trim().length > 9) error.code = `(${input.code.trim().length}/13)`
-    else if (allTickets.find(t => t.code === input.code)) { error.code = 'Este código ya fue registrado' }
-    return error;
-}
 
-
-export default function CodeRegister({ handleClose }) {
+export default function CodeRegister({ handleClose }, code) {
 
     const dispatch = useDispatch();
     const allStores = useSelector(state => state.allStores)
     const allTickets = useSelector(state => state.allTickets)
-    const user = useSelector(state => state.user)
+    const user = JSON.parse(localStorage.getItem("user"))
     const [selected, setSelected] = useState("")
     const [err, setErr] = useState({})
     const [input, setInput] = useState({  //llamar email usuario registrado
-        code: "",
-        email: "",
+        code: code,
+        email: user.email,
     })
+
+    function validate(input, allTickets) {
+        const error = {}
+        const isBlankSpace = new RegExp("^\\s+$")
+        if (!input.code || isBlankSpace.test(input.code)) { error.code = 'Ingrese un código válido' }
+        else if (input.code.trim().length > 9) error.code = `(${input.code.trim().length}/13)`
+        else if (allTickets.find(t => t.code === input.code)) { error.code = 'Este código ya fue registrado' }
+        return error;
+    }
+    
     
     useEffect(() => {
         !allTickets.length && dispatch(getTickets())
@@ -52,7 +53,7 @@ export default function CodeRegister({ handleClose }) {
 
 
     const handleChange = (e) => {
-        setInput({ ...input, code: e.target.value})
+        setInput({ ...input, code: code})
         const validacion = validate(input, allTickets)
         setErr(validacion)
     }
@@ -68,9 +69,9 @@ export default function CodeRegister({ handleClose }) {
                     X
                 </h3>
                 <div className={s.codeBody}>
-                    <h2>Ingresa tu Código aqui</h2>
+                    <h2>Elige el almacén donde realizaste la compra</h2>
                     <form onSubmit={handleSubmit} className={s.codeForm}>
-                        <input value={input.code} name="code" onChange={handleChange} type="number" maxLength="13" />
+                        <input hidden value={input.code} name="code" onChange={handleChange} type="number" maxLength="13" />
                         {err.code && <span className={s.formerror}>{err.code}</span>}
                         <select onChange={handleSelect} defaultValue='DEFAULT'>
                         <option value="DEFAULT" disabled>--seleccionar almacen--</option>
