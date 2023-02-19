@@ -3,6 +3,7 @@ import validate from '../UserForm/validate'
 import s from './UserForm.module.css'
 import { postUser } from "../../redux/actions/actionIndex";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function UserForm({ handleClose }) {
     const dispatch = useDispatch()
@@ -21,6 +22,7 @@ export default function UserForm({ handleClose }) {
         e.preventDefault()
         dispatch(postUser(input))
         localStorage.setItem("user", JSON.stringify(input));
+        handleClose()
         setInput({
             email: "",
             nombre: "",
@@ -74,7 +76,7 @@ export default function UserForm({ handleClose }) {
                         <input value={input.telephone} name='telephone' onChange={handleChange} type='text' placeholder='Su número de telefono' />
                         {err.telephone && <span className={s.formerror}>{err.telephone}</span>}
                     </div>
-                    <button disabled={isButtonDisabled()} type='submit'>Enviar Formulario</button>
+                    <button disabled={isButtonDisabled()} type='submit' >Enviar Formulario</button>
                 </form>
             </div>
         </div>
