@@ -13,7 +13,8 @@
     PUT_ADMIN_PW,
     POST_TICKET,
     GET_STORES_DB,
-    GET_USER_TICKETS
+    GET_USER_TICKETS,
+    SEARCH_BY_DOCUMENT
 
   } from "../actions/actionIndex.js";
 export const initialState = {
