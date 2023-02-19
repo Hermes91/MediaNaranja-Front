@@ -17,7 +17,7 @@ import { useRef } from "react";
 import { useDownloadExcel } from "react-export-table-to-excel";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getUsers } from "../../redux/actions/actionIndex";
+import { getTickets, getUsers } from "../../redux/actions/actionIndex";
 
 const style = {
   position: "absolute",
@@ -34,6 +34,7 @@ const style = {
 export default function Clients() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.allUsers);
+  const tickets = useSelector((state) => state.allTickets);
   const tableRef = useRef(null);
   const [user, setUser] = React.useState({});
 
@@ -47,11 +48,24 @@ export default function Clients() {
     sheet: "Users",
   });
 
+  function addTickets(allTickets, allUsers) {
+    for (let i = 0; i < allUsers.length; i++) {
+      allUsers[i]["tickets"] = [];
+      allTickets.map((t) => {
+        if (allUsers[i].id === t.userId) {
+          allUsers[i]["tickets"].push(t);
+        }
+      });
+    }
+    return allUsers;
+  }
+
   useEffect(() => {
     !users.length && dispatch(getUsers());
-    console.log(user.tickets);
-    //!tickets.length && dispatch(getTickets());
+    !tickets.length && dispatch(getTickets());
   }, [users, user, dispatch]);
+
+  const only15 = users.slice(0, 15);
 
   return (
     <React.Fragment>
@@ -81,7 +95,7 @@ export default function Clients() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((user) => (
+          {addTickets(tickets, only15).map((user) => (
             <>
               <TableRow key={user.id}>
                 <TableCell>

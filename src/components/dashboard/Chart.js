@@ -1,4 +1,5 @@
 import * as React from "react";
+import moment from "moment/moment";
 import { useTheme } from "@mui/material/styles";
 import {
   LineChart,
@@ -9,24 +10,33 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import Title from "./Title";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getTickets } from "../../redux/actions/actionIndex";
 
-// Generate Sales Data
 function createData(time, amount) {
   return { time, amount };
 }
 
-const data = [
-  createData("13/02/2023", 30),
-  createData("14/02/2023", 25),
-  createData("15/02/2023", 75),
-  createData("16/02/2023", 90),
-  createData("17/02/2023", 65),
-  createData("18/02/2023", 120),
-  createData("19/02/2023", 100),
-];
+const daysAgo = [];
+for (let i = 0; i < 7; i++) {
+  daysAgo[i] = moment().subtract(i, "days").format("DD/MM/YYYY");
+}
+
+const data = [];
+
+for (let i = 0; i < 7; i++) {
+  data.push(createData(daysAgo[i], 10 + i * 2));
+}
 
 export default function Chart() {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const tickets = useSelector((state) => state.allTickets);
+
+  useEffect(() => {
+    !tickets.length && dispatch(getTickets());
+  }, [tickets, dispatch]);
 
   return (
     <React.Fragment>
