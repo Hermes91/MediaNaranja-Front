@@ -18,6 +18,7 @@ export const GET_STORES_DB = 'GET_STORES_DB';
 export const GET_ADMIN = 'GET_ADMIN';
 export const PUT_ADMIN_PW = 'PUT_ADMIN_PW';
 export const PUT_ADMIN_COUNTDOWN = 'PUT_ADMIN_COUNTDOWN';
+export const GET_USER_TICKETS = 'GET_USER_TICKETS';
 
 export const getAdmin = () => {
   return async function (dispatch) {
@@ -154,7 +155,7 @@ export const getUserTickets = (email) => {
       const response = await axios.get(`/tickets/${email}`);
       dispatch({ type: GET_USER_TICKETS, payload: response.data});
     } catch (error) {
-      console-log('error:', error)
+      console.loglog('error:', error)
       toast.warn('Todavía no tiene tickets registrados')
     }
   }
