@@ -1,5 +1,6 @@
 import { Action } from "@remix-run/router";
 import axios from "axios";
+import { async } from "q";
 import { toast } from 'react-toastify';
 
 export const GET_TICKETS = "GET_TICKETS";
@@ -146,4 +147,16 @@ export const postTicket = (ticketInfo) => {
     }
   };
 };
+
+export const getUserTickets = (email) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`/tickets/${email}`);
+      dispatch({ type: GET_USER_TICKETS, payload: response.data});
+    } catch (error) {
+      console-log('error:', error)
+      toast.warn('Todavía no tiene tickets registrados')
+    }
+  }
+}
 
