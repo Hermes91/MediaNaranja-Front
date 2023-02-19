@@ -1,3 +1,4 @@
+import { Action } from "@remix-run/router";
 import axios from "axios";
 import { toast } from 'react-toastify';
 
@@ -9,7 +10,9 @@ export const FILTER_BY_USER = "FILTER_BY_USER";
 export const FILTER_BY_STORE = "FILTER_BY_STORE";
 export const SEARCH_BY_CODE = 'SEARCH_BY_CODE';
 export const POST_USER = 'POST_USER';
+export const POST_TICKET = 'POST_TICKET';
 export const SEARCH_BY_EMAIL = 'SEARCH_BY_EMAIL';
+export const GET_STORES_DB = 'GET_STORES_DB';
 export const GET_ADMIN = 'GET_ADMIN';
 export const PUT_ADMIN_PW = 'PUT_ADMIN_PW';
 export const PUT_ADMIN_COUNTDOWN = 'PUT_ADMIN_COUNTDOWN';
@@ -45,10 +48,10 @@ export const putAdminCountdown = ({countdown, email}) => {
 }
 
 export const getTickets = () => {
-    return async function (dispatch) {
-      const ticketResponse = await axios.get("/tickets");
-      dispatch({ type: GET_TICKETS, payload: ticketResponse.data });
-    };
+      return async function (dispatch) {
+        const ticketResponse = await axios.get(`/tickets`);
+        dispatch({ type: GET_TICKETS, payload: ticketResponse.data });
+      };
   };
 
 export const getUsers = () => {
@@ -58,16 +61,16 @@ export const getUsers = () => {
     };
   };
 
-export const getStores = () => {
+export const getStoresDB = () => {
     return async function (dispatch) {
       const storeResponde = await axios.get("/store");
-      dispatch({ type: GET_STORES, payload: storeResponde.data });
+      dispatch({ type: GET_STORES_DB, payload: storeResponde.data });
     };
   };
 
-export const filterByUser = (email) => {
+export const filterByUser = (numDocumento) => {
   return async function (dispatch) {
-    const ticketsResponse = await axios.get(`/tickets/`, email);
+    const ticketsResponse = await axios.get(`/tickets`, numDocumento);
     console.log(ticketsResponse.data)
     dispatch({ type: FILTER_BY_USER, payload: ticketsResponse.data });
   };
@@ -111,6 +114,19 @@ export const postUser = (userInfo) => {
     } catch (error) {
       console.log(error.message);
       dispatch({ type: POST_USER, payload: { data: [] } });
+    }
+  };
+};
+
+export const postTicket = (ticketInfo) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post("/tickets", ticketInfo);
+      dispatch({ type: POST_TICKET, payload: ticketInfo });
+      console.log(response)
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: POST_TICKET, payload: { data: [] } });
     }
   };
 };
