@@ -12,7 +12,6 @@ export const SEARCH_BY_CODE = 'SEARCH_BY_CODE';
 export const POST_USER = 'POST_USER';
 export const POST_TICKET = 'POST_TICKET';
 export const SEARCH_BY_EMAIL = 'SEARCH_BY_EMAIL';
-export const POST_TICKET = "POST_TICKET";
 export const SEARCH_BY_DOCUMENT = 'SEARCH_BY_DOCUMENT';
 export const GET_STORES_DB = 'GET_STORES_DB';
 export const GET_ADMIN = 'GET_ADMIN';
