@@ -15,6 +15,15 @@
 
 }
 
+.cedula {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    width: 100%;
+}
+
+
 @media (orientation:portrait) {
     .banner {
         display: flex;
