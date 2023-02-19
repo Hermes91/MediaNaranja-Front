@@ -79,6 +79,18 @@ export default function reducer(state = initialState, action) {
           allUsers: [...allUsers],
         };
 
+        case POST_TICKET:
+          return {
+            ...state,
+            allTickets: [...allTickets, action.payload]
+          }
+
+          case SEARCH_BY_DOCUMENT:
+            return {
+              ...state,
+              user: action.payload
+            }
+
     default:
       return {
         ...state,
