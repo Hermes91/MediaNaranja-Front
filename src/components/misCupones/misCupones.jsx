@@ -1,17 +1,21 @@
 import { Backdrop } from "@mui/material";
-import { React, useState } from "react";
+import  React,{ useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import {getUserTickets
 } from '../../redux/actions/actionIndex.js'
+import {useDispatch , useSelector} from 'react-redux'
 import CodeRegister from '../Code/code'
 import s from '../misCupones/misCupones.module.css'
 
+
 export default function MisCupones() {
-    
+
+    const tickets = useSelector(state => state.filterTickets)
+    const dispatch = useDispatch();
     let { code } = useParams();
-    const user = JSON.parse(localStorage.getItem("user"))
-  /* const user = {
-    nombre: 'amparo',
+   const user = JSON.parse(localStorage.getItem("user"))
+  /*const user = {
+    nombre: 'test',
     email: 'hola@gmail.com'
    }*/
     const [open, setOpen] = useState(false);
@@ -19,8 +23,11 @@ export default function MisCupones() {
         setOpen(!open);
     };
 
+    useEffect(() => {
+        dispatch(getUserTickets(user.email))
+        console.log('me actualice')
+    }, [tickets])
 
-    const ticketsOwn = getUserTickets(user.email).length+1
 
     return (
         <>
@@ -28,13 +35,12 @@ export default function MisCupones() {
    !code ? 
     <div className={s.content}> 
         <h1>Hola, {user.nombre}!</h1>
-        {console.log(getUserTickets(user.email))}
-        <h2>Tienes {ticketsOwn} Cupones!</h2>
+        <h2>Tienes {tickets.length} Cupones!</h2>
     </div>
     : 
     <div className={s.content}>
         <h1>Hola, {user.nombre}!</h1>
-        <h2>Tienes {ticketsOwn} Cupones!</h2>
+        <h2>Tienes {tickets.length} Cupones!</h2>
         <div className={s.newT}>
         <h2>Tienes 1 cupón disponible para cargar</h2>
         <h2 className={s.link} onClick={handleToggle}>Hacé click aquí para cargarlo</h2>

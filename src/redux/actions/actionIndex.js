@@ -154,7 +154,7 @@ export const getUserTickets = (email) => {
       const response = await axios.get(`/tickets/${email}`);
       dispatch({ type: GET_USER_TICKETS, payload: response.data});
     } catch (error) {
-      console.loglog('error:', error)
+      console.log('error:', error)
       toast.warn('Todavía no tiene tickets registrados')
     }
   }
