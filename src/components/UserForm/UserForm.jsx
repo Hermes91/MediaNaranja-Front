@@ -3,7 +3,6 @@ import validate from '../UserForm/validate'
 import s from './UserForm.module.css'
 import { postUser } from "../../redux/actions/actionIndex";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 
 export default function UserForm({ handleClose }) {
     const dispatch = useDispatch()
