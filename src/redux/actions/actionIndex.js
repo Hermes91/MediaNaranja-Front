@@ -24,10 +24,10 @@ export const getAdmin = () => {
   }
 }
 
-export const putAdminPassword = (password) => {
+export const putAdminPassword = ({password, email}) => {
   return async function (dispatch) {
   try {
-      const adminRes = await axios.put("/admin", password);
+      const adminRes = await axios.put("/admin", {password, email});
       dispatch({ type: PUT_ADMIN_PW, payload: adminRes.data.form })
     } 
    catch (error) {
