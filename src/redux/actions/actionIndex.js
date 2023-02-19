@@ -17,7 +17,7 @@ export const PUT_ADMIN_COUNTDOWN = 'PUT_ADMIN_COUNTDOWN';
 export const getAdmin = () => {
   return async function (dispatch) {
     const adminRes = await axios.get("/admin");
-    dispatch({ type: GET_ADMIN, payload: adminRes.data })
+    dispatch({ type: GET_ADMIN, payload: adminRes.data[0] })
   }
 }
 
@@ -33,10 +33,10 @@ export const putAdminPassword = (password) => {
   }
 }
 
-export const putAdminCountdown = (countdown) => {
+export const putAdminCountdown = ({countdown, email}) => {
   return async function (dispatch) {
   try {
-      const adminRes = await axios.put("/admin", countdown);
+      const adminRes = await axios.put("/admin", {countdown, email});
       dispatch({ type: PUT_ADMIN_COUNTDOWN, payload: adminRes.data.form })
     } catch (error) {
     console.log(error);

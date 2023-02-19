@@ -84,6 +84,7 @@ export default function reducer(state = initialState, action) {
         };
 
       case GET_ADMIN: 
+      console.log(action.payload)
       return {
         ...state,
         admin: action.payload
@@ -92,13 +93,13 @@ export default function reducer(state = initialState, action) {
       case PUT_ADMIN_PW: 
       return {
         ...state,
-        admin: [...state.admin, state.admin[0].password = action.payload]
+        admin: state.admin.password = action.payload
       }
 
       case PUT_ADMIN_COUNTDOWN: 
       return {
         ...state,
-        admin: [...state.admin, state.admin[0].countdown = action.payload]
+        admin: state.admin.countdown = action.payload
       }
       
     default:
