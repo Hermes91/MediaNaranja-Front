@@ -8,7 +8,7 @@ import CodeRegister from '../Code/code'
 import s from '../misCupones/misCupones.module.css'
 
 
-export default function MisCupones() {
+export default function MisCupones( {handleClose}) {
 
     const tickets = useSelector(state => state.filterTickets)
     const dispatch = useDispatch();
@@ -30,15 +30,22 @@ export default function MisCupones() {
 
 
     return (
+        
         <>
     {    
    !code ? 
     <div className={s.content}> 
+    <h3 onClick={handleClose}>
+                    X
+                </h3>
         <h1>Hola, {user.nombre}!</h1>
         <h2>Tienes {tickets.length} Cupones!</h2>
     </div>
     : 
     <div className={s.content}>
+        <h3 onClick={handleClose}>
+                    X
+                </h3>
         <h1>Hola, {user.nombre}!</h1>
         <h2>Tienes {tickets.length} Cupones!</h2>
         <div className={s.newT}>
