@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { searchByDNI } from '../../redux/actions/actionIndex'
+import { searchByDocument } from '../../redux/actions/actionIndex'
 import s from '../introDNI/introDni.module.css'
 
 ///////  valida el DNI ingresado  //////
@@ -15,14 +15,8 @@ function validate(input) {
 
 export default function IntroDNI({ handleClose }) {
     const [err, setErr] = useState({})
+    const [search, setSearch] = useState('')
     let dispatch = useDispatch()
-
-
-    useEffect(() => {
-        dispatch(searchByDNI())
-    }, [dispatch])
-
-
 
     const [input, setInput] = useState({
         numDocumento: "",
@@ -32,6 +26,8 @@ export default function IntroDNI({ handleClose }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setSearch(e.target.value)
+        dispatch(searchByDocument(search))
     }
 
     const handleChange = (e) => {

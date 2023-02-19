@@ -12,7 +12,6 @@ export const SEARCH_BY_CODE = 'SEARCH_BY_CODE';
 export const POST_USER = 'POST_USER';
 export const POST_TICKET = 'POST_TICKET';
 export const SEARCH_BY_EMAIL = 'SEARCH_BY_EMAIL';
-export const POST_TICKET = "POST_TICKET";
 export const SEARCH_BY_DOCUMENT = 'SEARCH_BY_DOCUMENT';
 export const GET_STORES_DB = 'GET_STORES_DB';
 export const GET_ADMIN = 'GET_ADMIN';
@@ -26,50 +25,50 @@ export const getAdmin = () => {
   }
 }
 
-export const putAdminPassword = ({password, email}) => {
+export const putAdminPassword = ({ password, email }) => {
   return async function (dispatch) {
-  try {
-      const adminRes = await axios.put("/admin", {password, email});
+    try {
+      const adminRes = await axios.put("/admin", { password, email });
       dispatch({ type: PUT_ADMIN_PW, payload: adminRes.data.form })
-    } 
-   catch (error) {
-    console.log(error);
+    }
+    catch (error) {
+      console.log(error);
     }
   }
 }
 
-export const putAdminCountdown = ({countdown, email}) => {
+export const putAdminCountdown = ({ countdown, email }) => {
   return async function (dispatch) {
-  try {
-      const adminRes = await axios.put("/admin", {countdown, email});
+    try {
+      const adminRes = await axios.put("/admin", { countdown, email });
       dispatch({ type: PUT_ADMIN_COUNTDOWN, payload: adminRes.data.form })
     } catch (error) {
-    console.log(error);
+      console.log(error);
     }
   }
 }
 
 
 export const getTickets = () => {
-      return async function (dispatch) {
-        const ticketResponse = await axios.get(`/tickets`);
-        dispatch({ type: GET_TICKETS, payload: ticketResponse.data });
-      };
+  return async function (dispatch) {
+    const ticketResponse = await axios.get(`/tickets`);
+    dispatch({ type: GET_TICKETS, payload: ticketResponse.data });
   };
+};
 
 export const getUsers = () => {
-    return async function (dispatch) {
-      const usersResponse = await axios.get("/user");
-      dispatch({ type: GET_USERS, payload: usersResponse.data });
-    };
+  return async function (dispatch) {
+    const usersResponse = await axios.get("/user");
+    dispatch({ type: GET_USERS, payload: usersResponse.data });
   };
+};
 
 export const getStoresDB = () => {
-    return async function (dispatch) {
-      const storeResponde = await axios.get("/store");
-      dispatch({ type: GET_STORES_DB, payload: storeResponde.data });
-    };
+  return async function (dispatch) {
+    const storeResponde = await axios.get("/store");
+    dispatch({ type: GET_STORES_DB, payload: storeResponde.data });
   };
+};
 
 export const filterByUser = (numDocumento) => {
   return async function (dispatch) {
@@ -87,7 +86,7 @@ export const filterByStore = (almacen) => {
 };
 
 export const searchByCode = (code) => {
-  return async function ( dispatch ) {
+  return async function (dispatch) {
     try {
       const searchResponse = await axios.get(`/tickets/?code=${code}`);
       dispatch({ type: SEARCH_BY_CODE, payload: searchResponse.data });
@@ -101,7 +100,7 @@ export const searchByEmail = (email) => {
   return async function (dispatch) {
     try {
       const searchResponse = await axios.get(`/user/?email=${email}`);
-      dispatch({ type: SEARCH_BY_EMAIL, payload: searchResponse.data});
+      dispatch({ type: SEARCH_BY_EMAIL, payload: searchResponse.data });
     } catch (error) {
       console.log('Email error ', error);
       toast.warn('El email no se encuentra registrado en la base de datos');
@@ -127,7 +126,7 @@ export const searchByDocument = (document) => {
   return async function (dispatch) {
     try {
       const searchResponse = await axios.get(`/user/?numDocumento=${document}`);
-      dispatch({ type: SEARCH_BY_DOCUMENT, payload: searchResponse.data});
+      dispatch({ type: SEARCH_BY_DOCUMENT, payload: searchResponse.data });
     } catch (error) {
       console.log('Document error ', error);
       toast.warn('El documento no se encuentra registrado en la base de datos');
