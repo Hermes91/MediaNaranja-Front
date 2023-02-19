@@ -69,28 +69,36 @@
 
 @media (orientation:portrait) {
     .formContainer {
-        width: 70%;
-        margin-right: 90px;
+        width: 80%;
+        height: max-content;
+    }
+
+    .formContainer h3 {
+        margin: 0;
+        padding: 0;
     }
 
     .formBody {
         width: 400px;
+        padding: 0;
+        margin: 0;
     }
 
     .formBody h2 {
         width: 300px;
+        margin: 0;
     }
 
     .formulario input {
         height: 30px;
         width: 200px;
     }
-   
+
     .formBody {
         margin-top: 15px;
         display: flex;
         flex-direction: column;
         align-items: baseline;
     }
-    
+
 }

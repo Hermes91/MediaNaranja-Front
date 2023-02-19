@@ -18,16 +18,16 @@
 
   } from "../actions/actionIndex.js";
 export const initialState = {
-        allTickets: [],
-        allStores: ['bello', 'apartado', 'envigado', 'parque berrio', 'pichincha', 'carabobo', 'cundinamarca', 'ayacucho', 'pereira', 'buenos aires', 'central', 'itagui'],
-        allUsers: [],
-        storesDB: [],
-        store: "",
-        filterTickets: [],
-        user: [],
-        admin: {},
-        orderedChange: false,
-      };
+  allTickets: [],
+  allStores: ['bello', 'apartado', 'envigado', 'parque berrio', 'pichincha', 'carabobo', 'cundinamarca', 'ayacucho', 'pereira', 'buenos aires', 'central', 'itagui'],
+  allUsers: [],
+  storesDB: [],
+  store: "",
+  filterTickets: [],
+  user: [],
+  admin: {},
+  orderedChange: false,
+};
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -38,9 +38,9 @@ export default function reducer(state = initialState, action) {
         filterTickets: action.payload,
       };
 
-    case GET_STORES_DB: 
+    case GET_STORES_DB:
       return {
-        ...state, 
+        ...state,
         storesDB: action.payload
       }
 
@@ -49,7 +49,7 @@ export default function reducer(state = initialState, action) {
     //     ...state,
     //     store: action.payload.name
     //   };
-      
+
     case GET_USERS:
       return {
         ...state,
@@ -74,50 +74,58 @@ export default function reducer(state = initialState, action) {
         filterTickets: action.payload,
       };
 
-      case SEARCH_BY_EMAIL:
-        return{
-          ...state,
-          user: action.payload
-        }
+    case SEARCH_BY_EMAIL:
+      return {
+        ...state,
+        user: action.payload
+      }
 
-      case POST_USER:
-        const newUser = action.payload; 
-        const allUsers = [...state.allUsers];
-        allUsers.push(newUser)
-        return {
-          ...state,
-          allUsers: [...allUsers],
-          user: newUser
-        };
+    case POST_USER:
+      const newUser = action.payload;
+      const allUsers = [...state.allUsers];
+      allUsers.push(newUser)
+      return {
+        ...state,
+        allUsers: [...allUsers],
+        user: newUser
+      };
 
-      case POST_TICKET:
-        return {
-          ...state,
-          allTickets: [...state.allTickets, action.payload],
-        };
-
-
-          case SEARCH_BY_DOCUMENT:
-            return {
-              ...state,
-              user: action.payload
-            }
+    case POST_TICKET:
+      return {
+        ...state,
+        allTickets: [...state.allTickets, action.payload],
+      };
 
 
-      case GET_ADMIN: 
+
+    case POST_TICKET:
+      return {
+        ...state,
+        allTickets: [...state.allTickets, action.payload]
+      }
+
+    case SEARCH_BY_DOCUMENT:
+      return {
+        ...state,
+        user: action.payload
+      }
+
+
+
+    case GET_ADMIN:
       console.log(action.payload)
       return {
         ...state,
         admin: action.payload
       }
 
-      case PUT_ADMIN_PW: 
+    case PUT_ADMIN_PW:
       return {
         ...state,
         admin: state.admin.password = action.payload
       }
 
-      case PUT_ADMIN_COUNTDOWN: 
+    case PUT_ADMIN_COUNTDOWN:
       return {
         ...state,
         admin: state.admin.countdown = action.payload

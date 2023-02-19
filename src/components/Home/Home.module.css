@@ -15,18 +15,31 @@
 
 }
 
+.cedula {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    width: 100%;
+}
+
+
 @media (orientation:portrait) {
     .banner {
         display: flex;
         justify-content: center;
         background-image: none;
+        margin: 0;
+        padding: 0;
+        height: 200px;
     }
 
     .bannImg {
+        margin-top: 0%;
         height: 200px;
     }
 
     .bannImg img {
-        width: 350px;
+        width: 300px;
     }
 }
