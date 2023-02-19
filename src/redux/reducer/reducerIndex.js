@@ -97,6 +97,7 @@ export default function reducer(state = initialState, action) {
       };
 
 
+
     case POST_TICKET:
       return {
         ...state,
@@ -108,6 +109,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         user: action.payload
       }
+
 
 
     case GET_ADMIN:

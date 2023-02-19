@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
+
 export const GET_TICKETS = "GET_TICKETS";
 export const GET_STORES = "GET_STORES";
 export const GET_STORE = "GET_STORE";
@@ -17,6 +18,7 @@ export const GET_ADMIN = "GET_ADMIN";
 export const PUT_ADMIN_PW = "PUT_ADMIN_PW";
 export const PUT_ADMIN_COUNTDOWN = "PUT_ADMIN_COUNTDOWN";
 export const GET_USER_TICKETS = "GET_USER_TICKETS;";
+
 
 export const getAdmin = () => {
   return async function (dispatch) {

@@ -1,0 +1,43 @@
+.content h1 {
+    font-size: 2.8em;
+    padding: 10px 0;
+    font-weight: 800;
+}
+
+.content h2 {
+    font-size: 10pt;
+    font-weight: 100;
+    letter-spacing: 5px;
+}
+
+.content.newT h2{
+    font-size: 36pt;
+    background-color: #ffebd5;
+    opacity: 1;
+    background-image: radial-gradient(#459ed5 1.6500000000000001px, #ffebd5 1.6500000000000001px);
+    background-size: 33px 33px;
+    height: 50%;
+    border-radius: 45px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    transition: transform 0.5s;
+}
+
+.link {
+    cursor: pointer;
+}
+
+.content {
+    box-shadow: inset 0px 10px 8px 0px #03000048, inset 0px -10px 8px 0px #03000048;
+    width: 100%;
+    padding: 60px 0;
+    text-align: center;
+    background: var(--secondary-orange);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3%;
+}
