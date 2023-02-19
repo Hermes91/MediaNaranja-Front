@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { searchByDocument } from '../../redux/actions/actionIndex'
+import { searchByDocument, getUsers } from '../../redux/actions/actionIndex'
 import s from '../introDNI/introDni.module.css'
 
 ///////  valida el DNI ingresado  //////
@@ -16,7 +16,12 @@ function validate(input) {
 export default function IntroDNI({ handleClose }) {
     const [err, setErr] = useState({})
     const [search, setSearch] = useState('')
+    const allUsers = useSelector(state => state.allUsers)
     let dispatch = useDispatch()
+
+    useEffect(() => {
+        !allUsers.length && dispatch(getUsers())
+    })
 
     const [input, setInput] = useState({
         numDocumento: "",
