@@ -6,9 +6,10 @@ import axios from "axios";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import Toaster from './Toaster'
 import store from "./redux/store/storeIndex";
 
-axios.defaults.baseURL = "https://concursos.lamedianaranja.com.co";
+axios.defaults.baseURL = "https://concursos.lamedianaranja.com.co/";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,6 +18,7 @@ root.render(
       <BrowserRouter>
         <App />
       </BrowserRouter>
+      <Toaster/>
     </Provider>
   </React.StrictMode>
 );

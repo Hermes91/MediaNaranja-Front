@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { searchByDocument, getUsers } from '../../redux/actions/actionIndex'
 import s from '../introDNI/introDni.module.css'
+import { toast } from 'react-toastify';
 
 ///////  valida el DNI ingresado  //////
-function validate(input) {
+function validate(input, allUsers) {
     const error = {}
     const isBlankSpace = new RegExp("^\\s+$")
-    const isDNI = new RegExp("^((\d{7})|(\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$")
+    const isDNI = /^[0-9]{6,11}$/ 
     if (!input.numDocumento || isBlankSpace.test(input.numDocumento)) error.numDocumento = 'Ingrese su n° de documento'
     else if (!isDNI.test(input.numDocumento)) error.numDocumento = 'Ingrese un documento valido'
     return error;
@@ -18,31 +19,39 @@ export default function IntroDNI({ handleClose }) {
     const allUsers = useSelector(state => state.allUsers)
     const user = useSelector(state => state.loggedUser)
     let dispatch = useDispatch()
-
+    
     useEffect(() => {
         !allUsers.length && dispatch(getUsers())
     }, [allUsers, dispatch])
-
+    
     const [input, setInput] = useState({
         numDocumento: "",
     })
 
+    var yaExiste = allUsers.find(u => u.numDocumento == input?.numDocumento)
+    
     const isButtonDisabled = () => {
-        if (!Object.keys(err).length || !input.numDocumento.length) return true
-        else if (!user[0]?.email) return true 
+        if (Object.keys(err).length || !input.numDocumento) return true
+        else return false
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        localStorage.setItem("user", JSON.stringify(user));
+        dispatch(searchByDocument(input.numDocumento))
+        const validacion = validate(input, allUsers)
+        setErr(validacion)
+        if (yaExiste && !Object.keys(err).length) {
+            localStorage.setItem("user", JSON.stringify(yaExiste));
+        } else{
+            toast.warn("Usted no está registrado, haga click en Únete Ahora")
+        }
     }
 
     const handleChange = (e) => {
         e.preventDefault()
-        setInput({ ...input, [e.target.name]: e.target.value })
-        const validacion = validate(input)
+        setInput({ ...input, [e.target.name]: Number(e.target.value) })
+        const validacion = validate(input, allUsers)
         setErr(validacion)
-        dispatch(searchByDocument(e.target.value))
     }
 
     return (
@@ -57,7 +66,7 @@ export default function IntroDNI({ handleClose }) {
                         <input value={input.numDocumento} name="numDocumento" onChange={handleChange} type="number" maxLength="10" />
                         {err.numDocumento && <span className={s.formerror}>{err.numDocumento}</span>}
                         <button onClick={handleClose} disabled={isButtonDisabled()} type='submit'>Acceder</button>
-                        {!err.numDocumento && !user?.email ? <a onClick={handleClose} href="#user_form">Regístrese haciendo click en Únete Ahora</a>: null}
+                        {!err.numDocumento && !yaExiste ? <a onClick={handleClose} href="#user_form">Si todavía no se ha registrado haga click acá</a>: null}
                     </form>
                 </div>
             </div>

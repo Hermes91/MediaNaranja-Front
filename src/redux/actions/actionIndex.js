@@ -105,7 +105,6 @@ export const searchByDocument = (document) => {
       dispatch({ type: SEARCH_BY_DOCUMENT, payload: searchResponse.data });
     } catch (error) {
       console.log("Document error ", error);
-      toast.warn("El documento no se encuentra registrado en la base de datos");
     }
   };
 };
