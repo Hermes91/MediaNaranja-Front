@@ -23,10 +23,8 @@ export default function MisCupones( {handleClose}) {
         setOpen(!open);
     };
 
-
-
     useEffect(() => {
-        !tickets.length && dispatch(getUserTickets(user.numDocumento))
+        dispatch(getUserTickets(user.email))
         console.log('me actualice')
     }, [tickets])
 
@@ -57,7 +55,7 @@ export default function MisCupones( {handleClose}) {
                         open={open}>
                         <CodeRegister
                             handleClose={() => setOpen(false)}
-                            code={code}
+                            code
                         />
                     </Backdrop>
         </div>

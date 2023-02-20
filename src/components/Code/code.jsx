@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import validate from '../UserForm/validate'
 import s from '../Code/code.module.css'
-import {getStores, postTicket, getTickets, searchByCode} from "../../redux/actions/actionIndex"
+import { getStores, postTicket, getTickets, searchByCode } from "../../redux/actions/actionIndex"
 
 
 function validate(input, ticketsRegistrados) {
@@ -17,7 +17,7 @@ function validate(input, ticketsRegistrados) {
     return error;
 }
 
-export default function CodeRegister({ handleClose, code}) {
+export default function CodeRegister({ handleClose, code }) {
 
     const dispatch = useDispatch();
     const allStores = useSelector(state => state.allStores)
@@ -29,8 +29,8 @@ export default function CodeRegister({ handleClose, code}) {
         code: code,
         email: user.email,
     })
-    
-    
+
+
     useEffect(() => {
         !ticketsRegistrados.length && dispatch(getTickets())
     })
@@ -60,12 +60,12 @@ export default function CodeRegister({ handleClose, code}) {
         setSelected(e.target.value)
         const validacion = validate(input, ticketsRegistrados)
         setErr(validacion)
-      }
+    }
 
     return (
         <>
             <div className={s.codeContainer}>
-                <h3 onClick={handleClose}>
+                <h3 onClick={handleClose} className={s.closeCode}>
                     X
                 </h3>
                 <div className={s.codeBody}>
@@ -74,8 +74,8 @@ export default function CodeRegister({ handleClose, code}) {
                         <input hidden defaultValue={input.code} name="code" type="number" maxLength="13" />
                         {err.code && <span className={s.formerror}>{err.code}</span>}
                         <select onChange={handleSelect} defaultValue='DEFAULT'>
-                        <option value="DEFAULT" disabled>--seleccionar almacen--</option>
-                        {allStores.map((store, index) => <option name="store" onChange={handleSelect} value={store} key={index}>{store}</option>)}
+                            <option value="DEFAULT" disabled>--seleccionar almacen--</option>
+                            {allStores.map((store, index) => <option name="store" onChange={handleSelect} value={store} key={index}>{store}</option>)}
                         </select>
                         <button disabled={isButtonDisabled()} onClick={handleClose} type='submit'>Subir mi Código</button>
                     </form>
