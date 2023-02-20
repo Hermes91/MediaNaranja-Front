@@ -56,3 +56,14 @@
     font-size: 10pt;
     width: 100%;
 }
+
+.userProfile h3 {
+    color: var(--main-orange);
+    font-weight: bold;
+    float: left;
+    text-align: center;
+    padding: 29px 26px;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+}
