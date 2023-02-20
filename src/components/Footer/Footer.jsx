@@ -6,12 +6,12 @@ import PinDropIcon from '@mui/icons-material/PinDrop';
 import StoreIcon from '@mui/icons-material/Store';
 import { Link } from 'react-router-dom'
 import s from './Footer.module.css'
-
+import Logout from "../LogOut/LogOut";
 
 
 
 export default function Footer() {
-
+    const user = localStorage.getItem("user")
     return <>
         <div className={s.footerContainer}>
             <div className={s.sociales}>
@@ -35,7 +35,13 @@ export default function Footer() {
                 </div>
                 <div><span>© 2023 La Media Naranja</span> </div>
             </div>
-
+            {
+            user ? 
+             <Logout/>
+             : 
+             ''
+            }
+       
         </div>
     </>
 }

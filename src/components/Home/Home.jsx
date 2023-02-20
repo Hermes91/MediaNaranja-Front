@@ -12,7 +12,7 @@ import s from './Home.module.css'
 export default function Home() {
 
     const [open, setOpen] = useState(true);
-    const user = JSON.parse(localStorage.getItem("user"))
+    const user = localStorage.getItem("user")
 
     return (
       
