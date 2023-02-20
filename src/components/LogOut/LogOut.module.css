@@ -1,0 +1,12 @@
+.container{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    cursor: pointer;
+}
+
+.text {
+    font-size: 1.2rem;
+    font-weight: 1.5rem;
+    font: bold;
+    color: #ff4d00;;
+}
