@@ -30,6 +30,9 @@
 }
 
 .formItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-top: 10px;
 }
 
@@ -61,7 +64,7 @@
 
 .formerror {
     color: rgb(255, 229, 229);
-    margin-top: -15px;
+    margin-top: 5px;
     font-size: 10pt;
     width: 100%;
 }
