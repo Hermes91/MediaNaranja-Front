@@ -6,7 +6,6 @@ export const GET_TICKETS = "GET_TICKETS";
 export const GET_STORES = "GET_STORES";
 export const GET_STORE = "GET_STORE";
 export const GET_USERS = "GET_USERS";
-export const FILTER_BY_USER = "FILTER_BY_USER";
 export const FILTER_BY_STORE = "FILTER_BY_STORE";
 export const SEARCH_BY_CODE = "SEARCH_BY_CODE";
 export const POST_USER = "POST_USER";
@@ -70,14 +69,6 @@ export const getStoresDB = () => {
   };
 };
 
-export const filterByUser = (numDocumento) => {
-  return async function (dispatch) {
-    const ticketsResponse = await axios.get(`/tickets`, numDocumento);
-    console.log(ticketsResponse.data);
-    dispatch({ type: FILTER_BY_USER, payload: ticketsResponse.data });
-  };
-};
-
 export const filterByStore = (almacen) => {
   return async function (dispatch) {
     const ticketsResponse = await axios.get(`/tickets/?almacen=${almacen}`);
@@ -93,17 +84,6 @@ export const searchByCode = (code) => {
     } catch (error) {
       console.error("Ticket not found: ", error);
       toast.warn("El código ingresado no le corresponde a ningún ticket");
-    }
-  };
-};
-export const searchByEmail = (email) => {
-  return async function (dispatch) {
-    try {
-      const searchResponse = await axios.get(`/user/?email=${email}`);
-      dispatch({ type: SEARCH_BY_EMAIL, payload: searchResponse.data });
-    } catch (error) {
-      console.log("Email error ", error);
-      toast.warn("El email no se encuentra registrado en la base de datos");
     }
   };
 };
@@ -145,10 +125,10 @@ export const postTicket = (ticketInfo) => {
   };
 };
 
-export const getUserTickets = (email) => {
+export const getUserTickets = (numDocumento) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`/tickets/${email}`);
+      const response = await axios.get(`/tickets`, numDocumento);
       dispatch({ type: GET_USER_TICKETS, payload: response.data });
     } catch (error) {
       console.log("error:", error);

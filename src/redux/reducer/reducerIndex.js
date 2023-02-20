@@ -57,12 +57,6 @@ export default function reducer(state = initialState, action) {
         allUsers: action.payload,
       };
 
-    case FILTER_BY_USER:
-      return {
-        ...state,
-        filterTickets: action.payload,
-      };
-
     case FILTER_BY_STORE:
       return {
         ...state,
@@ -74,12 +68,6 @@ export default function reducer(state = initialState, action) {
         ...state,
         filterTickets: action.payload,
       };
-
-    case SEARCH_BY_EMAIL:
-      return {
-        ...state,
-        user: action.payload
-      }
 
     case POST_USER:
       return {
@@ -93,12 +81,6 @@ export default function reducer(state = initialState, action) {
         allTickets: [...state.allTickets, action.payload],
         loggedUser: action.payload
       };
-
-    case POST_TICKET:
-      return {
-        ...state,
-        allTickets: [...state.allTickets, action.payload]
-      }
 
     case SEARCH_BY_DOCUMENT:
       return {

@@ -7,7 +7,7 @@ import s from '../introDNI/introDni.module.css'
 function validate(input) {
     const error = {}
     const isBlankSpace = new RegExp("^\\s+$")
-    const isDNI = /^((\d{7})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$/
+    const isDNI = new RegExp("^((\d{7})|(\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$")
     if (!input.numDocumento || isBlankSpace.test(input.numDocumento)) error.numDocumento = 'Ingrese su n° de documento'
     else if (!isDNI.test(input.numDocumento)) error.numDocumento = 'Ingrese un documento valido'
     return error;
@@ -28,8 +28,8 @@ export default function IntroDNI({ handleClose }) {
     })
 
     const isButtonDisabled = () => {
-        if (!!Object.keys(err).length || !input.numDocumento.length) return true
-        else if (!user?.email) return true 
+        if (!Object.keys(err).length || !input.numDocumento.length) return true
+        else if (!user[0]?.email) return true 
     }
 
     const handleSubmit = (e) => {
@@ -56,7 +56,7 @@ export default function IntroDNI({ handleClose }) {
                     <form onSubmit={handleSubmit} className={s.dniForm}>
                         <input value={input.numDocumento} name="numDocumento" onChange={handleChange} type="number" maxLength="10" />
                         {err.numDocumento && <span className={s.formerror}>{err.numDocumento}</span>}
-                        <button onClick={handleClose}disabled={isButtonDisabled()} type='submit'>Acceder</button>
+                        <button onClick={handleClose} disabled={isButtonDisabled()} type='submit'>Acceder</button>
                         {!err.numDocumento && !user?.email ? <a onClick={handleClose} href="#user_form">Regístrese haciendo click en Únete Ahora</a>: null}
                     </form>
                 </div>

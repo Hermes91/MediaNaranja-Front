@@ -3,15 +3,25 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import validate from '../UserForm/validate'
 import s from '../Code/code.module.css'
-import {getStores, postTicket, getTickets} from "../../redux/actions/actionIndex"
+import {getStores, postTicket, getTickets, searchByCode} from "../../redux/actions/actionIndex"
 
 
+function validate(input, ticketsRegistrados) {
+    const error = {}
+    const isBlankSpace = new RegExp("^\\s+$")
+    var yaExiste = ticketsRegistrados.find((t) => t.code == input.code)
+    if (!input.code || isBlankSpace.test(input.code)) { error.code = 'Ingrese un código válido' }
+    //else if (input.code.trim().length > 9) error.code = `(${input.code.trim().length}/13)`
+    //else if (allTickets.find((t) => t.code === input.code)) { error.code = 'Este código ya fue registrado' }
+    else if (yaExiste) { error.code = 'Este código ya fue registrado' }
+    return error;
+}
 
-export default function CodeRegister({ handleClose }, code) {
+export default function CodeRegister({ handleClose, code}) {
 
     const dispatch = useDispatch();
     const allStores = useSelector(state => state.allStores)
-    const allTickets = useSelector(state => state.allTickets)
+    const ticketsRegistrados = useSelector(state => state.filterTickets)
     const user = JSON.parse(localStorage.getItem("user"))
     const [selected, setSelected] = useState("")
     const [err, setErr] = useState({})
@@ -19,22 +29,16 @@ export default function CodeRegister({ handleClose }, code) {
         code: code,
         email: user.email,
     })
-
-    function validate(input, allTickets) {
-        const error = {}
-        const isBlankSpace = new RegExp("^\\s+$")
-        if (!input.code || isBlankSpace.test(input.code)) { error.code = 'Ingrese un código válido' }
-        else if (input.code.trim().length > 9) error.code = `(${input.code.trim().length}/13)`
-        else if (allTickets.find(t => t.code === input.code)) { error.code = 'Este código ya fue registrado' }
-        return error;
-    }
     
     
     useEffect(() => {
-        !allTickets.length && dispatch(getTickets())
+        !ticketsRegistrados.length && dispatch(getTickets())
     })
 
-    const isButtonDisabled = () => (!!Object.keys(err).length || !input.code.length)
+    const isButtonDisabled = () => {
+        if (!Object.keys(err).length && selected) return false
+        return true
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -46,20 +50,16 @@ export default function CodeRegister({ handleClose }, code) {
         dispatch(postTicket(ticketInfo))
         setInput({
             code: "",
-            almacen: '',
+            almacen: "",
             email: "",
         })
     }
 
 
-    const handleChange = (e) => {
-        setInput({ ...input, code: code})
-        const validacion = validate(input, allTickets)
-        setErr(validacion)
-    }
-
     const handleSelect = (e) => {
         setSelected(e.target.value)
+        const validacion = validate(input, ticketsRegistrados)
+        setErr(validacion)
       }
 
     return (
@@ -71,13 +71,13 @@ export default function CodeRegister({ handleClose }, code) {
                 <div className={s.codeBody}>
                     <h2>Elige el almacén donde realizaste la compra</h2>
                     <form onSubmit={handleSubmit} className={s.codeForm}>
-                        <input hidden value={input.code} name="code" onChange={handleChange} type="number" maxLength="13" />
+                        <input hidden defaultValue={input.code} name="code" type="number" maxLength="13" />
                         {err.code && <span className={s.formerror}>{err.code}</span>}
                         <select onChange={handleSelect} defaultValue='DEFAULT'>
                         <option value="DEFAULT" disabled>--seleccionar almacen--</option>
-                        {allStores.map((store, index) => <option value={store} key={index}>{store}</option>)}
+                        {allStores.map((store, index) => <option name="store" onChange={handleSelect} value={store} key={index}>{store}</option>)}
                         </select>
-                        <button disabled={isButtonDisabled()} type='submit'>Subir mi Código</button>
+                        <button disabled={isButtonDisabled()} onClick={handleClose} type='submit'>Subir mi Código</button>
                     </form>
                 </div>
             </div>
