@@ -4,6 +4,7 @@ import s from './UserForm.module.css'
 import { postUser } from "../../redux/actions/actionIndex";
 import { useDispatch } from "react-redux";
 
+
 export default function UserForm({ handleClose }) {
     const dispatch = useDispatch()
 
@@ -17,11 +18,16 @@ export default function UserForm({ handleClose }) {
     const [err, setErr] = useState({})
     const isButtonDisabled = () => (!!Object.keys(err).length || !input.email.length)
 
+    const handleClickUser = () => {
+        window.location.reload()
+      };
+
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(postUser(input))
         localStorage.setItem("user", JSON.stringify(input));
         handleClose()
+        handleClickUser()
         setInput({
             email: "",
             nombre: "",
