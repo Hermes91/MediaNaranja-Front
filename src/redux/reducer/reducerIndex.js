@@ -24,6 +24,7 @@ export const initialState = {
   storesDB: [],
   store: "",
   filterTickets: [],
+  loggedUser: {},
   user: [],
   admin: {},
   orderedChange: false,
@@ -81,22 +82,17 @@ export default function reducer(state = initialState, action) {
       }
 
     case POST_USER:
-      const newUser = action.payload;
-      const allUsers = [...state.allUsers];
-      allUsers.push(newUser)
       return {
         ...state,
-        allUsers: [...allUsers],
-        user: newUser
+        allUsers: [...state.allUsers, action.payload],
       };
 
     case POST_TICKET:
       return {
         ...state,
         allTickets: [...state.allTickets, action.payload],
+        loggedUser: action.payload
       };
-
-
 
     case POST_TICKET:
       return {
@@ -107,13 +103,10 @@ export default function reducer(state = initialState, action) {
     case SEARCH_BY_DOCUMENT:
       return {
         ...state,
-        user: action.payload
+        loggedUser: action.payload
       }
 
-
-
     case GET_ADMIN:
-      console.log(action.payload)
       return {
         ...state,
         admin: action.payload
