@@ -7,7 +7,7 @@ import s from '../introDNI/introDni.module.css'
 function validate(input) {
     const error = {}
     const isBlankSpace = new RegExp("^\\s+$")
-    const isDNI = /^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$/
+    const isDNI = /^((\d{7})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$/
     if (!input.numDocumento || isBlankSpace.test(input.numDocumento)) error.numDocumento = 'Ingrese su n° de documento'
     else if (!isDNI.test(input.numDocumento)) error.numDocumento = 'Ingrese un documento valido'
     return error;
@@ -15,30 +15,34 @@ function validate(input) {
 
 export default function IntroDNI({ handleClose }) {
     const [err, setErr] = useState({})
-    const [search, setSearch] = useState('')
     const allUsers = useSelector(state => state.allUsers)
+    const user = useSelector(state => state.loggedUser)
     let dispatch = useDispatch()
 
     useEffect(() => {
         !allUsers.length && dispatch(getUsers())
-    })
+    }, [allUsers, dispatch])
 
     const [input, setInput] = useState({
         numDocumento: "",
     })
 
-    const isButtonDisabled = () => (!!Object.keys(err).length || !input.numDocumento.length)
+    const isButtonDisabled = () => {
+        if (!!Object.keys(err).length || !input.numDocumento.length) return true
+        else if (!user?.email) return true 
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setSearch(e.target.value)
-        dispatch(searchByDocument(search))
+        localStorage.setItem("user", JSON.stringify(user));
     }
 
     const handleChange = (e) => {
+        e.preventDefault()
         setInput({ ...input, [e.target.name]: e.target.value })
         const validacion = validate(input)
         setErr(validacion)
+        dispatch(searchByDocument(e.target.value))
     }
 
     return (
@@ -50,9 +54,10 @@ export default function IntroDNI({ handleClose }) {
                 <div className={s.dniBody}>
                     <h2>Ingresa tu cedula aqui</h2>
                     <form onSubmit={handleSubmit} className={s.dniForm}>
-                        <input value={input.numDocumento} name="numDocumento" onChange={handleChange} type="text" maxLength="10" />
+                        <input value={input.numDocumento} name="numDocumento" onChange={handleChange} type="number" maxLength="10" />
                         {err.numDocumento && <span className={s.formerror}>{err.numDocumento}</span>}
-                        <button disabled={isButtonDisabled()} type='submit'>Acceder</button>
+                        <button onClick={handleClose}disabled={isButtonDisabled()} type='submit'>Acceder</button>
+                        {!err.numDocumento && !user?.email ? <a onClick={handleClose} href="#user_form">Regístrese haciendo click en Únete Ahora</a>: null}
                     </form>
                 </div>
             </div>

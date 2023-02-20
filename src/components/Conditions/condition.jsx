@@ -43,7 +43,7 @@ export default function Condition() {
                         imperdiet nibh eu, consectetur tellus. Donec a risus vestibulum, hendrerit libero
                         vehicula, vulputate felis.
                     </p>
-                    <div className={s.btn_bgstroke} onClick={handleToggle}>Únete ahora</div>
+                    <div id="user_form" className={s.btn_bgstroke} onClick={handleToggle}>Únete ahora</div>
                     <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                         open={open}
                     >

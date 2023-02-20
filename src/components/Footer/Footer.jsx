@@ -15,16 +15,16 @@ export default function Footer() {
     return <>
         <div className={s.footerContainer}>
             <div className={s.sociales}>
-                <Link to={"https://api.whatsapp.com/send/?phone=573154923722&text&type=phone_number&app_absent=0"}>
+                <Link to={"https://api.whatsapp.com/send/?phone=573154923722&text&type=phone_number&app_absent=0"} target= '_blanck'>
                     <WhatsAppIcon className={s.linkIcon} />
                 </Link>
-                <Link to={"https://lamedianaranja.com.co/"}>
+                <Link to={"https://lamedianaranja.com.co/"} target= '_blanck'>
                     <StoreIcon className={s.linkIcon} />
                 </Link>
-                <Link to={"https://www.facebook.com/almaceneslamedianaranja/"}>
+                <Link to={"https://www.facebook.com/almaceneslamedianaranja/"} target= '_blanck'>
                     <FacebookIcon className={s.linkIcon} />
                 </Link>
-                <Link to={"https://www.instagram.com/almaceneslamedianaranja/"}>
+                <Link to={"https://www.instagram.com/almaceneslamedianaranja/"} target= '_blanck'>
                     <InstagramIcon className={s.linkIcon} />
                 </Link>
             </div>
