@@ -3,8 +3,10 @@ import { React, useState } from "react";
 import s from '../Conditions/condition.module.css'
 import UserForm from "../UserForm/UserForm";
 import ByC from "../Conditions/bYc";
+import { toast } from "react-toastify";
 
 export default function Condition() {
+ const user = localStorage.getItem('user')
 
     const [open, setOpen] = useState(false);
     const handleToggle = () => {
@@ -15,7 +17,6 @@ export default function Condition() {
     const handleToggle2 = () => {
         setOpen2(!open2);
     };
-
 
 
     return (
@@ -43,18 +44,24 @@ export default function Condition() {
                         imperdiet nibh eu, consectetur tellus. Donec a risus vestibulum, hendrerit libero
                         vehicula, vulputate felis.
                     </p>
-                    <div id="user_form" className={s.btn_bgstroke} onClick={handleToggle}>Únete ahora</div>
-                    <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                        open={open}
-                    >
-                        <UserForm
-                            handleClose={() => setOpen(false)}
-                        />
-                    </Backdrop>
+                    
+                    {user ? 
+                   <div id="user_form" className={s.btn_bgstroke_logged} >¡Ya estás participando!</div>
+                :
+                <>
+                <div id="user_form" className={s.btn_bgstroke} onClick={handleToggle}>Únete ahora</div>
+                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+            >
+              
+                <UserForm
+                    handleClose={() => setOpen(false)}
+                />
+            </Backdrop>
+            </>
+                    }
                 </div>
             </section>
         </>
     )
-
-
 }
