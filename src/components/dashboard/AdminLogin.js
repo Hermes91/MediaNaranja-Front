@@ -27,7 +27,6 @@ function AdminLogin(props) {
     if (admin.password == password) {
       props.setAdminLogged(true);
       alert("Login exitoso");
-      props.setAdminLoginShow(false);
     } else {
       alert("Tu contraseña actual es incorrecta");
       setPassword("");
@@ -52,7 +51,6 @@ function AdminLogin(props) {
           variant="outlined"
           value={password}
           size="small"
-          type="password"
           onChange={handleChange}
         />
         <Button
@@ -60,7 +58,7 @@ function AdminLogin(props) {
           onClick={(e) => handleOnClick(e)}
           value={password}
         >
-          Ingresar
+          Buscar
         </Button>
       </Box>
     </React.Fragment>

@@ -15,13 +15,12 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import LogoutIcon from "@mui/icons-material/Logout";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
-import LoginIcon from "@mui/icons-material/Login";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
@@ -186,10 +185,7 @@ function DashboardContent() {
   const adminLogin = (
     <Grid item xs={12}>
       <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-        <AdminLogin
-          setAdminLogged={setAdminLogged}
-          setAdminLoginShow={setAdminLoginShow}
-        />
+        <AdminLogin setAdminLogged={setAdminLogged} />
       </Paper>
     </Grid>
   );
@@ -231,7 +227,9 @@ function DashboardContent() {
                 setAdminLoginShow(true);
               }}
             >
-              <LoginIcon />
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -330,10 +328,8 @@ function DashboardContent() {
 
             <ListItemButton
               onClick={() => {
-                alert("Logout exitoso");
-                setAdminLogged(false);
-                setGraphShow(true);
-                setdepositShow(true);
+                setGraphShow(false);
+                setdepositShow(false);
                 setrecentShow(false);
                 setordersShow(false);
                 setClientsShow(false);
@@ -342,7 +338,7 @@ function DashboardContent() {
               }}
             >
               <ListItemIcon>
-                <LogoutIcon />
+                <ExitToAppIcon />
               </ListItemIcon>
               <ListItemText primary="Salir" />
             </ListItemButton>
