@@ -23,12 +23,15 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
-import RecentOrders from "./RecentOrders";
-import Orders from "./Orders";
+import SearchCoupon from "./SearchCoupon";
+import Orders from "./Winners";
 import Clients from "./Clients";
 import Products from "./Products";
+import AdminActions from "./AdminActions";
+import AdminLogin from "./AdminLogin";
 
 const drawerWidth = 240;
 
@@ -97,10 +100,13 @@ function DashboardContent() {
   const [open, setOpen] = useState(false);
   const [graphShow, setGraphShow] = useState(true);
   const [depositShow, setdepositShow] = useState(true);
-  const [recentShow, setrecentShow] = useState(true);
+  const [recentShow, setrecentShow] = useState(false);
   const [ordersShow, setordersShow] = useState(false);
   const [clientsShow, setClientsShow] = useState(false);
   const [productsShow, setproductsShow] = useState(false);
+  const [adminActionsShow, setAdminActionsShow] = useState(false);
+  const [adminLoginShow, setAdminLoginShow] = useState(false);
+  const [adminLogged, setAdminLogged] = useState(false);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -139,7 +145,7 @@ function DashboardContent() {
   const recents = (
     <Grid item xs={12}>
       <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-        <RecentOrders />
+        <SearchCoupon />
       </Paper>
     </Grid>
   );
@@ -164,6 +170,22 @@ function DashboardContent() {
     <Grid item xs={12}>
       <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
         <Products />
+      </Paper>
+    </Grid>
+  );
+
+  const adminActions = (
+    <Grid item xs={12}>
+      <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+        <AdminActions />
+      </Paper>
+    </Grid>
+  );
+
+  const adminLogin = (
+    <Grid item xs={12}>
+      <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+        <AdminLogin setAdminLogged={setAdminLogged} />
       </Paper>
     </Grid>
   );
@@ -199,7 +221,12 @@ function DashboardContent() {
             >
               La Media Naranja - Sistema de sorteos
             </Typography>
-            <IconButton color="inherit">
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                setAdminLoginShow(true);
+              }}
+            >
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
@@ -225,10 +252,11 @@ function DashboardContent() {
               onClick={() => {
                 setGraphShow(true);
                 setdepositShow(true);
-                setrecentShow(true);
+                setrecentShow(false);
                 setordersShow(false);
                 setClientsShow(false);
                 setproductsShow(false);
+                setAdminActionsShow(false);
               }}
             >
               <ListItemIcon>
@@ -238,12 +266,17 @@ function DashboardContent() {
             </ListItemButton>
             <ListItemButton
               onClick={() => {
-                setGraphShow(false);
-                setdepositShow(false);
-                setrecentShow(false);
-                setordersShow(false);
-                setClientsShow(true);
-                setproductsShow(false);
+                if (adminLogged) {
+                  setGraphShow(false);
+                  setdepositShow(false);
+                  setrecentShow(false);
+                  setordersShow(false);
+                  setClientsShow(true);
+                  setproductsShow(false);
+                  setAdminActionsShow(false);
+                } else {
+                  alert("Debes ingresar para ver esta sección");
+                }
               }}
             >
               <ListItemIcon>
@@ -253,12 +286,17 @@ function DashboardContent() {
             </ListItemButton>
             <ListItemButton
               onClick={() => {
-                setGraphShow(false);
-                setdepositShow(false);
-                setrecentShow(false);
-                setordersShow(true);
-                setClientsShow(false);
-                setproductsShow(false);
+                if (adminLogged) {
+                  setGraphShow(false);
+                  setdepositShow(false);
+                  setrecentShow(false);
+                  setordersShow(true);
+                  setClientsShow(false);
+                  setproductsShow(false);
+                  setAdminActionsShow(false);
+                } else {
+                  alert("Debes ingresar para ver esta sección");
+                }
               }}
             >
               <ListItemIcon>
@@ -269,12 +307,34 @@ function DashboardContent() {
 
             <ListItemButton
               onClick={() => {
+                if (adminLogged) {
+                  setGraphShow(false);
+                  setdepositShow(false);
+                  setrecentShow(true);
+                  setordersShow(false);
+                  setClientsShow(false);
+                  setproductsShow(false);
+                  setAdminActionsShow(true);
+                } else {
+                  alert("Debes ingresar para ver esta sección");
+                }
+              }}
+            >
+              <ListItemIcon>
+                <ManageAccountsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Configuración" />
+            </ListItemButton>
+
+            <ListItemButton
+              onClick={() => {
                 setGraphShow(false);
                 setdepositShow(false);
                 setrecentShow(false);
                 setordersShow(false);
                 setClientsShow(false);
                 setproductsShow(false);
+                setAdminActionsShow(false);
               }}
             >
               <ListItemIcon>
@@ -313,6 +373,10 @@ function DashboardContent() {
               {clientsShow && clients}
               {/* Products */}
               {productsShow && products}
+
+              {adminActionsShow && adminActions}
+
+              {adminLoginShow && adminLogin}
             </Grid>
           </Container>
         </Box>

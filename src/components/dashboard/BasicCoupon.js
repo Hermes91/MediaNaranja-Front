@@ -10,17 +10,36 @@ export default function BasicCoupon(props) {
     <Card sx={{ minWidth: 275, margin: 1 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Código: {props.code}
+          Fecha de registro: {props.dateRegistro}
         </Typography>
         <Typography variant="h5" component="div">
-          Fecha de registro: {props.dateRegistro}
+          Código: {props.code}
         </Typography>
         <Typography sx={{ mt: 1.5 }} color="text.secondary">
           Tienda: {props.storeId}
         </Typography>
+        <Typography sx={{ mt: 0 }} color="text.secondary">
+          Usuario: {props.storeId}
+        </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" sx={{ width: "100%" }} onClick={props.onClose}>
+        <Button
+          variant="contained"
+          size="small"
+          sx={{ width: "100%" }}
+          onClick={() => {
+            alert("El cupón ha sido borrado");
+            props.onClose();
+          }}
+        >
+          BORRAR
+        </Button>
+        <Button
+          variant="contained"
+          size="small"
+          sx={{ width: "100%" }}
+          onClick={props.onClose}
+        >
           CERRAR
         </Button>
       </CardActions>
