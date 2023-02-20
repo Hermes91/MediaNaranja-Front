@@ -69,12 +69,6 @@ export default function reducer(state = initialState, action) {
         allUsers: action.payload,
       };
 
-    case FILTER_BY_USER:
-      return {
-        ...state,
-        filterTickets: action.payload,
-      };
-
     case FILTER_BY_STORE:
       return {
         ...state,
@@ -92,20 +86,6 @@ export default function reducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
-
-    case POST_USER:
-      return {
-        ...state,
-        allUsers: [...state.allUsers, action.payload],
-      };
-
-    case POST_TICKET:
-      return {
-        ...state,
-        allTickets: [...state.allTickets, action.payload],
-        loggedUser: action.payload
-      };
-
 
     case POST_TICKET:
       return {
