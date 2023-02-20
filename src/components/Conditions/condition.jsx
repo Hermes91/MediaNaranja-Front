@@ -46,7 +46,7 @@ export default function Condition() {
                     </p>
                     
                     {user ? 
-                   <div id="user_form" className={s.btn_bgstroke_logged} >¡Ya estás participando!</div>
+                   <div id="user_form" className={s.btn_bgstroke_logged} >¡Ya puedes ingresar cupones y participar!</div>
                 :
                 <>
                 <div id="user_form" className={s.btn_bgstroke} onClick={handleToggle}>Únete ahora</div>
