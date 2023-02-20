@@ -4,6 +4,7 @@ import Condition from "../Conditions/condition";
 import Footer from "../Footer/Footer";
 import IntroDNI from "../introDNI/introDni"
 import { Backdrop } from "@mui/material";
+import NavBar from "../Navbar/Navbar";
 
 import s from './Home.module.css'
 
@@ -14,7 +15,9 @@ export default function Home() {
     const user = JSON.parse(localStorage.getItem("user"))
 
     return (
+      
         <>
+          <NavBar/>
         {
            !user? 
            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
