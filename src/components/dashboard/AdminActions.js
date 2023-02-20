@@ -45,7 +45,7 @@ function AdminActions() {
   }
   return (
     <React.Fragment>
-      <Title>Cambiar password</Title>
+      <Title>Cambiar password de administrador</Title>
       <Divider />
       <Box
         component="form"
@@ -62,6 +62,7 @@ function AdminActions() {
           variant="outlined"
           value={oldPassword}
           size="small"
+          type="password"
           onChange={handleChangeOld}
         />
         <TextField
@@ -71,6 +72,7 @@ function AdminActions() {
           variant="outlined"
           value={newPassword}
           size="small"
+          type="password"
           onChange={handleChange}
         />
 
