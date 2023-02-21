@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import s from '../Code/code.module.css'
 import { getStores, postTicket, getTickets, searchByCode } from "../../redux/actions/actionIndex"
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 function validate(input, ticketsRegistrados) {
@@ -49,12 +50,13 @@ export default function CodeRegister({ handleClose, code }) {
             email: input.email
         }
         dispatch(postTicket(ticketInfo))
-        navigate('/')
         setInput({
             code: "",
             almacen: "",
             email: "",
         })
+        navigate('/')
+        toast.success('El código fue agragado correctamente')
     }
 
 
