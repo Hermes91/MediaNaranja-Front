@@ -1,4 +1,4 @@
-
+import {searchByDocument} from '../../redux/actions/actionIndex'
 
 
 export default function validateAccount({ email, nombre, numDocumento, direccion, telephone, }) {
@@ -7,7 +7,7 @@ export default function validateAccount({ email, nombre, numDocumento, direccion
     const onlyAlphabet = /[\p{L}-]+/u;
     const isMail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const isDNI = /^[0-9]{6,11}$/ 
-
+    const isRegister = searchByDocument(numDocumento)
     const error = {}
 
     if (!email || isBlankSpace.test(email) || !isMail.test(email)) error.email = 'coloque un mail valido'
@@ -18,6 +18,7 @@ export default function validateAccount({ email, nombre, numDocumento, direccion
 
     if (!numDocumento || isBlankSpace.test(numDocumento)) error.numDocumento = 'Ingrese su n° de documento'
     else if (!isDNI.test(numDocumento)) error.numDocumento = 'Ingrese un documento valido'
+    else if(isRegister.length) error.numDocumento = 'Este documento ya fue registrado' 
 
     if (!telephone || isBlankSpace.test(telephone)) error.telephone = 'Agrege un número telefonico'
     else if (!isPhoneNumber.test(telephone)) error.telephone = 'Agrege un número telefonico valido'
