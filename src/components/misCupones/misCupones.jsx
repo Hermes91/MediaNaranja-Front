@@ -26,7 +26,6 @@ export default function MisCupones({ handleClose }) {
 
     useEffect(() => {
         dispatch(getUserTickets(user.numDocumento))
-        console.log('si')
     }, [tickets.length])
 
     return (
