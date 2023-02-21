@@ -142,7 +142,7 @@ p,
 
 .letrachica li {
     font-size: 11pt;
-    padding-top: 8px;
+    padding: 2px;
     list-style: none;
     color: black;
 }

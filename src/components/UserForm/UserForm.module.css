@@ -106,4 +106,7 @@
         align-items: baseline;
     }
 
+    .formulario {
+        row-gap: 3px;
+    }
 }

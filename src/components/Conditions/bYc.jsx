@@ -37,9 +37,9 @@ export default function bYc({ handleClose2 }) {
                         los clientes que realicen su compra por medio de la tienda online <a href="www.lamedianaranja.com.co">www.lamedianaranja.com.co</a> quedarán inscritos con los participantes de la tienda de cundinamarca.</li>
                     <hr></hr>
                     <div className={s.letrachica}>
-                        <li>*debes <span>conservar tu cupón físico</span> porque si eres uno de los ganadores</li>
-                        <li>Debes presentarlo para la entrega del premio. </li>
-                        <li>*sin el cupón físico no se hace entrega del premio.</li>
+                        <li>*Debes <span>conservar tu cupón físico</span> porque si eres uno de los ganadores debes presentarlo para la entrega del premio.</li>
+                        <li> </li>
+                        <li>*Sin el cupón físico no se hace entrega del premio.</li>
                     </div>
                 </div>
             </div>
