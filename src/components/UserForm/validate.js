@@ -14,7 +14,7 @@ export default function validateAccount({ email, nombre, numDocumento, direccion
 
     if (!nombre || isBlankSpace.test(nombre)) error.nombre = 'Indique su nombre'
     else if (!onlyAlphabet.test(nombre)) error.nombre = 'No se aceptan números'
-    else if (nombre.trim().length > 15) error.nombre = `Maximo número de caracteres: 15 (${nombre.trim().length}/15)`
+    else if (nombre.trim().length > 50) error.nombre = `Maximo número de caracteres: 50 (${nombre.trim().length}/50)`
 
     if (!numDocumento || isBlankSpace.test(numDocumento)) error.numDocumento = 'Ingrese su n° de documento'
     else if (!isDNI.test(numDocumento)) error.numDocumento = 'Ingrese un documento valido'
