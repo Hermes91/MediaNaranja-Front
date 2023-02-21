@@ -55,7 +55,8 @@
 
 .formerror {
     color: rgb(255, 229, 229);
-    margin-top: 5px;
-    font-size: 10pt;
+    position: relative;
     width: 100%;
+    right: 59%;
+    
 }
