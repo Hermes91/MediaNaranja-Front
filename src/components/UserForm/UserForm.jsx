@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import validate from '../UserForm/validate'
 import s from './UserForm.module.css'
 import { postUser } from "../../redux/actions/actionIndex";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 export default function UserForm({ handleClose }) {
     const dispatch = useDispatch()
+    const allUsers = useSelector(state => state.allUsers)
 
     const [input, setInput] = useState({
         email: "",
@@ -16,7 +17,14 @@ export default function UserForm({ handleClose }) {
         telephone: "",
     })
     const [err, setErr] = useState({})
-    const isButtonDisabled = () => (!!Object.keys(err).length || !input.email.length)
+
+    var yaExiste = allUsers.find((u) => u.numDocumento == input.numDocumento)
+
+    const isButtonDisabled = () => {
+        if (!!Object.keys(err).length || !input.email.length) return true
+        else if (yaExiste) return true
+        else return false
+    }
     
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -76,6 +84,7 @@ export default function UserForm({ handleClose }) {
                         <input value={input.telephone} name='telephone' onChange={handleChange} type='text' placeholder='Su número de telefono' />
                         {err.telephone && <span className={s.formerror}>{err.telephone}</span>}
                     </div>
+                    {yaExiste? <span className={s.formerror}>Este documento ya fue registrado</span>: null}
                     <button onClick={handleClose} disabled={isButtonDisabled()} type='submit' >Enviar Formulario</button>
                 </form>
             </div>
