@@ -17,8 +17,9 @@ import { Divider } from "@mui/material";
 import { useRef } from "react";
 import { useDownloadExcel } from "react-export-table-to-excel";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getTickets, getUsers } from "../../redux/actions/actionIndex";
+import { Pagination } from "./Pagination";
 
 const style = {
   position: "absolute",
@@ -39,7 +40,7 @@ export default function Clients() {
   const tableRef = useRef(null);
   const [user, setUser] = React.useState({});
   const [pg, setpg] = React.useState(0);
-    const [rpg, setrpg] = React.useState(5);
+  const [rpg, setrpg] = React.useState(5);
   
     function handleChangePage(event, newpage) {
         setpg(newpage);
@@ -79,6 +80,12 @@ export default function Clients() {
  
   return (
     <React.Fragment>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        maxItems="15"
+        allUsers={users}
+      />
       <Title>Usuarios registrados</Title>
       <Divider />
       <Button
