@@ -11,29 +11,36 @@ export default function bYc({ handleClose2 }) {
                     X
                 </h3>
                 <div className={s.textByC}>
-                    <li> NO PARTICIPAN EMPLEADOS HASTA TERCER GRADO DE CONSANGUINIDAD</li>
+                    <li> No participan empleados, ni sus familiares hasta tercer grado de consanguinidad.</li>
 
-                    <li>   NO PARTICIPAN MENORES DE 18 AÑOS* EL PREMIO NO SE CANJEA POR DINERO BAJO NINGUNA CONDICION</li>
+                    <li> No está permitida la participación de menores de 18 años.</li>
 
-                    <li>   SE DEBE PRESENTAR LA CEDULA ORIGINAL PARA LA ENTREGA DEL MISMO EN CASO DE SER COLOMBIANO, Y PARA EXTRANJEROS EL PASAPORTE Y/O CEDULA DE EXTRANJERIA.</li>
+                    <li> Se tendrá un único ganador por punto de venta. 12 puntos de venta y 12 ganadores.</li>
 
-                    <li>  LA EMPRESA NO SE HACE RESPONSABLE POR LOS DATOS INFORMATIVOS A LAS CAJERAS Y/O DIGITADORAS DE CUPONES, POR ESTE MOTIVO SE LE RECOMIENDA VERIFICARLO AL MOMENTO DE COMPRA.</li>
+                    <li> La tienda donde el cliente haga sus compras y registre sus cupones, será su sede de participación. </li>
 
-                    <li>  CONSULTA  GANADORES  EN LA PAGINA DE BENEDAN.</li>
+                    <li> El premio no se canjea por dinero bajo ninguna circunstancia.</li>
 
-                    <li> LA ENTREGA DEL PREMIO DEBE SER PRESENCIAL</li>
+                    <li> Para la entrega del premio si el ganador es de nacionalidad colombiana debe presentar la cédula original y en caso de ser extranjero, debes suministrar el pasaporte y/o cédula de extranjería.</li>
 
-                    <li> LA EMPRESA NO REALIZA ENVIOS DEL PREMIO EN CASO QUE EL GANADOR ESTE EN OTRA CIUDAD</li>
+                    <li> El premio solo se entrega al ganador inscrito y no es transferible y en caso tal de que el ganador no pueda presentarse personalmente a las instalaciones de Almacenes La Media Naranja, deberá enviar una carta de autorización notariada con el poder para que otra persona pueda reclamarlo. No realiza envío del premio en caso que el ganador este en otra ciudad.</li>
 
-                    <li> EL PREMIO SOLO SE ENTREGA AL GANADOR CON SU CEDULA FISICA, EN CASO DE QUE EL GANADOR NO PUEDA DIRIGIRSE A LAS INTALACIONES ESTE DEBERA ENVIAR UNA CARTA DE AUTORIZACION NOTARIADA CO EL PODER PARA QUE OTRA PERSONA PUEDA RECLAMARLO.</li>
+                    <li> Debe verificar que los datos entregados a las cajeras o digitadores de cupones, si se requirieran, sean correctos y válidos para cuando se haga el sorteo. En caso de presentarse anomalías con los datos suministrados quedará descalificado del sorteo.</li>
 
-                    <li> UN UNICO GANADOR POR PUNTO DE VENTA.</li>
+                    <li> Almacenes La Media Naranja no se hace responsable de la mala digitación de la información suministrada por el cliente a la hora de registrar sus datos y cupones en la aplicación.</li>
 
-                    <li> LA TIENDA DONDE EL CLIENTE SE REGISTRE ESA SERA SU SEDE DE PARTICIPACION</li>
+                    <li> Si se detecta intento de fraude o suplantación de identidad al momento de inscribir cupones, automáticamente queda descalificado del sorteo.</li>
 
-                    <li>  FECHA DE CIERRE 23 DE MARZO. 2023</li>
+                    <li> Se pueden consultar los ganadores en la página de Benedan Colocar URL.</li>
 
-                    <li> FECHA DE SORTEO 24 DE MARZO 2023</li>
+                    <li> La Fecha de cierre del concurso será el 23 de marzo de 2023 a las 00:00 Hora Local y la fecha de sorteo del concurso será el 24 de marzo 2023.
+                        los clientes que realicen su compra por medio de la tienda online <a href="www.lamedianaranja.com.co">www.lamedianaranja.com.co</a> quedarán inscritos con los participantes de la tienda de cundinamarca.</li>
+                    <hr></hr>
+                    <div className={s.letrachica}>
+                        <li>*debes <span>conservar tu cupón físico</span> porque si eres uno de los ganadores</li>
+                        <li>Debes presentarlo para la entrega del premio. </li>
+                        <li>*sin el cupón físico no se hace entrega del premio.</li>
+                    </div>
                 </div>
             </div>
 

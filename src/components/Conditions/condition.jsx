@@ -6,7 +6,7 @@ import ByC from "../Conditions/bYc";
 import { toast } from "react-toastify";
 
 export default function Condition() {
- const user = localStorage.getItem('user')
+    const user = localStorage.getItem('user')
 
     const [open, setOpen] = useState(false);
     const handleToggle = () => {
@@ -33,32 +33,31 @@ export default function Condition() {
                 </div>
                 <div className={s.textParticipar}>
                     <h2>¿Como Participar?</h2>
-                    <p>texto sobre como se participar Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit. Nunc pellentesque vestibulum risus eu blandit.
-                        Sed non magna id nunc posuere auctor. Morbi pretium fringilla lobortis.
-                        Curabitur vitae porta nisi. Aliquam finibus egestas pharetra.
-                        Integer pharetra purus quis tellus consequat ullamcorper.
-                        Donec dictum efficitur metus sed molestie. Phasellus cursus non eros ac pulvinar.
-                        Mauris id nisl lacinia, hendrerit elit nec, auctor urna. Duis lorem mauris,
-                        hendrerit non nisl quis, faucibus lacinia magna. Maecenas sit amet erat faucibus,
-                        imperdiet nibh eu, consectetur tellus. Donec a risus vestibulum, hendrerit libero
-                        vehicula, vulputate felis.
+                    <p>
+                        Gracias por participar, para ser uno de los ganadores de uno de los 12 combos de portátil + impresora.    </p>
+                    <br />
+                    <p>  Por cada compra igual o superior de $50.000, en cualquiera de nuestras 12 tiendas, recibirás un cupón con un código QR. Por ejemplo, si la compra es por valor de 150.000 recibirás tres (3) cupones. </p>
+                    <br />
+                    <p>    Inscribe tus datos y los cupones. Podrás inscribir todos los cupones que quiera por las compras realizadas desde el inicio del concurso y hasta el 23 de marzo a las11:59 PM hora local. </p>
+                    <br />
+                    <p>
+                        El sorteo ha sido aprobado por La lotería de Medellín para las tiendas ubicadas en Antioquia y por la lotería de Risaralda para nuestra tienda de Pereira y se realizará el día 24 de marzo por medio de una aplicación que elige el ganador de forma aleatoria.
                     </p>
-                    
-                    {user ? 
-                   <div id="user_form" className={s.btn_bgstroke_logged} >¡Ya puedes ingresar cupones y participar!</div>
-                :
-                <>
-                <div id="user_form" className={s.btn_bgstroke} onClick={handleToggle}>Únete ahora</div>
-                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={open}
-            >
-              
-                <UserForm
-                    handleClose={() => setOpen(false)}
-                />
-            </Backdrop>
-            </>
+
+                    {user ?
+                        <div id="user_form" className={s.btn_bgstroke_logged} >¡Ya puedes ingresar cupones y participar!</div>
+                        :
+                        <>
+                            <div id="user_form" className={s.btn_bgstroke} onClick={handleToggle}>Únete ahora</div>
+                            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                                open={open}
+                            >
+
+                                <UserForm
+                                    handleClose={() => setOpen(false)}
+                                />
+                            </Backdrop>
+                        </>
                     }
                 </div>
             </section>
