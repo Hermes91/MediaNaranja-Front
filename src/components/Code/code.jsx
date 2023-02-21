@@ -79,7 +79,7 @@ export default function CodeRegister({ handleClose, code }) {
                         {err.code && <span className={s.formerror}>{err.code}</span>}
                         <select onChange={handleSelect} defaultValue='DEFAULT'>
                             <option value="DEFAULT" disabled>--seleccionar almacen--</option>
-                            {allStores.map((store, index) => <option name="store" onChange={handleSelect} value={store} key={index}>{store}</option>)}
+                            {allStores.map((store, index) => <option name="store" onChange={handleSelect} value={store} key={index}>{store[0].toUpperCase()+store.substring(1)}</option>)}
                         </select>
                         <button disabled={isButtonDisabled()} onClick={handleClose} type='submit'>Subir mi Código</button>
                     </form>
