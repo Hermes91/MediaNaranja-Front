@@ -14,6 +14,7 @@ export default function MisCupones({ handleClose }) {
     const tickets = useSelector(state => state.filterTickets)
     const dispatch = useDispatch();
     let { code } = useParams();
+    const cleanCode = code? code.substring(0, 13) : null
     const user = JSON.parse(localStorage.getItem("user"))
     /*const user = {
       nombre: 'test',
@@ -54,7 +55,7 @@ export default function MisCupones({ handleClose }) {
                                 open={open}>
                                 <CodeRegister
                                     handleClose={() => setOpen(false)}
-                                    code={code}
+                                    code={cleanCode}
                                 />
                             </Backdrop>
                         </div>

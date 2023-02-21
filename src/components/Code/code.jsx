@@ -13,9 +13,9 @@ function validate(input, ticketsRegistrados) {
     const isBlankSpace = new RegExp("^\\s+$")
     var yaExiste = ticketsRegistrados.find((t) => t.code == input.code)
     if (!input.code || isBlankSpace.test(input.code)) { error.code = 'Ingrese un código válido' }
-    //else if (input.code.trim().length > 9) error.code = `(${input.code.trim().length}/13)`
+    if (input.code.length !== 13) { error.code = 'Su coupon no es válido' }
     //else if (allTickets.find((t) => t.code === input.code)) { error.code = 'Este código ya fue registrado' }
-    else if (yaExiste.id) { error.code = 'Este código ya fue registrado' }
+    else if (yaExiste?.id) { error.code = 'Este código ya fue registrado' }
     return error;
 }
 
