@@ -69,9 +69,9 @@ export default function CodeRegister({ handleClose, code }) {
     return (
         <>
             <div className={s.codeContainer}>
-                <h3 onClick={handleClose} className={s.closeCode}>
+                <span onClick={handleClose} className={s.closeCode}>
                     X
-                </h3>
+                </span>
                 <div className={s.codeBody}>
                     <h2>Elige el almacén donde realizaste la compra</h2>
                     <form onSubmit={handleSubmit} className={s.codeForm}>
