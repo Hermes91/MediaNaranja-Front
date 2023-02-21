@@ -25,9 +25,8 @@ export default function MisCupones({ handleClose }) {
     };
 
     useEffect(() => {
-        !tickets.length && dispatch(getUserTickets(user.numDocumento))
-        console.log('me actualice')
-    }, [tickets])
+        dispatch(getUserTickets(user.numDocumento))
+    }, [tickets.length])
 
     return (
 
