@@ -6,7 +6,7 @@ export default function validateAccount({ email, nombre, numDocumento, direccion
     const isPhoneNumber = /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}/
     const onlyAlphabet = /[\p{L}-]+/u;
     const isMail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    const isDNI = /^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$/
+    const isDNI = /^[0-9]{6,11}$/ 
 
     const error = {}
 
