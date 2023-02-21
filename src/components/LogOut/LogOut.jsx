@@ -8,7 +8,7 @@ export default function Logout({className}) {
     }
     return (
         <div className={s.container}>
-    <div className={s.text} onClick={logout}>[LOGOUT]</div>
+    <div className={s.text} onClick={logout}>[SALIR]</div>
     </div>
     )
 
