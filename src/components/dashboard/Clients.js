@@ -80,12 +80,6 @@ export default function Clients() {
  
   return (
     <React.Fragment>
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        maxItems="15"
-        allUsers={users}
-      />
       <Title>Usuarios registrados</Title>
       <Divider />
       <Button
