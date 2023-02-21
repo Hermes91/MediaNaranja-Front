@@ -1,4 +1,7 @@
 .codeContainer {
+    display: block;
+    flex-direction: column;
+    align-items: center;
     background-color: var(--secondary-orange);
     border-radius: 15px;
     box-shadow: inset 0px 10px 8px 0px #03000048, inset 0px -10px 8px 0px #03000048;
@@ -9,9 +12,9 @@
 }
 
 .closeCode {
-    position: absolute;
+    position: initial;
     cursor: pointer;
-    padding: 0;
+    padding-right: 1.4rem;
 }
 
 .codeContainer span {
