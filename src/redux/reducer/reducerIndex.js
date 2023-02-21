@@ -47,7 +47,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         allTickets: action.payload,
-        filterTickets: action.payload,
       };
 
     case GET_STORES_DB:

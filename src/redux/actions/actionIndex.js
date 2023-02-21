@@ -125,11 +125,10 @@ export const postTicket = (ticketInfo) => {
 export const getUserTickets = (numDocumento) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`/tickets`, numDocumento);
+      const response = await axios.get(`/tickets/${numDocumento}`);
       dispatch({ type: GET_USER_TICKETS, payload: response.data });
     } catch (error) {
       console.log("error:", error);
-      toast.warn("Todavía no tiene tickets registrados");
     }
   };
 };
