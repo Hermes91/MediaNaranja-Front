@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import DownloadIcon from "@mui/icons-material/Download";
 import Title from "./Title";
 import BasicCard from "./BasicCard";
+import TablePagination from "@mui/material/TablePagination";
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -37,6 +38,17 @@ export default function Clients() {
   const tickets = useSelector((state) => state.allTickets);
   const tableRef = useRef(null);
   const [user, setUser] = React.useState({});
+  const [pg, setpg] = React.useState(0);
+    const [rpg, setrpg] = React.useState(5);
+  
+    function handleChangePage(event, newpage) {
+        setpg(newpage);
+    }
+  
+    function handleChangeRowsPerPage(event) {
+        setrpg(parseInt(event.target.value, 10));
+        setpg(0);
+    }
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -64,9 +76,7 @@ export default function Clients() {
     !users.length && dispatch(getUsers());
     !tickets.length && dispatch(getTickets());
   }, [users, user, dispatch]);
-
-  const only15 = users.slice(0, 15);
-
+ 
   return (
     <React.Fragment>
       <Title>Usuarios registrados</Title>
@@ -95,8 +105,8 @@ export default function Clients() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {addTickets(tickets, only15).map((user) => (
             <>
+          {addTickets(tickets, users).slice(pg * rpg, pg * rpg + rpg).map((user) => (
               <TableRow key={user.id}>
                 <TableCell>
                   <Button
@@ -113,10 +123,19 @@ export default function Clients() {
                 <TableCell>{user.email}</TableCell>
                 <TableCell align="center">{user.tickets.length}</TableCell>
               </TableRow>
+             ))}
             </>
-          ))}
         </TableBody>
       </Table>
+      <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={users.length}
+                rowsPerPage={rpg}
+                page={pg}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            />
       <Divider />
 
       <Modal
