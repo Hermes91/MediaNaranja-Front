@@ -1,12 +1,14 @@
-import { useSelect } from "@mui/base";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import validate from '../UserForm/validate'
 import s from '../Code/code.module.css'
 import { getStores, postTicket, getTickets, searchByCode } from "../../redux/actions/actionIndex"
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 function validate(input, ticketsRegistrados) {
+    
     const error = {}
     const isBlankSpace = new RegExp("^\\s+$")
     var yaExiste = ticketsRegistrados.find((t) => t.code == input.code)
@@ -18,7 +20,7 @@ function validate(input, ticketsRegistrados) {
 }
 
 export default function CodeRegister({ handleClose, code }) {
-
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const allStores = useSelector(state => state.allStores)
     const ticketsRegistrados = useSelector(state => state.filterTickets)
@@ -33,7 +35,7 @@ export default function CodeRegister({ handleClose, code }) {
 
     useEffect(() => {
         !ticketsRegistrados.length && dispatch(getTickets())
-    })
+    },[])
 
     const isButtonDisabled = () => {
         if (!Object.keys(err).length && selected) return false
@@ -53,6 +55,8 @@ export default function CodeRegister({ handleClose, code }) {
             almacen: "",
             email: "",
         })
+        navigate('/')
+        toast.success('El código fue agragado correctamente')
     }
 
 
