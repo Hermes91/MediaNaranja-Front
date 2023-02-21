@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import DownloadIcon from "@mui/icons-material/Download";
 import Title from "./Title";
 import BasicCard from "./BasicCard";
+import TablePagination from "@mui/material/TablePagination";
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -18,7 +19,6 @@ import { useDownloadExcel } from "react-export-table-to-excel";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getTickets, getUsers } from "../../redux/actions/actionIndex";
-import { Pagination } from "./Pagination";
 
 const style = {
   position: "absolute",
@@ -37,117 +37,125 @@ export default function Clients() {
   const users = useSelector((state) => state.allUsers);
   const tickets = useSelector((state) => state.allTickets);
   const tableRef = useRef(null);
-  const [user, setUser] = React.useState({});
-  const [currentPage, setCurrentPage] = useState(1);
+  const [user, setUser] = useState({});
+  const [pg, setpg] = useState(0);
+  const [rpg, setrpg] = useState(5);
+    function handleChangePage(event, newpage) {
+    setpg(newpage);
+    }
+    function handleChangeRowsPerPage(event) {
+    setrpg(parseInt(event.target.value, 10));
+    setpg(0);
+    }
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const { onDownload } = useDownloadExcel({
-    currentTableRef: tableRef.current,
-    filename: "Users table",
-    sheet: "Users",
+  currentTableRef: tableRef.current,
+  filename: "Users table",
+  sheet: "Users",
   });
 
   function addTickets(allTickets, allUsers) {
-    for (let i = 0; i < allUsers.length; i++) {
-      allUsers[i]["tickets"] = [];
-      allTickets.map((t) => {
-        if (allUsers[i].id === t.userId) {
-          allUsers[i]["tickets"].push(t);
-        }
-      });
+  for (let i = 0; i < allUsers.length; i++) {
+    allUsers[i]["tickets"] = [];
+    allTickets.map((t) => {
+    if (allUsers[i].id === t.userId) {
+    allUsers[i]["tickets"].push(t);
+    }
+    });
     }
     return allUsers;
   }
 
-  useEffect(() => {
-    !users.length && dispatch(getUsers());
-    !tickets.length && dispatch(getTickets());
-  }, [users, user, dispatch]);
-
-  const only15 = users.slice(0, 15);
-
+    useEffect(() => {
+      !users.length && dispatch(getUsers());
+      !tickets.length && dispatch(getTickets());
+      }, [users, user, dispatch]);
   return (
-    <React.Fragment>
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        maxItems="15"
-        allUsers={users}
-      />
+      <React.Fragment>
       <Title>Usuarios registrados</Title>
       <Divider />
       <Button
-        variant="contained"
-        onClick={onDownload}
-        startIcon={<DownloadIcon />}
-        sx={{
-          width: 150,
-          display: "flex",
-          alignSelf: "flex-end",
-          marginTop: 1,
-          marginBottom: 2,
-        }}
+      variant="contained"
+      onClick={onDownload}
+      startIcon={<DownloadIcon />}
+      sx={{
+      width: 150,
+      display: "flex",
+      alignSelf: "flex-end",
+      marginTop: 1,
+      marginBottom: 2,
+      }}
       >
-        Descargar
+      Descargar
       </Button>
       <Table size="small" ref={tableRef}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Documento de identidad</TableCell>
-            <TableCell>Nombre</TableCell>
-            <TableCell>Correo electrónico</TableCell>
-            <TableCell align="center">Cupones registrados</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {addTickets(tickets, only15).map((user) => (
-            <>
-              <TableRow key={user.id}>
-                <TableCell>
-                  <Button
-                    onClick={() => {
-                      setUser(user);
-                      handleOpen();
-                    }}
-                  >
-                    {user.numDocumento}
-                  </Button>
-                </TableCell>
+      <TableHead>
+      <TableRow>
+      <TableCell>Documento de identidad</TableCell>
+      <TableCell>Nombre</TableCell>
+      <TableCell>Correo electrónico</TableCell>
+      <TableCell align="center">Cupones registrados</TableCell>
+      </TableRow>
+      </TableHead>
+      <TableBody>
+      <>
+      {addTickets(tickets, users).slice(pg * rpg, pg * rpg + rpg).map((user) => (
+      <TableRow key={user.id}>
+      <TableCell>
+      <Button
+      onClick={() => {
+      setUser(user);
+      handleOpen();
+      }}
+      >
+      {user.numDocumento}
+      </Button>
+      </TableCell>
 
-                <TableCell>{user.nombre}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell align="center">{user.tickets.length}</TableCell>
-              </TableRow>
-            </>
-          ))}
-        </TableBody>
+      <TableCell>{user.nombre}</TableCell>
+      <TableCell>{user.email}</TableCell>
+      <TableCell align="center">{user.tickets.length}</TableCell>
+      </TableRow>
+      ))}
+      </>
+      </TableBody>
       </Table>
+      <TablePagination
+      rowsPerPageOptions={[5, 10, 25]}
+      component="div"
+      count={users.length}
+      rowsPerPage={rpg}
+      page={pg}
+      onPageChange={handleChangePage}
+      onRowsPerPageChange={handleChangeRowsPerPage}
+      />
       <Divider />
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          >
+          <Box sx={style}>
           <BasicCard
-            name={user.nombre}
-            numDocumento={user.numDocumento}
-            email={user.email}
-            telephone={user.telephone}
-            tickets={
-              user.tickets
-                ? user.tickets
-                : [{ code: "No tiene cupones registrados" }]
-            }
-            onClose={handleClose}
+          name={user.nombre}
+          numDocumento={user.numDocumento}
+          email={user.email}
+          telephone={user.telephone}
+          tickets={
+          user.tickets
+          ? user.tickets
+          : [{ code: "No tiene cupones registrados" }]
+          }
+          onClose={handleClose}
           />
         </Box>
-      </Modal>
-    </React.Fragment>
-  );
+        </Modal>
+      </React.Fragment>
+      );
 }
