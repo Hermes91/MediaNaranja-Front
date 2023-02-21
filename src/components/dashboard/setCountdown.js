@@ -1,43 +1,63 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putAdminCountdown, getAdmin } from "../../redux/actions/actionIndex";
 
+import * as React from "react";
+import dayjs from "dayjs";
+import TextField from "@mui/material/TextField";
+import Title from "./Title";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { Button, Box, Divider } from "@mui/material";
+
 export default function SetCountDown() {
-    const [newCountdown, setNewCountDown] = useState("");
-    const admin = useSelector(state => state.admin);
-    const dispatch = useDispatch();
-    const date = admin?.countdown?.split("T").join(" ").slice(0, -5)
+  const [value, setValue] = React.useState(dayjs("2022-04-07"));
+  const admin = useSelector((state) => state.admin);
+  const dispatch = useDispatch();
+  const date = admin?.countdown?.split("T").join(" ").slice(0, -5);
 
-    useEffect(() => {
-     if (!admin || !Object.keys(admin).length) {
-         dispatch(getAdmin())
-     }
-    }, [dispatch, admin])
-
-    function handleChange(e){
-        e.preventDefault()
-        setNewCountDown(e.target.value)
+  useEffect(() => {
+    if (!admin || !Object.keys(admin).length) {
+      dispatch(getAdmin());
     }
+  }, [dispatch, admin]);
 
-    function handleOnClick(e){
-        var infoCountDown = {
-            countdown: newCountdown,
-            email: admin.email
-        }
-        dispatch(putAdminCountdown(infoCountDown))
-        dispatch(getAdmin())
-        setNewCountDown("")
-    }
+  function handleOnClick(e) {
+    var infoCountDown = {
+      countdown: value,
+      email: admin.email,
+    };
+    dispatch(putAdminCountdown(infoCountDown));
+    dispatch(getAdmin());
+  }
 
-    return (
-        <div>
-            <h1>Fecha concurso: {date}</h1>
-            <div>
-            <h3>Modificar fecha</h3>
-            <input onChange={handleChange} type="text" value={newCountdown} name="countdown"/>
-            <button onClick={handleOnClick}>Confirmar cambio</button>
-            </div>
-        </div>
-    ) 
-    
+  return (
+    <React.Fragment>
+      <Title>Fecha del concurso: {date}</Title>
+      <Divider />
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DateTimePicker
+            renderInput={(props) => <TextField {...props} />}
+            label="DateTimePicker"
+            value={value}
+            onChange={(newValue) => {
+              setValue(dayjs(newValue).format("DD/MM/YYYY"));
+            }}
+          />
+          <Button size="large" variant="contained" onClick={handleOnClick}>
+            Cambiar Fecha
+          </Button>
+        </LocalizationProvider>
+      </Box>
+    </React.Fragment>
+  );
 }

@@ -33,7 +33,7 @@ import Clients from "./Clients";
 import Products from "./Products";
 import AdminActions from "./AdminActions";
 import AdminLogin from "./AdminLogin";
-
+import SetCountDown from "./setCountdown";
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -108,6 +108,7 @@ function DashboardContent() {
   const [adminActionsShow, setAdminActionsShow] = useState(false);
   const [adminLoginShow, setAdminLoginShow] = useState(false);
   const [adminLogged, setAdminLogged] = useState(false);
+  const [countDownShow, setCountDownShow] = useState(false);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -179,6 +180,14 @@ function DashboardContent() {
     <Grid item xs={12}>
       <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
         <AdminActions />
+      </Paper>
+    </Grid>
+  );
+
+  const countDown = (
+    <Grid item xs={12}>
+      <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+        <SetCountDown />
       </Paper>
     </Grid>
   );
@@ -259,6 +268,8 @@ function DashboardContent() {
                 setClientsShow(false);
                 setproductsShow(false);
                 setAdminActionsShow(false);
+                setCountDownShow(false);
+                setCountDownShow(false);
               }}
             >
               <ListItemIcon>
@@ -276,6 +287,7 @@ function DashboardContent() {
                   setClientsShow(true);
                   setproductsShow(false);
                   setAdminActionsShow(false);
+                  setCountDownShow(false);
                 } else {
                   alert("Debes ingresar para ver esta sección");
                 }
@@ -296,6 +308,7 @@ function DashboardContent() {
                   setClientsShow(false);
                   setproductsShow(false);
                   setAdminActionsShow(false);
+                  setCountDownShow(false);
                 } else {
                   alert("Debes ingresar para ver esta sección");
                 }
@@ -317,6 +330,7 @@ function DashboardContent() {
                   setClientsShow(false);
                   setproductsShow(false);
                   setAdminActionsShow(true);
+                  setCountDownShow(true);
                 } else {
                   alert("Debes ingresar para ver esta sección");
                 }
@@ -381,6 +395,8 @@ function DashboardContent() {
               {adminActionsShow && adminActions}
 
               {adminLoginShow && adminLogin}
+
+              {countDownShow && countDown}
             </Grid>
           </Container>
         </Box>
