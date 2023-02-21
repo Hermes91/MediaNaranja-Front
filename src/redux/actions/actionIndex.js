@@ -92,7 +92,7 @@ export const postUser = (userInfo) => {
       const response = await axios.post("/user", userInfo);
       dispatch({ type: POST_USER, payload: response.config.data });
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
       dispatch({ type: POST_USER, payload: { data: [] } });
     }
   };

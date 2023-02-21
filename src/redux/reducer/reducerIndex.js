@@ -3,7 +3,6 @@ import {
   GET_STORES,
   GET_STORE,
   GET_USERS,
-  FILTER_BY_USER,
   FILTER_BY_STORE,
   SEARCH_BY_CODE,
   POST_USER,
@@ -87,10 +86,17 @@ export default function reducer(state = initialState, action) {
         user: action.payload,
       };
 
+    case POST_USER:
+      return {
+        ...state,
+        allUsers: [...state.allUsers, action.payload],
+      };
+
     case POST_TICKET:
       return {
         ...state,
-        allTickets: [...state.allTickets, action.payload]
+        allTickets: [...state.allTickets, action.payload],
+        filterTickets: [...state.allTickets, action.payload]
       }
 
     case SEARCH_BY_DOCUMENT:

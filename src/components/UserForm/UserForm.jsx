@@ -17,17 +17,12 @@ export default function UserForm({ handleClose }) {
     })
     const [err, setErr] = useState({})
     const isButtonDisabled = () => (!!Object.keys(err).length || !input.email.length)
-
-    const handleClickUser = () => {
-        window.location.reload()
-      };
-
+    
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(postUser(input))
         localStorage.setItem("user", JSON.stringify(input));
         handleClose()
-        handleClickUser()
         setInput({
             email: "",
             nombre: "",
@@ -81,7 +76,7 @@ export default function UserForm({ handleClose }) {
                         <input value={input.telephone} name='telephone' onChange={handleChange} type='text' placeholder='Su número de telefono' />
                         {err.telephone && <span className={s.formerror}>{err.telephone}</span>}
                     </div>
-                    <button disabled={isButtonDisabled()} type='submit' >Enviar Formulario</button>
+                    <button onClick={handleClose} disabled={isButtonDisabled()} type='submit' >Enviar Formulario</button>
                 </form>
             </div>
         </div>

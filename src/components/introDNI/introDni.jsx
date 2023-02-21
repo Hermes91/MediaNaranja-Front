@@ -17,7 +17,6 @@ function validate(input, allUsers) {
 export default function IntroDNI({ handleClose }) {
     const [err, setErr] = useState({})
     const allUsers = useSelector(state => state.allUsers)
-    const user = useSelector(state => state.loggedUser)
     let dispatch = useDispatch()
     
     useEffect(() => {
