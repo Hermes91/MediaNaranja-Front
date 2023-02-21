@@ -34,7 +34,7 @@ export default function bYc({ handleClose2 }) {
                     <li> Se pueden consultar los ganadores en la página de Benedan Colocar URL.</li>
 
                     <li> La Fecha de cierre del concurso será el 23 de marzo de 2023 a las 00:00 Hora Local y la fecha de sorteo del concurso será el 24 de marzo 2023.
-                        los clientes que realicen su compra por medio de la tienda online <a href="www.lamedianaranja.com.co">www.lamedianaranja.com.co</a> quedarán inscritos con los participantes de la tienda de cundinamarca.</li>
+                        los clientes que realicen su compra por medio de la tienda online <a href="https://lamedianaranja.com.co/">www.lamedianaranja.com.co</a> quedarán inscritos con los participantes de la tienda de cundinamarca.</li>
                     <hr></hr>
                     <div className={s.letrachica}>
                         <li>*Debes <span>conservar tu cupón físico</span> porque si eres uno de los ganadores debes presentarlo para la entrega del premio.</li>
