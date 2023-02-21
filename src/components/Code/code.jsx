@@ -55,6 +55,7 @@ export default function CodeRegister({ handleClose, code }) {
             almacen: "",
             email: "",
         })
+        window.location.reload()
         navigate('/')
         toast.success('El código fue agragado correctamente')
     }
@@ -69,9 +70,9 @@ export default function CodeRegister({ handleClose, code }) {
     return (
         <>
             <div className={s.codeContainer}>
-                <span onClick={handleClose} className={s.closeCode}>
+                <h3 onClick={handleClose} className={s.closeCode}>
                     X
-                </span>
+                </h3>
                 <div className={s.codeBody}>
                     <h2>Elige el almacén donde realizaste la compra</h2>
                     <form onSubmit={handleSubmit} className={s.codeForm}>
