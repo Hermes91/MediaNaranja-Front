@@ -3,6 +3,8 @@
     margin-right: auto;
     background-color: var(--secondary-orange);
     padding: 10px;
+    border-radius: 15px;
+    box-shadow: inset 0px 10px 8px 0px #03000048, inset 0px -10px 8px 0px #03000048;
 }
 
 .formContainer h3 {
