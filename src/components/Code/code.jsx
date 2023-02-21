@@ -15,7 +15,7 @@ function validate(input, ticketsRegistrados) {
     if (!input.code || isBlankSpace.test(input.code)) { error.code = 'Ingrese un código válido' }
     //else if (input.code.trim().length > 9) error.code = `(${input.code.trim().length}/13)`
     //else if (allTickets.find((t) => t.code === input.code)) { error.code = 'Este código ya fue registrado' }
-    else if (yaExiste) { error.code = 'Este código ya fue registrado' }
+    else if (yaExiste.id) { error.code = 'Este código ya fue registrado' }
     return error;
 }
 
@@ -23,7 +23,7 @@ export default function CodeRegister({ handleClose, code }) {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const allStores = useSelector(state => state.allStores)
-    const ticketsRegistrados = useSelector(state => state.filterTickets)
+    const ticketsRegistrados = useSelector(state => state.allTickets)
     const user = JSON.parse(localStorage.getItem("user"))
     const [selected, setSelected] = useState("")
     const [err, setErr] = useState({})
