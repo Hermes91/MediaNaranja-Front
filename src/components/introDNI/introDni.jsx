@@ -42,6 +42,7 @@ export default function IntroDNI({ handleClose }) {
         setErr(validacion)
         if (yaExiste && !Object.keys(err).length) {
             localStorage.setItem("user", JSON.stringify(yaExiste));
+            window.location.reload()
         } else{
             toast.warn("Usted no está registrado, haga click en Únete Ahora")
         }
