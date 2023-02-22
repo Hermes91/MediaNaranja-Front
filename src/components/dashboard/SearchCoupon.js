@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getTickets,
+  getUsers,
   searchByCode,
   getStoresDB,
 } from "../../redux/actions/actionIndex.js";
@@ -30,6 +31,7 @@ export default function SearchCoupon() {
   const [nameStore, setNameStore] = useState("");
   const ticketfound = useSelector((state) => state.filterTickets);
   const stores = useSelector((state) => state.storesDB);
+  const users = useSelector((state) => state.allUsers);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -64,7 +66,20 @@ export default function SearchCoupon() {
     }
   };
 
+  function addTickets(allTickets, allUsers) {
+    for (let i = 0; i < allUsers.length; i++) {
+      allUsers[i]["tickets"] = [];
+      allTickets.map((t) => {
+        if (allUsers[i].id === t.userId) {
+          allUsers[i]["tickets"].push(t);
+        }
+      });
+    }
+    return allUsers;
+  }
+
   useEffect(() => {
+    !users.length && dispatch(getUsers());
     !ticketfound.length && dispatch(getTickets());
     !stores.length && dispatch(getStoresDB());
   }, [ticketfound, stores, dispatch]);
