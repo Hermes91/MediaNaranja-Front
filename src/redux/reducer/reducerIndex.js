@@ -14,6 +14,7 @@ import {
   GET_STORES_DB,
   GET_USER_TICKETS,
   SEARCH_BY_DOCUMENT,
+  DELETE_TICKET,
 } from "../actions/actionIndex.js";
 export const initialState = {
   allTickets: [],
@@ -39,6 +40,7 @@ export const initialState = {
   user: [],
   admin: {},
   orderedChange: false,
+  ticketDeleted: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -95,14 +97,14 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         allTickets: [...state.allTickets, action.payload],
-        filterTickets: [...state.allTickets, action.payload]
-      }
+        filterTickets: [...state.allTickets, action.payload],
+      };
 
     case SEARCH_BY_DOCUMENT:
       return {
         ...state,
-        loggedUser: action.payload
-      }
+        loggedUser: action.payload,
+      };
 
     case GET_ADMIN:
       return {
@@ -114,6 +116,12 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         admin: (state.admin.password = action.payload),
+      };
+
+    case DELETE_TICKET:
+      return {
+        ...state,
+        ticketDeleted: !state.ticketDeleted,
       };
 
     case PUT_ADMIN_COUNTDOWN:

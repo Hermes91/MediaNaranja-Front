@@ -16,6 +16,7 @@ export const GET_ADMIN = "GET_ADMIN";
 export const PUT_ADMIN_PW = "PUT_ADMIN_PW";
 export const PUT_ADMIN_COUNTDOWN = "PUT_ADMIN_COUNTDOWN";
 export const GET_USER_TICKETS = "GET_USER_TICKETS;";
+export const DELETE_TICKET = "DELETE_TICKET";
 
 export const getAdmin = () => {
   return async function (dispatch) {
@@ -40,6 +41,17 @@ export const putAdminCountdown = ({ countdown, email }) => {
     try {
       const adminRes = await axios.put("/admin", { countdown, email });
       dispatch({ type: PUT_ADMIN_COUNTDOWN, payload: adminRes.data.form });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const deleteTicket = ({ code, email }) => {
+  return async function (dispatch) {
+    try {
+      const deleted = await axios.delete("/tickets", { code, email });
+      dispatch({ type: DELETE_TICKET, payload: deleted.data });
     } catch (error) {
       console.log(error);
     }
