@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 
 function validate(input, ticketsRegistrados) {
-    
+
     const error = {}
     const isBlankSpace = new RegExp("^\\s+$")
     var yaExiste = ticketsRegistrados.find((t) => t.code == input.code)
@@ -35,7 +35,7 @@ export default function CodeRegister({ handleClose, code }) {
 
     useEffect(() => {
         !ticketsRegistrados.length && dispatch(getTickets())
-    },[])
+    }, [])
 
     const isButtonDisabled = () => {
         if (!Object.keys(err).length && selected) return false
@@ -79,13 +79,15 @@ export default function CodeRegister({ handleClose, code }) {
                         {err.code && <span className={s.formerror}>{err.code}</span>}
                         <select onChange={handleSelect} defaultValue='DEFAULT'>
                             <option value="DEFAULT" disabled>--seleccionar almacen--</option>
-                            {allStores.map((store, index) => <option name="store" onChange={handleSelect} value={store} key={index}>{store[0].toUpperCase()+store.substring(1)}</option>)}
+                            {allStores.map((store, index) => <option name="store" onChange={handleSelect} value={store} key={index}>{store[0].toUpperCase() + store.substring(1)}</option>)}
                         </select>
-                        <button disabled={isButtonDisabled()} onClick={handleClose} type='submit'>Subir mi Código</button>
+                        <button style={{ visibility: isButtonDisabled() === true ? 'hidden' : 'visible' }} onClick={handleClose} type='submit'>Subir mi Código</button>
                     </form>
                 </div>
             </div>
         </>
     )
 }
+
+
 
