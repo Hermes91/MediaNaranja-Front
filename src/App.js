@@ -1,16 +1,22 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./components/dashboard/Dashboard";
-import NavBar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
-import MisCupones from "./components/misCupones/misCupones";
+import { Helmet } from "react-helmet";
 
 function App() {
   return (
     <div className="App">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        ></meta>
+        <title>Sorteos - La media Naranja</title>
+      </Helmet>
       <div>
-        <Routes>
-        </Routes>
+        <Routes></Routes>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/admin" element={<Dashboard />} />
