@@ -75,7 +75,7 @@ export default function IntroDNI({ handleClose }) {
                 </h3>
                 <div className={s.dniBody}>
                     <h2>Ingresa tu cedula aqui</h2>
-                    <form onSubmit={handleSubmit} className={s.dniForm}>
+                    <label onSubmit={handleSubmit} className={s.dniForm}>
                         <input value={input.numDocumento} name="numDocumento" onChange={handleChange} type="text" maxLength="10" />
                         {err.numDocumento && <span className={s.formerror}>{err.numDocumento}</span>}
 
@@ -94,9 +94,9 @@ export default function IntroDNI({ handleClose }) {
                         : null}
                         </>
                         :
-                        <button onClick={handleClose} disabled={isButtonDisabled()} type='submit'>Acceder</button> }
+                        <button onClick={handleSubmit} disabled={isButtonDisabled()} type='submit'>Acceder</button> }
 
-                    </form>
+                    </label>
                 </div>
             </div>
         </>
