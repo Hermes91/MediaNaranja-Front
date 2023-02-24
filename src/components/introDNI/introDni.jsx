@@ -7,16 +7,13 @@ import UserForm from "../UserForm/UserForm";
 import { Backdrop } from "@mui/material";
 
 ///////  valida el DNI ingresado  //////
-function validate(input, allUsers) {
-    const error = {};
-    const isBlankSpace = new RegExp("^\\s+$");
-    const isDNI = /^[0-9]{6,10}$/;
-    if (!input.numDocumento || isBlankSpace.test(input.numDocumento))
-        error.numDocumento = "Ingrese su n° de documento";
-    else if (!isDNI.test(input.numDocumento))
-        error.numDocumento = "Ingrese un documento valido";
-    return error;
-}
+// function validate(input) {
+//     const error = {};
+//     const isBlankSpace = new RegExp("^\\s+$");
+//     if (!input.numDocumento || isBlankSpace.test(input.numDocumento))
+//         error.numDocumento = "Ingrese su n° de documento";
+//     return error;
+// }
 
 export default function IntroDNI({ handleClose }) {
     const [err, setErr] = useState({});
@@ -40,26 +37,20 @@ export default function IntroDNI({ handleClose }) {
 
     var yaExiste = allUsers.find((u) => u.numDocumento == input?.numDocumento);
 
-
-    var yaExiste = allUsers.find(u => u.numDocumento == input?.numDocumento)
-
     const isButtonDisabled = () => {
-        if (Object.keys(err).length || !input.numDocumento) return true
-        else if (!yaExiste) return true
+        if (!yaExiste) return true
         return false
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(searchByDocument(Number(input.numDocumento)))
-        const validacion = validate(input, allUsers, yaExiste)
-        setErr(validacion)
-        if (yaExiste && !Object.keys(err).length) {
+        // const validacion = validate(input)
+        // setErr(validacion)
+        if (yaExiste) {
             localStorage.setItem("user", JSON.stringify(yaExiste));
-            window.location.reload()
-        } else {
-            toast.warn("Usted no está registrado, haga click en Únete Ahora")
-        }
+        } 
+        handleClose()
     }
 
     const handleChange = (e) => {
@@ -91,9 +82,9 @@ export default function IntroDNI({ handleClose }) {
 
                         {isButtonDisabled() ?
                             <>
-                                {!err.numDocumento && !yaExiste ?
+                                {!yaExiste ?
                                     <>
-                                        <a onClick={handleToggle} style={{ 'cursor': 'pointer' }}>Regístrece aquí</a>
+                                        <a onClick={handleToggle} style={{ 'cursor': 'pointer' }}>Regístrate aquí</a>
                                         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                                             open={open}>
                                             <UserForm
@@ -105,7 +96,6 @@ export default function IntroDNI({ handleClose }) {
                             </>
                             :
                             <button onClick={handleSubmit} disabled={isButtonDisabled()} type='submit'>Acceder</button>}
-
                     </label>
                 </div>
             </div>
