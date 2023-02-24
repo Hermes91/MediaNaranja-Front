@@ -80,6 +80,7 @@ export default function IntroDNI({ handleClose }) {
                         {err.numDocumento && <span className={s.formerror}>{err.numDocumento}</span>}
 
                        {isButtonDisabled() ? 
+                       <>
                        {!err.numDocumento && !yaExiste ? 
                         <>
                         <a onClick={handleToggle} style={{'cursor':'pointer'}}>Regístrece aquí</a> 
@@ -91,6 +92,7 @@ export default function IntroDNI({ handleClose }) {
                             </Backdrop>
                         </>
                         : null}
+                        </>
                         :
                         <button onClick={handleClose} disabled={isButtonDisabled()} type='submit'>Acceder</button> }
 
