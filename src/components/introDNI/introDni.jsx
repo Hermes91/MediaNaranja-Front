@@ -38,7 +38,7 @@ export default function IntroDNI({ handleClose }) {
         numDocumento: "",
     })
 
-    var yaExiste = allUsers.find(u => u.numDocumento === input?.numDocumento)
+    var yaExiste = allUsers.find(u => u.numDocumento == input?.numDocumento)
     
     const isButtonDisabled = () => {
         if (Object.keys(err).length || !input.numDocumento) return true
@@ -61,7 +61,7 @@ export default function IntroDNI({ handleClose }) {
 
     const handleChange = (e) => {
         e.preventDefault()
-        setInput({ ...input, [e.target.name]: Number(e.target.value) })
+        setInput({ ...input, [e.target.name]: e.target.value })
         const validacion = validate(input, allUsers)
         setErr(validacion)
     }
