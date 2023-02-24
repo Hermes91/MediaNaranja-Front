@@ -11,7 +11,7 @@ import { Backdrop } from "@mui/material";
 function validate(input, allUsers) {
     const error = {}
     const isBlankSpace = new RegExp("^\\s+$")
-    const isDNI = /^[0-9]{6,11}$/
+    const isDNI = /^[0-9]{6,10}$/
     if (!input.numDocumento || isBlankSpace.test(input.numDocumento)) error.numDocumento = 'Ingrese su n° de documento'
     else if (!isDNI.test(input.numDocumento)) error.numDocumento = 'Ingrese un documento valido'
     return error;
@@ -39,16 +39,17 @@ export default function IntroDNI({ handleClose }) {
     })
 
     var yaExiste = allUsers.find(u => u.numDocumento === input?.numDocumento)
-
+    
     const isButtonDisabled = () => {
         if (Object.keys(err).length || !input.numDocumento) return true
-        else return false
+        else if (!yaExiste) return true
+        return false
     }
-
+    
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(searchByDocument(input.numDocumento))
-        const validacion = validate(input, allUsers)
+        dispatch(searchByDocument(Number(input.numDocumento)))
+        const validacion = validate(input, allUsers, yaExiste)
         setErr(validacion)
         if (yaExiste && !Object.keys(err).length) {
             localStorage.setItem("user", JSON.stringify(yaExiste));
@@ -77,8 +78,9 @@ export default function IntroDNI({ handleClose }) {
                     <form onSubmit={handleSubmit} className={s.dniForm}>
                         <input value={input.numDocumento} name="numDocumento" onChange={handleChange} type="text" maxLength="10" />
                         {err.numDocumento && <span className={s.formerror}>{err.numDocumento}</span>}
-                        <button onClick={handleClose} disabled={isButtonDisabled()} type='submit'>Acceder</button>
-                        {!err.numDocumento && !yaExiste ? 
+
+                       {isButtonDisabled() ? 
+                       {!err.numDocumento && !yaExiste ? 
                         <>
                         <a onClick={handleToggle} style={{'cursor':'pointer'}}>Regístrece aquí</a> 
                         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -89,10 +91,12 @@ export default function IntroDNI({ handleClose }) {
                             </Backdrop>
                         </>
                         : null}
+                        :
+                        <button onClick={handleClose} disabled={isButtonDisabled()} type='submit'>Acceder</button> }
+
                     </form>
                 </div>
             </div>
-
         </>
     )
 }

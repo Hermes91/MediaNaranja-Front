@@ -42,7 +42,13 @@
 .codeForm input {
     height: 21pt;
     width: 80%;
+    color: black;
 }
+
+.codeForm select {
+    color: black;
+}
+
 
 .codeForm button {
     margin-top: 4%;
