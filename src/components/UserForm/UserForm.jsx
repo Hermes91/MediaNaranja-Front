@@ -47,7 +47,7 @@ export default function UserForm({ handleClose }) {
       direccion: "",
       telephone: "",
     });
-    window.location.reload()
+  //  window.location.reload()
   };
 
   const handleChange = (e) => {
