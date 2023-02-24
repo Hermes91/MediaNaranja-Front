@@ -94,6 +94,10 @@
         margin: 0;
     }
 
+    .formBody h5 {
+        width: 300px;
+    }
+
     .formulario input {
         height: 30px;
         width: 200px;
