@@ -51,6 +51,7 @@ export default function IntroDNI({ handleClose }) {
             localStorage.setItem("user", JSON.stringify(yaExiste));
         } 
         handleClose()
+        window.location.reload()
     }
 
     const handleChange = (e) => {
