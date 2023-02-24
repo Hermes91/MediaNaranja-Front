@@ -33,9 +33,9 @@ export default function UserForm({ handleClose }) {
     const newUser = {
       email: input.email,
       nombre: input.nombre,
-      numDocumento: input.numDocumento,
+      numDocumento: Number(input.numDocumento),
       direccion: input.direccion,
-      telephone: input.telephone,
+      telephone: Number(input.telephone),
     };
     dispatch(postUser(newUser));
     localStorage.setItem("user", JSON.stringify(newUser));
@@ -47,9 +47,8 @@ export default function UserForm({ handleClose }) {
       direccion: "",
       telephone: "",
     });
-    window.location.reload();
-    navigate("/");
   };
+
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
     setErr(validate({ ...input, [e.target.name]: e.target.value }));
