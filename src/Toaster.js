@@ -15,7 +15,6 @@ const Toaster = () => {
       draggable
       pauseOnHover
       theme="colored"
-      toastStyle={{ backgroundColor: "brown" }}
     />
   );
 };
