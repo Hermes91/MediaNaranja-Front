@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { searchByDocument, getUsers } from '../../redux/actions/actionIndex'
 import s from '../introDNI/introDni.module.css'
 import { toast } from 'react-toastify';
+import UserForm from "../UserForm/UserForm";
+import { Backdrop } from "@mui/material";
 
 
 ///////  valida el DNI ingresado  //////
@@ -19,8 +21,12 @@ export default function IntroDNI({ handleClose }) {
 
     const [err, setErr] = useState({})
     const allUsers = useSelector(state => state.allUsers)
-  
 
+    const [open, setOpen] = useState(false);
+    const handleToggle = () => {
+        setOpen(!open);
+    };
+  
     let dispatch = useDispatch()
 
     useEffect(() => {
@@ -72,8 +78,22 @@ export default function IntroDNI({ handleClose }) {
                     <form onSubmit={handleSubmit} className={s.dniForm}>
                         <input value={input.numDocumento} name="numDocumento" onChange={handleChange} type="text" maxLength="10" />
                         {err.numDocumento && <span className={s.formerror}>{err.numDocumento}</span>}
-                       {isButtonDisabled() ? <a onClick={handleClose} href="#user_form">Regístrese aquí</a> 
-                        :<button onClick={handleClose} disabled={isButtonDisabled()} type='submit'>Acceder</button> }
+
+                       {isButtonDisabled() ? 
+                       {!err.numDocumento && !yaExiste ? 
+                        <>
+                        <a onClick={handleToggle} style={{'cursor':'pointer'}}>Regístrece aquí</a> 
+                        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                                open={open}>
+                                <UserForm
+                                    handleClose={() => setOpen(false)}
+                                />
+                            </Backdrop>
+                        </>
+                        : null}
+                        :
+                        <button onClick={handleClose} disabled={isButtonDisabled()} type='submit'>Acceder</button> }
+
                     </form>
                 </div>
             </div>
