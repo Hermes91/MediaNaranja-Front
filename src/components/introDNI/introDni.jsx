@@ -1,42 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux"
-import { searchByDocument, getUsers } from '../../redux/actions/actionIndex'
-import s from '../introDNI/introDni.module.css'
-import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from "react-redux";
+import { searchByDocument, getUsers } from "../../redux/actions/actionIndex";
+import s from "../introDNI/introDni.module.css";
+import { toast } from "react-toastify";
 import UserForm from "../UserForm/UserForm";
 import { Backdrop } from "@mui/material";
 
-
 ///////  valida el DNI ingresado  //////
 function validate(input, allUsers) {
-    const error = {}
-    const isBlankSpace = new RegExp("^\\s+$")
-    const isDNI = /^[0-9]{6,10}$/
-    if (!input.numDocumento || isBlankSpace.test(input.numDocumento)) error.numDocumento = 'Ingrese su n° de documento'
-    else if (!isDNI.test(input.numDocumento)) error.numDocumento = 'Ingrese un documento valido'
-    return error;
+  const error = {};
+  const isBlankSpace = new RegExp("^\\s+$");
+  const isDNI = /^[0-9]{6,10}$/;
+  if (!input.numDocumento || isBlankSpace.test(input.numDocumento))
+    error.numDocumento = "Ingrese su n° de documento";
+  else if (!isDNI.test(input.numDocumento))
+    error.numDocumento = "Ingrese un documento valido";
+  return error;
 }
 
 export default function IntroDNI({ handleClose }) {
+  const [err, setErr] = useState({});
+  const allUsers = useSelector((state) => state.allUsers);
 
-    const [err, setErr] = useState({})
-    const allUsers = useSelector(state => state.allUsers)
+  const [open, setOpen] = useState(false);
+  const handleToggle = () => {
+    setOpen(!open);
+  };
 
-    const [open, setOpen] = useState(false);
-    const handleToggle = () => {
-        setOpen(!open);
-    };
+  let dispatch = useDispatch();
+  
 
-    let dispatch = useDispatch()
+  useEffect(() => {
+    !allUsers.length && dispatch(getUsers());
+  }, [allUsers, dispatch]);
 
-    useEffect(() => {
-        !allUsers.length && dispatch(getUsers())
-    }, [allUsers, dispatch])
+  const [input, setInput] = useState({
+    numDocumento: "",
+  });
 
+  var yaExiste = allUsers.find((u) => u.numDocumento == input?.numDocumento);
 
-    const [input, setInput] = useState({
-        numDocumento: "",
-    })
 
     var yaExiste = allUsers.find(u => u.numDocumento == input?.numDocumento)
 
@@ -64,20 +67,34 @@ export default function IntroDNI({ handleClose }) {
         setInput({ ...input, [e.target.name]: e.target.value })
         // const validacion = validate(input, allUsers)
         // setErr(validacion)
+
     }
+  };
 
-    return (
-        <>
+  const handleChange = (e) => {
+    e.preventDefault();
+    setInput({ ...input, [e.target.name]: e.target.value });
+    const validacion = validate(input, allUsers);
+    setErr(validacion);
+  };
 
-            <div className={s.dniContainer}>
-                <h3 onClick={handleClose}>
-                    X
-                </h3>
-                <div className={s.dniBody}>
-                    <h2>Ingresa tu cedula aqui</h2>
-                    <label onSubmit={handleSubmit} className={s.dniForm}>
-                        <input value={input.numDocumento} name="numDocumento" onChange={handleChange} type="text" maxLength="10" />
-                        {err.numDocumento && <span className={s.formerror}>{err.numDocumento}</span>}
+  return (
+    <>
+      <div className={s.dniContainer}>
+        <h3 onClick={handleClose}>X</h3>
+        <div className={s.dniBody}>
+          <h2>Ingresa tu cédula</h2>
+          <label onSubmit={handleSubmit} className={s.dniForm}>
+            <input
+              value={input.numDocumento}
+              name="numDocumento"
+              onChange={handleChange}
+              type="text"
+              maxLength="10"
+            />
+            {err.numDocumento && (
+              <span className={s.formerror}>{err.numDocumento}</span>
+            )}
 
                         {isButtonDisabled() ?
                             <>
@@ -102,4 +119,3 @@ export default function IntroDNI({ handleClose }) {
         </>
     )
 }
-
