@@ -17,6 +17,7 @@ export const PUT_ADMIN_PW = "PUT_ADMIN_PW";
 export const PUT_ADMIN_COUNTDOWN = "PUT_ADMIN_COUNTDOWN";
 export const GET_USER_TICKETS = "GET_USER_TICKETS;";
 export const DELETE_TICKET = "DELETE_TICKET";
+export const GET_CLEAN = "GET_CLEAN";
 
 export const getAdmin = () => {
   return async function (dispatch) {
@@ -142,5 +143,12 @@ export const getUserTickets = (numDocumento) => {
     } catch (error) {
       console.log("error:", error);
     }
+  };
+};
+
+export function getClean() {
+  return {
+    type: GET_CLEAN,
+    payload: [],
   };
 };

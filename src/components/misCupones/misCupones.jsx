@@ -2,7 +2,8 @@ import { Backdrop } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import {
-    getUserTickets
+    getUserTickets,
+    getClean
 } from '../../redux/actions/actionIndex.js'
 import { useDispatch, useSelector } from 'react-redux'
 import CodeRegister from '../Code/code'
@@ -28,6 +29,7 @@ export default function MisCupones({ handleClose }) {
     useEffect(() => {
         dispatch(getUserTickets(user.numDocumento))
     }, [tickets])
+
 
     return (
 

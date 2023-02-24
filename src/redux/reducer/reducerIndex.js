@@ -15,6 +15,7 @@ import {
   GET_USER_TICKETS,
   SEARCH_BY_DOCUMENT,
   DELETE_TICKET,
+  GET_CLEAN,
 } from "../actions/actionIndex.js";
 export const initialState = {
   allTickets: [],
@@ -135,6 +136,13 @@ export default function reducer(state = initialState, action) {
         ...state,
         userTickets: action.payload,
       };
+
+      case GET_CLEAN: {
+        return {
+          ...state,
+          dogsDetail: action.payload,
+        };
+      }
 
     default:
       return {
