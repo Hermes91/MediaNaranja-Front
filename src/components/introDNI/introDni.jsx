@@ -26,7 +26,7 @@ export default function IntroDNI({ handleClose }) {
     const handleToggle = () => {
         setOpen(!open);
     };
-  
+
     let dispatch = useDispatch()
 
     useEffect(() => {
@@ -39,13 +39,13 @@ export default function IntroDNI({ handleClose }) {
     })
 
     var yaExiste = allUsers.find(u => u.numDocumento == input?.numDocumento)
-    
+
     const isButtonDisabled = () => {
         if (Object.keys(err).length || !input.numDocumento) return true
         else if (!yaExiste) return true
         return false
     }
-    
+
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(searchByDocument(Number(input.numDocumento)))
@@ -62,8 +62,8 @@ export default function IntroDNI({ handleClose }) {
     const handleChange = (e) => {
         e.preventDefault()
         setInput({ ...input, [e.target.name]: e.target.value })
-        const validacion = validate(input, allUsers)
-        setErr(validacion)
+        // const validacion = validate(input, allUsers)
+        // setErr(validacion)
     }
 
     return (
@@ -79,22 +79,22 @@ export default function IntroDNI({ handleClose }) {
                         <input value={input.numDocumento} name="numDocumento" onChange={handleChange} type="text" maxLength="10" />
                         {err.numDocumento && <span className={s.formerror}>{err.numDocumento}</span>}
 
-                       {isButtonDisabled() ? 
-                       <>
-                       {!err.numDocumento && !yaExiste ? 
-                        <>
-                        <a onClick={handleToggle} style={{'cursor':'pointer'}}>Regístrece aquí</a> 
-                        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                                open={open}>
-                                <UserForm
-                                    handleClose={() => setOpen(false)}
-                                />
-                            </Backdrop>
-                        </>
-                        : null}
-                        </>
-                        :
-                        <button onClick={handleSubmit} disabled={isButtonDisabled()} type='submit'>Acceder</button> }
+                        {isButtonDisabled() ?
+                            <>
+                                {!err.numDocumento && !yaExiste ?
+                                    <>
+                                        <a onClick={handleToggle} style={{ 'cursor': 'pointer' }}>Regístrece aquí</a>
+                                        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                                            open={open}>
+                                            <UserForm
+                                                handleClose={() => setOpen(false)}
+                                            />
+                                        </Backdrop>
+                                    </>
+                                    : null}
+                            </>
+                            :
+                            <button onClick={handleSubmit} disabled={isButtonDisabled()} type='submit'>Acceder</button>}
 
                     </label>
                 </div>
