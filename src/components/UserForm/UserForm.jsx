@@ -4,9 +4,11 @@ import s from './UserForm.module.css'
 import { postUser } from "../../redux/actions/actionIndex";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 export default function UserForm({ handleClose }) {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const allUsers = useSelector(state => state.allUsers)
 
@@ -47,6 +49,7 @@ export default function UserForm({ handleClose }) {
             telephone: "",
         })
         window.location.reload()
+        navigate('/')
     }
     const handleChange = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value })
