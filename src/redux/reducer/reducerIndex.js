@@ -39,6 +39,7 @@ export const initialState = {
   loggedUser: {},
   user: [],
   admin: {},
+  userTickets : [],
   orderedChange: false,
   ticketDeleted: false,
 };
@@ -96,8 +97,7 @@ export default function reducer(state = initialState, action) {
     case POST_TICKET:
       return {
         ...state,
-        allTickets: [...state.allTickets, action.payload],
-        filterTickets: [...state.allTickets, action.payload],
+        allTickets: [...state.allTickets, action.payload]
       };
 
     case SEARCH_BY_DOCUMENT:
@@ -133,7 +133,7 @@ export default function reducer(state = initialState, action) {
     case GET_USER_TICKETS:
       return {
         ...state,
-        filterTickets: action.payload,
+        userTickets: action.payload,
       };
 
     default:

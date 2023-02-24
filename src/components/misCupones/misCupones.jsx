@@ -11,7 +11,7 @@ import s from '../misCupones/misCupones.module.css'
 
 export default function MisCupones({ handleClose }) {
 
-    const tickets = useSelector(state => state.filterTickets)
+    const tickets = useSelector(state => state.userTickets)
     const dispatch = useDispatch();
     let { code } = useParams();
     const cleanCode = code? code.substring(0, 13) : null
@@ -27,7 +27,7 @@ export default function MisCupones({ handleClose }) {
 
     useEffect(() => {
         dispatch(getUserTickets(user.numDocumento))
-    }, [tickets.length])
+    }, [tickets])
 
     return (
 
