@@ -12,8 +12,16 @@ import { getUsers } from "../../redux/actions/actionIndex";
 
 import s from './Home.module.css'
 
-
 export default function Home() {
+
+    const dispatch = useDispatch()
+const allUsers = useSelector(state => state.allUsers)
+
+useEffect(() => {
+    dispatch(getUsers())
+}, [dispatch])
+
+
 
     const [open, setOpen] = useState(true);
     const user = localStorage.getItem("user")
