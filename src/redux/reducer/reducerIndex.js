@@ -98,7 +98,8 @@ export default function reducer(state = initialState, action) {
     case POST_TICKET:
       return {
         ...state,
-        allTickets: [...state.allTickets, action.payload]
+        allTickets: [...state.allTickets, action.payload], 
+        userTickets: [...state.userTickets, action.payload]
       };
 
     case SEARCH_BY_DOCUMENT:

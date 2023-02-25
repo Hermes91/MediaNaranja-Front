@@ -1,5 +1,5 @@
 import { Backdrop } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from 'react-router-dom';
 import {
     getUserTickets,
@@ -12,11 +12,12 @@ import s from '../misCupones/misCupones.module.css'
 
 export default function MisCupones({ handleClose }) {
 
-    const tickets = useSelector(state => state.userTickets)
     const dispatch = useDispatch();
     let { code } = useParams();
     const cleanCode = code? code.substring(0, 13) : null
     const user = JSON.parse(localStorage.getItem("user"))
+    const tickets = useSelector(state => state.userTickets)
+    //const { current: myArray } = useRef(["one", "two", "three"]);
     /*const user = {
       nombre: 'test',
       email: 'hola@gmail.com'
@@ -27,7 +28,9 @@ export default function MisCupones({ handleClose }) {
     };
 
     useEffect(() => {
+        if (!code && !tickets.length) {
         dispatch(getUserTickets(user.numDocumento))
+        } 
     }, [tickets])
 
 

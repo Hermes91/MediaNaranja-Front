@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import Banner from "../Banner/Banner";
 import Condition from "../Conditions/condition";
 import Footer from "../Footer/Footer";
@@ -12,20 +12,13 @@ import { getUsers } from "../../redux/actions/actionIndex";
 import s from "./Home.module.css";
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const allUsers = useSelector((state) => state.allUsers);
 
   const [open, setOpen] = useState(true);
   const user = localStorage.getItem("user");
 
-  useEffect(() => {
-    dispatch(getUsers());
-    console.log("urra");
-  }, [dispatch]);
-
   return (
     <>
-      <NavBar />
+      <NavBar/>
       {!user ? (
         <Backdrop
           sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
