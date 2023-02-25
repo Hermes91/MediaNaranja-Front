@@ -19,9 +19,10 @@ const allUsers = useSelector(state => state.allUsers)
 
 useEffect(() => {
     dispatch(getUsers())
+    console.log('si')
 }, [dispatch])
 
-
+//coment
 
     const [open, setOpen] = useState(true);
     const user = localStorage.getItem("user")
