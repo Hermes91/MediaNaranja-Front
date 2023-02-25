@@ -1,41 +1,44 @@
-import React, { Component } from "react";
-class CountDownTimer extends Component {
-    state = {
-        days: 0,
-        hours: '00',
-        minutes: '00',
-        seconds: '00',
-        timeUp: false
-    }
-    componentDidMount() {
+import React, { useEffect, useState } from "react";
+
+
+
+function CountDownTimer({ date }) {
+    const [days, setDays] = useState(0)
+    const [hours, setHours] = useState('00')
+    const [minutes, setMinutes] = useState('00')
+    const [seconds, setSeconds] = useState('00')
+    const [timeUp, setTimeUp] = useState(false)
+
+    useEffect(() => {
         setInterval(() => {
-            let eventDate = +new Date(this.props.date);
+            let eventDate = +new Date(date);
             let difference = eventDate - +new Date();
             if (difference < 1) {
-                this.setState({ timeUp: true });
+                setTimeUp(true)
             } else {
                 let days = Math.floor(difference / (1000 * 60 * 60 * 24));
                 let hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+
                 let minutes = Math.floor((difference / (1000 * 60)) % 60);
                 let seconds = Math.floor((difference / (1000)) % 60);
-                this.setState({
-                    hours: hours > 9 ? hours : `0${hours}`,
-                    minutes: minutes > 9 ? minutes : `0${minutes}`,
-                    seconds: seconds > 9 ? seconds : `0${seconds}`,
-                    days
-                });
+
+                hours > 9 ? setHours(hours) : setHours(`0${hours}`);
+                minutes > 9 ? setMinutes(minutes) : setMinutes(`0${minutes}`);
+                seconds > 9 ? setSeconds(seconds) : setSeconds(`0${seconds}`);
+                setDays(days)
             }
         }, 1000)
-    }
-    render() {
-        const { days, hours, minutes, seconds, timeUp } = this.state;
-        const dayString = days === 1 ? 'día' : 'días';
-        return (
-            timeUp ?
-                <p>Buena Suerte!</p>
-                :
-                <p>{`${days} ${dayString} ${hours} horas ${minutes}  minutos ${seconds} segundos`}</p>
-        );
-    }
+    })
+
+    // const { days, hours, minutes, seconds, timeUp } = this.state;
+
+    const dayString = days === 1 ? 'día' : 'días';
+    return (
+        timeUp ?
+            <p>Buena Suerte!</p>
+            :
+            <p>{`${days} ${dayString} ${hours} horas ${minutes}  minutos ${seconds} segundos`}</p>
+    );
+
 }
 export default CountDownTimer;
