@@ -33,7 +33,7 @@ export default function NavBar() {
                     </div>
                     <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                         open={open}>
-                        <MisCupones handleClose={() => setOpen(false)} />
+                        <MisCupones handleClose={() => setOpen(false)}/>
                     </Backdrop>
                 </>
                 :
