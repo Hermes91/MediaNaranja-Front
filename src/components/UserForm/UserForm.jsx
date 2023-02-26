@@ -3,11 +3,8 @@ import validate from "../UserForm/validate";
 import s from "./UserForm.module.css";
 import { postUser } from "../../redux/actions/actionIndex";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 export default function UserForm({ handleClose }) {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.allUsers);
 
@@ -47,7 +44,7 @@ export default function UserForm({ handleClose }) {
       direccion: "",
       telephone: "",
     });
-  //  window.location.reload()
+    //  window.location.reload()
   };
 
   const handleChange = (e) => {
@@ -62,13 +59,13 @@ export default function UserForm({ handleClose }) {
           <h2>¡Regístrate para cargar tus cupones!</h2>
           <form onSubmit={handleSubmit} className={s.formulario}>
             <div className={s.formItem}>
-              <label>Nombre*: </label>
+              <label>Nombre Completo*: </label>
               <input
                 value={input.nombre}
                 name="nombre"
                 onChange={handleChange}
                 type="text"
-                placeholder="Ingrese su nombre"
+                placeholder="Ingresa tu nombre completo"
               />
               {err.nombre && <span className={s.formerror}>{err.nombre}</span>}
             </div>
@@ -79,7 +76,7 @@ export default function UserForm({ handleClose }) {
                 name="email"
                 onChange={handleChange}
                 type="text"
-                placeholder="Ingrese su mail"
+                placeholder="Ingresa tu e-mail"
               />
               {err.email && <span className={s.formerror}>{err.email}</span>}
             </div>
@@ -90,20 +87,20 @@ export default function UserForm({ handleClose }) {
                 name="numDocumento"
                 onChange={handleChange}
                 type="text"
-                placeholder="Ingrese su cedula"
+                placeholder="Ingresa tu cédula"
               />
               {err.numDocumento && (
                 <span className={s.formerror}>{err.numDocumento}</span>
               )}
             </div>
             <div className={s.formItem}>
-              <label>Dirección: </label>
+              <label>Barrio: </label>
               <input
                 value={input.direccion}
                 name="direccion"
                 onChange={handleChange}
                 type="text"
-                placeholder="Indique su direccion"
+                placeholder="¿De qué barrio eres?"
               />
             </div>
             <div className={s.formItem}>
@@ -113,7 +110,7 @@ export default function UserForm({ handleClose }) {
                 name="telephone"
                 onChange={handleChange}
                 type="text"
-                placeholder="Su número de telefono"
+                placeholder="Tu número de teléfono"
               />
               {err.telephone && (
                 <span className={s.formerror}>{err.telephone}</span>
@@ -125,6 +122,7 @@ export default function UserForm({ handleClose }) {
               </span>
             ) : null}
             <button
+              className={s.button}
               onClick={handleClose}
               disabled={isButtonDisabled()}
               type="submit"

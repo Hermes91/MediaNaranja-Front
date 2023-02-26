@@ -1,116 +1,129 @@
 .formContainer {
-    margin-left: auto;
-    margin-right: auto;
-    background-color: var(--secondary-orange);
-    padding: 10px;
-    border-radius: 15px;
-    box-shadow: inset 0px 10px 8px 0px #03000048, inset 0px -10px 8px 0px #03000048;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--secondary-orange);
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: inset 0px 10px 8px 0px #03000048,
+    inset 0px -10px 8px 0px #03000048;
 }
 
 .formContainer h3 {
-    display: block;
-    float: right;
-    margin-top: 3px;
-    margin-right: 10px;
-    cursor: pointer;
-    transition: transform 0.5s;
+  display: block;
+  float: right;
+  margin-top: 3px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: transform 0.5s;
 }
 
 .formContainer h3:hover {
-    transform: scale(1.3);
+  transform: scale(1.3);
 }
 
 .formBody {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .formBody h2 {
-    width: 420px;
+  width: 420px;
 }
 
 .formItem {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .formulario {
-    display: flex;
-    flex-direction: column;
-    row-gap: 5px;
-    padding-bottom: 25px;
-    align-items: center;
-    width: 300px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  padding-bottom: 25px;
+  align-items: center;
+  width: 300px;
 }
 
 .formulario label {
-    display: flex;
-    align-self: flex-start;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  display: flex;
+  align-self: flex-start;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .formulario input {
-    height: 30px;
-    width: 300px;
+  height: 30px;
+  width: 300px;
 }
 
 .formulario button {
-    margin-top: 4%;
-    width: 30%;
-    border-radius: 5px;
+  margin-top: 4%;
+  width: 30%;
+  border-radius: 5px;
 }
 
 .formerror {
-    color: rgb(255, 229, 229);
-    margin-top: 5px;
-    font-size: 10pt;
-    width: 100%;
+  color: rgb(255, 229, 229);
+  margin-top: 5px;
+  font-size: 10pt;
+  width: 100%;
 }
 
+.button {
+  width: 180px;
+  color: white;
+  border: 2px solid white;
+  background-color: transparent;
+}
+.button:disabled {
+  width: 180px;
+  border: 2px solid gray;
+  color: grey;
+  background-color: transparent;
+}
 
-@media (orientation:portrait) {
-    .formContainer {
-        width: 80%;
-        height: max-content;
-    }
+@media (orientation: portrait) {
+  .formContainer {
+    width: 80%;
+    height: max-content;
+  }
 
-    .formContainer h3 {
-        margin: 0;
-        padding: 0;
-    }
+  .formContainer h3 {
+    margin: 0;
+    padding: 0;
+  }
 
-    .formBody {
-        width: 400px;
-        padding: 0;
-        margin: 0;
-    }
+  .formBody {
+    width: 400px;
+    padding: 0;
+    margin: 0;
+  }
 
-    .formBody h2 {
-        width: 300px;
-        margin: 0;
-    }
+  .formBody h2 {
+    width: 300px;
+    margin: 0;
+  }
 
-    .formBody h5 {
-        width: 300px;
-    }
+  .formBody h5 {
+    width: 300px;
+  }
 
-    .formulario input {
-        height: 30px;
-        width: 200px;
-    }
+  .formulario input {
+    height: 30px;
+    width: 200px;
+  }
 
-    .formBody {
-        margin-top: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: baseline;
-    }
+  .formBody {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+  }
 
-    .formulario {
-        row-gap: 3px;
-    }
+  .formulario {
+    row-gap: 3px;
+  }
 }
