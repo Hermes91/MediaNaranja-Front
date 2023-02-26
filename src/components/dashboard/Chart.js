@@ -33,7 +33,7 @@ export default function Chart() {
       tickets.filter((ticket) => {
         return (
           ticket.dateRegistro.slice(0, 10) ===
-          moment().subtract(5, "days").format("YYYY-MM-DD")
+          moment().subtract(6, "days").format("YYYY-MM-DD")
         );
       })
     );
@@ -41,7 +41,7 @@ export default function Chart() {
       tickets.filter((ticket) => {
         return (
           ticket.dateRegistro.slice(0, 10) ===
-          moment().subtract(4, "days").format("YYYY-MM-DD")
+          moment().subtract(5, "days").format("YYYY-MM-DD")
         );
       })
     );
@@ -49,7 +49,7 @@ export default function Chart() {
       tickets.filter((ticket) => {
         return (
           ticket.dateRegistro.slice(0, 10) ===
-          moment().subtract(3, "days").format("YYYY-MM-DD")
+          moment().subtract(4, "days").format("YYYY-MM-DD")
         );
       })
     );
@@ -57,7 +57,7 @@ export default function Chart() {
       tickets.filter((ticket) => {
         return (
           ticket.dateRegistro.slice(0, 10) ===
-          moment().subtract(2, "days").format("YYYY-MM-DD")
+          moment().subtract(3, "days").format("YYYY-MM-DD")
         );
       })
     );
@@ -65,7 +65,7 @@ export default function Chart() {
       tickets.filter((ticket) => {
         return (
           ticket.dateRegistro.slice(0, 10) ===
-          moment().subtract(1, "days").format("YYYY-MM-DD")
+          moment().subtract(2, "days").format("YYYY-MM-DD")
         );
       })
     );
@@ -73,7 +73,7 @@ export default function Chart() {
       tickets.filter((ticket) => {
         return (
           ticket.dateRegistro.slice(0, 10) ===
-          moment().subtract(0, "days").format("YYYY-MM-DD")
+          moment().subtract(1, "days").format("YYYY-MM-DD")
         );
       })
     );
@@ -81,7 +81,7 @@ export default function Chart() {
       tickets.filter((ticket) => {
         return (
           ticket.dateRegistro.slice(0, 10) ===
-          moment().add(1, "days").format("YYYY-MM-DD")
+          moment().add(0, "days").format("YYYY-MM-DD")
         );
       })
     );
@@ -95,7 +95,7 @@ export default function Chart() {
   for (let i = 6; i > 0; i--) {
     daysAgo[i] = moment().subtract(i, "days").format("DD/MM/YYYY");
   }
-  daysAgo[0] = moment().add(1, "days").format("DD/MM/YYYY");
+  daysAgo[0] = moment().add(0, "days").format("DD/MM/YYYY");
 
   const data = [];
 

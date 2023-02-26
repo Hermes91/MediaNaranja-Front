@@ -39,7 +39,7 @@ export default function Clients() {
   const tableRef = useRef(null);
   const [user, setUser] = useState({});
   const [pg, setpg] = useState(0);
-  const [rpg, setrpg] = useState(5);
+  const [rpg, setrpg] = useState(10);
   function handleChangePage(event, newpage) {
     setpg(newpage);
   }
@@ -127,7 +127,7 @@ export default function Clients() {
         </TableBody>
       </Table>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={[10, 25, 50, 100]}
         component="div"
         count={users.length}
         rowsPerPage={rpg}
@@ -149,11 +149,8 @@ export default function Clients() {
             numDocumento={user.numDocumento}
             email={user.email}
             telephone={user.telephone}
-            tickets={
-              user.tickets
-                ? user.tickets
-                : [{ code: "No tiene cupones registrados" }]
-            }
+            barrio={user.direccion}
+            tickets={user.tickets ? user.tickets : ""}
             onClose={handleClose}
           />
         </Box>
