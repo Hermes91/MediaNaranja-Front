@@ -6,9 +6,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 export default function BasicCard(props) {
-  const coupons = props.tickets.map((ticket) => {
-    return <div>{ticket.code}</div>;
-  });
+  const coupons = props.tickets.length ? (
+    props.tickets.map((ticket) => {
+      return <div>{ticket.code}</div>;
+    })
+  ) : (
+    <div>No ha registrado cupones</div>
+  );
 
   return (
     <Card sx={{ minWidth: 275, margin: 1 }}>
@@ -22,11 +26,14 @@ export default function BasicCard(props) {
         <Typography sx={{ mt: 1.5 }} color="text.secondary">
           Documento: {props.numDocumento}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        <Typography color="text.secondary">
           teléfono: {props.telephone}
         </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          Barrio: {props.barrio}
+        </Typography>
         <Typography variant="body2">
-          Cupones: {props.coupons}
+          Cupones:
           {coupons}
           <br />
         </Typography>
