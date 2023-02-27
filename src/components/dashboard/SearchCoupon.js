@@ -66,23 +66,11 @@ export default function SearchCoupon() {
     }
   };
 
-  function addTickets(allTickets, allUsers) {
-    for (let i = 0; i < allUsers.length; i++) {
-      allUsers[i]["tickets"] = [];
-      allTickets.map((t) => {
-        if (allUsers[i].id === t.userId) {
-          allUsers[i]["tickets"].push(t);
-        }
-      });
-    }
-    return allUsers;
-  }
-
   useEffect(() => {
     !users.length && dispatch(getUsers());
     !ticketfound.length && dispatch(getTickets());
     !stores.length && dispatch(getStoresDB());
-  }, [ticketfound, stores, dispatch]);
+  }, [ticketfound, stores, users, dispatch]);
 
   return (
     <div className={style.backimg}>
