@@ -17,6 +17,22 @@
   color: #000000;
 }
 
+.button {
+  background-color: #e95725;
+  border: 1px solid #e95725;
+  border-radius: 5px;
+  color: white;
+  padding: 0 4px 2px 4px;
+  margin-bottom: 2px;
+}
+
+.button:hover {
+  background-color: grey;
+  border: 1px solid grey;
+  border-radius: 5px;
+  color: black;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

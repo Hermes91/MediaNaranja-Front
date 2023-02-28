@@ -4,11 +4,26 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useDispatch } from "react-redux";
+import { deleteTicket } from "../../redux/actions/actionIndex";
 
 export default function BasicCard(props) {
+  const dispatch = useDispatch();
+
+  const handleDelete = (code) => {
+    dispatch(deleteTicket(code));
+  };
+
   const coupons = props.tickets.length ? (
     props.tickets.map((ticket) => {
-      return <div>{ticket.code}</div>;
+      return (
+        <div>
+          {ticket.code}{" "}
+          <button className="button" onClick={handleDelete(ticket.code)}>
+            x
+          </button>
+        </div>
+      );
     })
   ) : (
     <div>No ha registrado cupones</div>

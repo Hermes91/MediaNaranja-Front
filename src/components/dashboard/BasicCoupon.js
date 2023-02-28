@@ -4,11 +4,8 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useDispatch } from "react-redux";
-import { deleteTicket } from "../../redux/actions/actionIndex";
 
 export default function BasicCoupon(props) {
-  const dispatch = useDispatch();
   return (
     <Card sx={{ minWidth: 275, margin: 1 }}>
       <CardContent>
@@ -31,7 +28,6 @@ export default function BasicCoupon(props) {
           size="small"
           sx={{ width: "100%" }}
           onClick={() => {
-            dispatch(deleteTicket({ code: props.code, email: props.mail }));
             alert("El cupón ha sido borrado");
             props.onClose();
           }}

@@ -38,14 +38,13 @@ export default function SearchCoupon() {
   const handleClose = () => setOpen(false);
 
   const handleInput = (e) => {
-    e.preventDefault();
     setTicket(e.target.value);
   };
 
   const handleInputSubmit = (e) => {
     e.preventDefault();
-    dispatch(searchByCode(ticket));
     dispatch(getStoresDB());
+    dispatch(searchByCode(ticket));
 
     const filtrado = ticketfound.filter((ticket) => {
       return ticket.code.toString() === e.target.value;
