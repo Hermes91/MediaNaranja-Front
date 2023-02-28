@@ -19,7 +19,7 @@ export default function BasicCoupon(props) {
           Tienda: {props.storeId}
         </Typography>
         <Typography sx={{ mt: 0 }} color="text.secondary">
-          Usuario: {props.storeId}
+          Usuario: {props.userName}
         </Typography>
       </CardContent>
       <CardActions>

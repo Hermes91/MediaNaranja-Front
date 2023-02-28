@@ -29,7 +29,8 @@ export default function SearchCoupon() {
   const [ticket, setTicket] = useState("");
   const [coupon, setCoupon] = useState({});
   const [nameStore, setNameStore] = useState("");
-  const ticketfound = useSelector((state) => state.filterTickets);
+  const [user, setUser] = useState()
+  const tickets = useSelector((state) => state.allTickets);
   const stores = useSelector((state) => state.storesDB);
   const users = useSelector((state) => state.allUsers);
 
@@ -46,18 +47,19 @@ export default function SearchCoupon() {
     dispatch(getStoresDB());
     dispatch(searchByCode(ticket));
 
-    const filtrado = ticketfound.filter((ticket) => {
-      return ticket.code.toString() === e.target.value;
-    });
+    const filtrado = tickets.find((ticket) => ticket.code.toString() === e.target.value);
+    const ticketUser = users.find((user) => user.id === filtrado.userId)
 
-    if (filtrado.length) {
-      !filtrado[0].length ? setCoupon(filtrado[0]) : setCoupon({});
+    if (filtrado.code) {
+      setCoupon(filtrado) 
+      setUser(ticketUser)
+      console.log(ticketUser)
 
-      const store = stores.filter((store) => {
-        return store.id === filtrado[0].storeId;
+      const store = stores.find((store) => {
+        return store.id === filtrado.storeId;
       });
 
-      store.length && setNameStore(store[0].name);
+      store && setNameStore(store.name);
       handleOpen();
     } else {
       alert("El cupón no existe en la base de datos");
@@ -67,9 +69,9 @@ export default function SearchCoupon() {
 
   useEffect(() => {
     !users.length && dispatch(getUsers());
-    !ticketfound.length && dispatch(getTickets());
+    !tickets.length && dispatch(getTickets());
     !stores.length && dispatch(getStoresDB());
-  }, [ticketfound, stores, users, dispatch]);
+  }, [tickets, stores, users, dispatch]);
 
   return (
     <div className={style.backimg}>
@@ -114,6 +116,7 @@ export default function SearchCoupon() {
               .slice(0, -5)}
             storeId={nameStore}
             onClose={handleClose}
+            userName={user?.nombre}
           />
         </Box>
       </Modal>
