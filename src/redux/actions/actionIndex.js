@@ -48,11 +48,12 @@ export const putAdminCountdown = ({ countdown, email }) => {
   };
 };
 
-export const deleteTicket = ({ code, email }) => {
+export const deleteTicket = (code) => {
   return async function (dispatch) {
     try {
-      const deleted = await axios.delete("/tickets", { code, email });
-      dispatch({ type: DELETE_TICKET, payload: deleted.data });
+      const deleted = await axios.delete("/tickets", {data: code});
+      dispatch({ type: DELETE_TICKET, payload: code });
+      console.log(deleted)
     } catch (error) {
       console.log(error);
     }
@@ -116,6 +117,7 @@ export const searchByDocument = (document) => {
     try {
       const searchResponse = await axios.get(`/user/?numDocumento=${document}`);
       dispatch({ type: SEARCH_BY_DOCUMENT, payload: searchResponse.data });
+      console.log(searchResponse)
     } catch (error) {
       console.log("Document error ", error);
     }

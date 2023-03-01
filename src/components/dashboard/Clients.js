@@ -18,7 +18,7 @@ import { useRef } from "react";
 import { useDownloadExcel } from "react-export-table-to-excel";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getTickets, getUsers } from "../../redux/actions/actionIndex";
+import { getTickets, getUsers, deleteTicket } from "../../redux/actions/actionIndex";
 
 const style = {
   position: "absolute",
@@ -48,6 +48,14 @@ export default function Clients() {
     setpg(0);
   }
 
+  const handleDelete = (code) => {
+    const enviar = {"code": code}
+    dispatch(deleteTicket(enviar));
+    if (tickets.length) {
+      dispatch(getTickets())
+    }
+  };
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -73,7 +81,8 @@ export default function Clients() {
   useEffect(() => {
     !users.length && dispatch(getUsers());
     !tickets.length && dispatch(getTickets());
-  }, [users, user, dispatch]);
+  }, [users, tickets, dispatch]);
+
   return (
     <React.Fragment>
       <Title>Usuarios registrados</Title>
@@ -117,7 +126,6 @@ export default function Clients() {
                       {user.numDocumento}
                     </Button>
                   </TableCell>
-
                   <TableCell>{user.nombre}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell align="center">{user.tickets.length}</TableCell>
@@ -150,8 +158,9 @@ export default function Clients() {
             email={user.email}
             telephone={user.telephone}
             barrio={user.direccion}
-            tickets={user.tickets ? user.tickets : ""}
+            tickets={user.tickets}
             onClose={handleClose}
+            handleDelete={handleDelete}
           />
         </Box>
       </Modal>

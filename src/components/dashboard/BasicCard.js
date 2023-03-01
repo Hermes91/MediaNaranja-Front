@@ -5,29 +5,10 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch } from "react-redux";
-import { deleteTicket } from "../../redux/actions/actionIndex";
+//import { deleteTicket } from "../../redux/actions/actionIndex";
 
 export default function BasicCard(props) {
-  const dispatch = useDispatch();
-
-  const handleDelete = (code) => {
-    dispatch(deleteTicket(code));
-  };
-
-  const coupons = props.tickets.length ? (
-    props.tickets.map((ticket) => {
-      return (
-        <div>
-          {ticket.code}{" "}
-          <button className="button" onClick={handleDelete(ticket.code)}>
-            x
-          </button>
-        </div>
-      );
-    })
-  ) : (
-    <div>No ha registrado cupones</div>
-  );
+  //const dispatch = useDispatch();
 
   return (
     <Card sx={{ minWidth: 275, margin: 1 }}>
@@ -47,9 +28,18 @@ export default function BasicCard(props) {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           Barrio: {props.barrio}
         </Typography>
-        <Typography variant="body2">
+        <Typography component='span' variant="body2">
           Cupones:
-          {coupons}
+          {props.tickets.length? props.tickets.map((ticket) => {
+            return (
+              <p key={ticket.id}>
+                {ticket.code}{" "}
+                <button className="button" onClick={() => props.handleDelete(ticket.code)}>
+                  x
+                </button>
+              </p>
+            );
+            }) :  <p>No ha registrado cupones</p>}
           <br />
         </Typography>
       </CardContent>
