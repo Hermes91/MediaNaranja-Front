@@ -124,6 +124,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         ticketDeleted: !state.ticketDeleted,
+        allTickets: state.allTickets.filter(t => t.code !== action.payload)
       };
 
     case PUT_ADMIN_COUNTDOWN:
