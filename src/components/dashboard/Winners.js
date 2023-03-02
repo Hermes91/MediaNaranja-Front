@@ -85,10 +85,11 @@ export default function Orders() {
     return (
       <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
         <BasicCard
-          name={user.name}
+          name={user.nombre}
           email={user.email}
           numDocumento={user.numDocumento}
           telephone={user.telephone}
+          barrio={user.direccion}
           tickets={
             user.tickets
               ? user.tickets
