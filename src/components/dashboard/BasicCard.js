@@ -29,17 +29,14 @@ export default function BasicCard(props) {
           Barrio: {props.barrio}
         </Typography>
         <Typography component='span' variant="body2">
-          Cupones:
-          {props.tickets.length? props.tickets.map((ticket) => {
-            return (
-              <p key={ticket.id}>
-                {ticket.code}{" "}
-                <button className="button" onClick={() => props.handleDelete(ticket.code)}>
+          Cupón ganador:
+              <p key={props.ticket.id}>
+                {props.ticket.code}
+                <button className="button" onClick={() => props.handleDelete(props.ticket.code)}>
                   x
                 </button>
               </p>
-            );
-            }) :  <p>No ha registrado cupones</p>}
+
           <br />
         </Typography>
       </CardContent>
