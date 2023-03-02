@@ -28,7 +28,7 @@ export default function BasicCard(props) {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           Barrio: {props.barrio}
         </Typography>
-        <Typography component='span' variant="body2">
+        <Typography sx={{ mb: 1.5 }} color="text.secondary" >
           Cupón ganador:
               <p key={props.ticket.id}>
                 {props.ticket.code}
