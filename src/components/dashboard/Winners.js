@@ -27,13 +27,14 @@ export default function Orders() {
 
   function addTickets(allTickets, allUsers) {
     for (let i = 0; i < allUsers.length; i++) {
-      allUsers[i]["tickets"] = [];
+      allUsers[i]["user"] = [];
       allTickets.map((t) => {
-        if (allUsers[i].id === t.userId) {
-          allUsers[i]["tickets"].push(t);
+        if (allUsers[i].userId === t.id) {
+          allUsers[i]["user"].push(t);
         }
       });
     }
+    console.log(allUsers)
     return allUsers;
   }
 
@@ -74,26 +75,23 @@ export default function Orders() {
       timer.current = window.setTimeout(() => {
         setSuccess(true);
         setLoading(false);
-        setUsersWinners(
-          ...usersWinners.push(users[Math.floor(Math.random() * users.length)])
-        );
+        usersWinners.push(tickets[Math.floor(Math.random() * tickets.length)])
+        
       }, 2000);
     }
   };
 
-  const userCards = addTickets(tickets, usersWinners).map((user) => {
+  const userCards = addTickets(users, usersWinners).map((ticketWinner) => {
     return (
       <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
         <BasicCard
-          name={user.name}
-          email={user.email}
-          numDocumento={user.numDocumento}
-          telephone={user.telephone}
-          tickets={
-            user.tickets
-              ? user.tickets
-              : [{ code: "No tiene cupones registrados" }]
-          }
+          name={ticketWinner.user[0].nombre}
+          email={ticketWinner.user[0].email}
+          numDocumento={ticketWinner.user[0].numDocumento}
+          telephone={ticketWinner.user[0].telephone}
+          barrio={ticketWinner.user[0].direccion}
+          ticket={ticketWinner}
+          
         />
       </Box>
     );
