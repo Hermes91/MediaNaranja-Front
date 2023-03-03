@@ -14,6 +14,7 @@ import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getTickets, getUsers } from "../../redux/actions/actionIndex";
+import WinnerCard from "./WinnerCard";
 
 export default function Orders() {
   const [loading, setLoading] = React.useState(false);
@@ -84,7 +85,7 @@ export default function Orders() {
   const userCards = addTickets(users, usersWinners).map((ticketWinner) => {
     return (
       <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-        <BasicCard
+        <WinnerCard
           name={ticketWinner.user[0].nombre}
           email={ticketWinner.user[0].email}
           numDocumento={ticketWinner.user[0].numDocumento}
