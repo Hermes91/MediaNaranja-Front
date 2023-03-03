@@ -30,12 +30,12 @@ export default function BasicCard(props) {
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary" >
           Cupón ganador:
-              <p key={props.ticket.id}>
-                {props.ticket.code}
-                <button className="button" onClick={() => props.handleDelete(props.ticket.code)}>
+              {props.tickets.map((ticket) => <p key={ticket.id}>
+                {ticket.code}
+                <button className="button" onClick={() => props.handleDelete(ticket.code)}>
                   x
                 </button>
-              </p>
+              </p>)}
 
           <br />
         </Typography>
