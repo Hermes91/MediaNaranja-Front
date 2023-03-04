@@ -9,7 +9,6 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -23,7 +22,6 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
 import LoginIcon from "@mui/icons-material/Login";
 import BarChartIcon from "@mui/icons-material/BarChart";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
@@ -34,6 +32,7 @@ import Products from "./Products";
 import AdminActions from "./AdminActions";
 import AdminLogin from "./AdminLogin";
 import SetCountDown from "./setCountdown";
+import TotalByStore from "./TotalByStore";
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -109,6 +108,7 @@ function DashboardContent() {
   const [adminLoginShow, setAdminLoginShow] = useState(false);
   const [adminLogged, setAdminLogged] = useState(false);
   const [countDownShow, setCountDownShow] = useState(false);
+  const [totalStore, setTotalStore] = useState(true);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -140,6 +140,22 @@ function DashboardContent() {
         }}
       >
         <Deposits />
+      </Paper>
+    </Grid>
+  );
+
+  const totalByStores = (
+    <Grid item xs={12} md={12} lg={12}>
+      <Paper
+        sx={{
+          p: 2,
+          pt: 6,
+          display: "flex",
+          flexDirection: "column",
+          height: 940,
+        }}
+      >
+        <TotalByStore />
       </Paper>
     </Grid>
   );
@@ -270,6 +286,7 @@ function DashboardContent() {
                 setAdminActionsShow(false);
                 setCountDownShow(false);
                 setCountDownShow(false);
+                setTotalStore(true);
               }}
             >
               <ListItemIcon>
@@ -288,6 +305,7 @@ function DashboardContent() {
                   setproductsShow(false);
                   setAdminActionsShow(false);
                   setCountDownShow(false);
+                  setTotalStore(false);
                 } else {
                   alert("Debes ingresar para ver esta sección");
                 }
@@ -309,6 +327,7 @@ function DashboardContent() {
                   setproductsShow(false);
                   setAdminActionsShow(false);
                   setCountDownShow(false);
+                  setTotalStore(false);
                 } else {
                   alert("Debes ingresar para ver esta sección");
                 }
@@ -331,6 +350,7 @@ function DashboardContent() {
                   setproductsShow(false);
                   setAdminActionsShow(true);
                   setCountDownShow(true);
+                  setTotalStore(false);
                 } else {
                   alert("Debes ingresar para ver esta sección");
                 }
@@ -353,6 +373,7 @@ function DashboardContent() {
                 setClientsShow(false);
                 setproductsShow(false);
                 setAdminActionsShow(false);
+                setTotalStore(false);
               }}
             >
               <ListItemIcon>
@@ -379,6 +400,7 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
+              {adminLoginShow && adminLogin}
               {/* Chart */}
               {graphShow && graph}
               {/* Recent Deposits */}
@@ -394,9 +416,9 @@ function DashboardContent() {
 
               {adminActionsShow && adminActions}
 
-              {adminLoginShow && adminLogin}
-
               {countDownShow && countDown}
+
+              {totalStore && totalByStores}
             </Grid>
           </Container>
         </Box>
