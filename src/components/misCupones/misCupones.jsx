@@ -23,10 +23,8 @@ export default function MisCupones({ handleClose }) {
   };
 
   useEffect(() => {
-    if (!code && !tickets.length) {
-      dispatch(getUserTickets(user.numDocumento));
-    }
-  }, [tickets]);
+    !tickets.length && dispatch(getUserTickets(user.numDocumento))
+  }, []);
 
   return (
     <>
