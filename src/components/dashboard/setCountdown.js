@@ -12,9 +12,10 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { Button, Box, Divider } from "@mui/material";
 
 export default function SetCountDown() {
-  const [value, setValue] = React.useState(dayjs("2022-04-07"));
+  const [value, setValue] = React.useState(dayjs());
   const admin = useSelector((state) => state.admin);
   const dispatch = useDispatch();
+ // console.log(admin?.countdown);
   const date = admin?.countdown?.split("T").join(" ").slice(0, -5);
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function SetCountDown() {
     dispatch(putAdminCountdown(infoCountDown));
     dispatch(getAdmin());
   }
+
 
   return (
     <React.Fragment>
@@ -49,8 +51,10 @@ export default function SetCountDown() {
             renderInput={(props) => <TextField {...props} />}
             label="DateTimePicker"
             value={value}
+            inputFormat="DD/MM/YYYY hh:mm:ss"
             onChange={(newValue) => {
-              setValue(dayjs(newValue).format("DD/MM/YYYY"));
+              //  { console.log(newValue) }  H:13
+              setValue(dayjs(newValue));
             }}
           />
           <Button size="large" variant="contained" onClick={handleOnClick}>

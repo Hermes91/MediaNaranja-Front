@@ -40,7 +40,9 @@ export const putAdminPassword = ({ password, email }) => {
 export const putAdminCountdown = ({ countdown, email }) => {
   return async function (dispatch) {
     try {
+      // console.log(countdown); llega hora normal (H:13)
       const adminRes = await axios.put("/admin", { countdown, email });
+      // console.log(adminRes); llega hora alterada (H:16)
       dispatch({ type: PUT_ADMIN_COUNTDOWN, payload: adminRes.data.form });
     } catch (error) {
       console.log(error);
@@ -51,7 +53,7 @@ export const putAdminCountdown = ({ countdown, email }) => {
 export const deleteTicket = (code) => {
   return async function (dispatch) {
     try {
-      const deleted = await axios.delete("/tickets", {data: code});
+      const deleted = await axios.delete("/tickets", { data: code });
       dispatch({ type: DELETE_TICKET, payload: code });
       console.log(deleted)
     } catch (error) {
