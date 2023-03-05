@@ -10,6 +10,7 @@ import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import BasicCard from "./BasicCard";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import { filterByStore } from '../../redux/actions/actionIndex'
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -24,23 +25,24 @@ export default function Orders() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.allUsers);
   const tickets = useSelector((state) => state.allTickets);
+  const ticketsStore = useSelector((state) => state.filterTickets);
   const [usersWinners, setUsersWinners] = React.useState([]);
 
-  function addTickets(allTickets, allUsers) {
-    for (let i = 0; i < allUsers.length; i++) {
-      allUsers[i]["user"] = [];
-      allTickets.map((t) => {
-        if (allUsers[i].userId === t.id) {
-          allUsers[i]["user"].push(t);
+  function addTickets(users, usersWinners) {
+    for (let i = 0; i < usersWinners.length; i++) {
+      usersWinners[i]["user"] = [];
+      users.map((t) => {
+        if (usersWinners[i].userId === t.id) {
+          usersWinners[i]["user"].push(t);
         }
       });
     }
-    console.log(allUsers)
-    return allUsers;
+    console.log(usersWinners)
+    return usersWinners;
   }
 
   const tiendas = [
-    "BELLO",
+    "BELLO", 
     "APARTADÓ",
     "ENVIGADO",
     "PARQUE BERRÍO",
@@ -54,6 +56,7 @@ export default function Orders() {
     "ITAGÜÍ",
   ];
 
+  const [value, setValue] = React.useState(tiendas[0].toLowerCase());
   const buttonSx = {
     ...(success && {
       bgcolor: yellow[500],
@@ -68,21 +71,39 @@ export default function Orders() {
       clearTimeout(timer.current);
     };
   }, [users]);
+  
+const validate = (value) => {
+  if (value === 'ITAGÜÍ' || value === 'itagüí') {
+    setValue('itagui') 
+  } 
+  if (value === 'APARTADÓ' || value === 'apartadó') {
+    setValue('apartado')
+  }
+  if (value === "PARQUE BERRÍO" || value === 'parque berrío') {
+    setValue('parque berrio')
+  }
+  console.log('validete:', value)
+}
+
+useEffect(() => {
+  validate(value)
+  console.log('useEffect:', value)
+  dispatch(filterByStore(value))
+},[value])
 
   const handleButtonClick = () => {
     if (!loading) {
       setSuccess(false);
       setLoading(true);
       timer.current = window.setTimeout(() => {
+        usersWinners.push(ticketsStore[Math.floor(Math.random() * ticketsStore.length)])
         setSuccess(true);
         setLoading(false);
-        usersWinners.push(tickets[Math.floor(Math.random() * tickets.length)])
-        
-      }, 2000);
+      }, 2500);
     }
   };
 
-  const userCards = addTickets(users, usersWinners).map((ticketWinner) => {
+  const userCard = addTickets(users, usersWinners).map((ticketWinner) => {
     return (
       <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
         <WinnerCard
@@ -96,8 +117,7 @@ export default function Orders() {
         />
       </Box>
     );
-  });
-
+  })
   return (
     <React.Fragment>
       <Title>Sorteo de ganadores</Title>
@@ -111,6 +131,10 @@ export default function Orders() {
           <Autocomplete
             disablePortal
             id="combo-box-demo"
+            defaultValue={tiendas[0]}
+            onChange={(event, newValue) => {
+              setValue(newValue.toLowerCase().toString());
+            }}
             options={tiendas}
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Almacén" />}
@@ -146,7 +170,7 @@ export default function Orders() {
             alignItems: "center",
           }}
         >
-          {userCards}
+          {userCard}
         </Box>
       </Box>
     </React.Fragment>
