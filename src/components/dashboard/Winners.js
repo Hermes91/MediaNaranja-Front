@@ -30,8 +30,6 @@ export default function Orders() {
 
   function addTickets(users, usersWinners) {
     for (let i = 0; i < usersWinners.length; i++) {
-      console.log('userWinners addTickets', usersWinners)
-      console.log('users addTickets', users)
       usersWinners[i]["user"] = [];
       users.map((t) => {
         if (usersWinners[i].userId === t.id) {
@@ -39,12 +37,11 @@ export default function Orders() {
         }
       });
     }
-    console.log(usersWinners)
     return usersWinners;
   }
 
   const tiendas = [
-    "BELLO",
+    "BELLO", 
     "APARTADÓ",
     "ENVIGADO",
     "PARQUE BERRIO",
@@ -58,7 +55,7 @@ export default function Orders() {
     "ITAGÜÍ",
   ];
 
-  const [value, setValue] = React.useState(tiendas[0]);
+  const [value, setValue] = React.useState(tiendas[0].toLowerCase());
   const buttonSx = {
     ...(success && {
       bgcolor: yellow[500],
@@ -75,17 +72,19 @@ export default function Orders() {
   }, [users]);
   
 const validate = (value) => {
-  if (value === 'ITAGÜÍ') value = 'itagui'
-  if (value === 'APARTADÓ') value = 'apartado'
-  if (value === 'PICHINCHA') value = 'pichincha'
-  if (value === 'BUENOS AIRES') value = 'buenos aires'
-  if (value === 'CENTRAL') value = 'central'
+  if (value === 'ITAGÜÍ' || value === 'itagüí') {
+    setValue('itagui') 
+  } 
+  if (value === 'APARTADÓ' || value === 'apartadó') {
+    setValue('apartado')
+  }
+  console.log('validete:', value)
 }
 
 useEffect(() => {
   validate(value)
-  let cleanValue = value.toLowerCase()
-  dispatch(filterByStore(cleanValue))
+  console.log('useEffect:', value)
+  dispatch(filterByStore(value))
 },[value])
 
   const handleButtonClick = () => {
@@ -93,7 +92,6 @@ useEffect(() => {
       setSuccess(false);
       setLoading(true);
       timer.current = window.setTimeout(() => {
-        console.log(ticketsStore)
         usersWinners.push(ticketsStore[Math.floor(Math.random() * ticketsStore.length)])
         setSuccess(true);
         setLoading(false);
@@ -116,7 +114,7 @@ useEffect(() => {
             id="combo-box-demo"
             defaultValue={tiendas[0]}
             onChange={(event, newValue) => {
-              setValue(newValue);
+              setValue(newValue.toLowerCase().toString());
             }}
             options={tiendas}
             sx={{ width: 300 }}
