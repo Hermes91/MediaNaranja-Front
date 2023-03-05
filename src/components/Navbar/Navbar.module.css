@@ -21,6 +21,10 @@
     border-radius: 5px;
 }
 
+.topnav h4 {
+    color: var(--secondary-orange);
+}
+
 .timers {
     color: var(--secondary-orange);
     font-weight: bold;

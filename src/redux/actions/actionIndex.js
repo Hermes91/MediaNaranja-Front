@@ -51,7 +51,7 @@ export const putAdminCountdown = ({ countdown, email }) => {
 export const deleteTicket = (code) => {
   return async function (dispatch) {
     try {
-      const deleted = await axios.delete("/tickets", {data: code});
+      const deleted = await axios.delete("/tickets", { data: code });
       dispatch({ type: DELETE_TICKET, payload: code });
       console.log(deleted)
     } catch (error) {
