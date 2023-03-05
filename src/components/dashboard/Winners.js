@@ -57,6 +57,7 @@ export default function Orders() {
     "CENTRAL",
     "ITAGÜÍ",
   ];
+
   const [value, setValue] = React.useState(tiendas[0]);
   const buttonSx = {
     ...(success && {
@@ -73,9 +74,17 @@ export default function Orders() {
     };
   }, [users]);
   
+const validate = (value) => {
+  if (value === 'ITAGÜÍ') value = 'itagui'
+  if (value === 'APARTADÓ') value = 'apartado'
+  if (value === 'PICHINCHA') value = 'pichincha'
+  if (value === 'BUENOS AIRES') value = 'buenos aires'
+  if (value === 'CENTRAL') value = 'central'
+}
+
 useEffect(() => {
+  validate(value)
   let cleanValue = value.toLowerCase()
-  console.log(cleanValue)
   dispatch(filterByStore(cleanValue))
 },[value])
 
