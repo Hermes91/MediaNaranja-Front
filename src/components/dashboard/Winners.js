@@ -37,6 +37,7 @@ export default function Orders() {
         }
       });
     }
+    console.log(usersWinners)
     return usersWinners;
   }
 
@@ -102,6 +103,21 @@ useEffect(() => {
     }
   };
 
+  const userCard = addTickets(users, usersWinners).map((ticketWinner) => {
+    return (
+      <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+        <WinnerCard
+          name={ticketWinner.user[0].nombre}
+          email={ticketWinner.user[0].email}
+          numDocumento={ticketWinner.user[0].numDocumento}
+          telephone={ticketWinner.user[0].telephone}
+          barrio={ticketWinner.user[0].direccion}
+          ticket={ticketWinner}
+          
+        />
+      </Box>
+    );
+  })
   return (
     <React.Fragment>
       <Title>Sorteo de ganadores</Title>
@@ -154,21 +170,7 @@ useEffect(() => {
             alignItems: "center",
           }}
         >
-          {addTickets(users, usersWinners).map((ticketWinner) => {
-    return (
-      <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-        <WinnerCard
-          name={ticketWinner.user[0].nombre}
-          email={ticketWinner.user[0].email}
-          numDocumento={ticketWinner.user[0].numDocumento}
-          telephone={ticketWinner.user[0].telephone}
-          barrio={ticketWinner.user[0].direccion}
-          ticket={ticketWinner}
-          
-        />
-      </Box>
-    );
-  })}
+          {userCard}
         </Box>
       </Box>
     </React.Fragment>
