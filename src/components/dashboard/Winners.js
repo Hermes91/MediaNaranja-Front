@@ -44,7 +44,7 @@ export default function Orders() {
     "BELLO", 
     "APARTADÓ",
     "ENVIGADO",
-    "PARQUE BERRIO",
+    "PARQUE BERRÍO",
     "PICHINCHA",
     "CARABOBO",
     "CUNDINAMARCA",
@@ -77,6 +77,9 @@ const validate = (value) => {
   } 
   if (value === 'APARTADÓ' || value === 'apartadó') {
     setValue('apartado')
+  }
+  if (value === "PARQUE BERRÍO" || value === 'parque berrío') {
+    setValue('parque berrio')
   }
   console.log('validete:', value)
 }
