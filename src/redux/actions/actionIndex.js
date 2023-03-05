@@ -40,9 +40,7 @@ export const putAdminPassword = ({ password, email }) => {
 export const putAdminCountdown = ({ countdown, email }) => {
   return async function (dispatch) {
     try {
-      // console.log(countdown); llega hora normal (H:13)
       const adminRes = await axios.put("/admin", { countdown, email });
-      // console.log(adminRes); llega hora alterada (H:16)
       dispatch({ type: PUT_ADMIN_COUNTDOWN, payload: adminRes.data.form });
     } catch (error) {
       console.log(error);
