@@ -37,7 +37,6 @@ export default function Orders() {
         }
       });
     }
-    console.log(usersWinners)
     return usersWinners;
   }
 
@@ -82,12 +81,10 @@ const validate = (value) => {
   if (value === "PARQUE BERRÍO" || value === 'parque berrío') {
     setValue('parque berrio')
   }
-  console.log('validete:', value)
 }
 
 useEffect(() => {
   validate(value)
-  console.log('useEffect:', value)
   dispatch(filterByStore(value))
 },[value])
 

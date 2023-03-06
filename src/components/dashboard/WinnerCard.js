@@ -40,11 +40,13 @@ export default function WinnerCard(props) {
           <br />
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small" sx={{ width: "100%" }} onClick={props.onClose}>
+      {/*
+      <CardActions>   
+        <Button size="small" sx={{ width: "100%" }} onClick={props.onClose(props.ticket.code)}>
           CERRAR
         </Button>
       </CardActions>
+      */ }
     </Card>
   );
 }
