@@ -18,7 +18,11 @@ import { useRef } from "react";
 import { useDownloadExcel } from "react-export-table-to-excel";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getTickets, getUsers, deleteTicket } from "../../redux/actions/actionIndex";
+import {
+  getTickets,
+  getUsers,
+  deleteTicket,
+} from "../../redux/actions/actionIndex";
 
 const style = {
   position: "absolute",
@@ -49,10 +53,10 @@ export default function Clients() {
   }
 
   const handleDelete = (code) => {
-    const enviar = {"code": code}
+    const enviar = { code: code };
     dispatch(deleteTicket(enviar));
     if (tickets.length) {
-      dispatch(getTickets())
+      dispatch(getTickets());
     }
   };
 
@@ -135,7 +139,7 @@ export default function Clients() {
         </TableBody>
       </Table>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 50, 100]}
+        rowsPerPageOptions={[10, 25, 50, 100, users.length]}
         component="div"
         count={users.length}
         rowsPerPage={rpg}
