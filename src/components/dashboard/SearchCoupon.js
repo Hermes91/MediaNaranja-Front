@@ -29,7 +29,7 @@ export default function SearchCoupon() {
   const [ticket, setTicket] = useState("");
   const [coupon, setCoupon] = useState({});
   const [nameStore, setNameStore] = useState("");
-  const [user, setUser] = useState()
+  const [user, setUser] = useState();
   const tickets = useSelector((state) => state.allTickets);
   const stores = useSelector((state) => state.storesDB);
   const users = useSelector((state) => state.allUsers);
@@ -47,14 +47,14 @@ export default function SearchCoupon() {
     dispatch(getStoresDB());
     dispatch(searchByCode(ticket));
 
-    const filtrado = tickets.find((ticket) => ticket.code.toString() === e.target.value);
-    const ticketUser = users.find((user) => user.id === filtrado.userId)
+    const filtrado = tickets.find(
+      (ticket) => ticket.code.toString() === e.target.value
+    );
+    const ticketUser = users.find((user) => user.id === filtrado.userId);
 
     if (filtrado.code) {
-      setCoupon(filtrado) 
-      setUser(ticketUser)
-      console.log(ticketUser)
-
+      setCoupon(filtrado);
+      setUser(ticketUser);
       const store = stores.find((store) => {
         return store.id === filtrado.storeId;
       });
