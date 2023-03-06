@@ -27,17 +27,6 @@ export default function BasicCoupon(props) {
           variant="contained"
           size="small"
           sx={{ width: "100%" }}
-          onClick={() => {
-            alert("El cupón ha sido borrado");
-            props.onClose();
-          }}
-        >
-          BORRAR
-        </Button>
-        <Button
-          variant="contained"
-          size="small"
-          sx={{ width: "100%" }}
           onClick={props.onClose}
         >
           CERRAR
