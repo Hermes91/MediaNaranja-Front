@@ -21,14 +21,8 @@ export default function NavBar() {
     const dispatch = useDispatch();
 
     function setCountDown() {
-        const justDate = admin?.countdown?.split("T")[0];
-        const dateFormat = justDate?.match(/\d+/g)
-        if (dateFormat) {
-            const year = dateFormat[0]
-            const month = dateFormat[1]
-            const day = dateFormat[2]
-            return `"${month}/${day}/${year}"`;
-        }
+        const justDate = admin?.countdown?.split("-").join("/").split("T")[0];  
+        return justDate
     }
     const newDate = setCountDown()
 
