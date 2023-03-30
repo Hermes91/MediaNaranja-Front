@@ -111,6 +111,7 @@ export default function Clients() {
             <TableCell>Documento de identidad</TableCell>
             <TableCell>Nombre</TableCell>
             <TableCell>Correo electrónico</TableCell>
+            <TableCell>Teléfono</TableCell>
             <TableCell align="center">Cupones registrados</TableCell>
           </TableRow>
         </TableHead>
@@ -132,6 +133,7 @@ export default function Clients() {
                   </TableCell>
                   <TableCell>{user.nombre}</TableCell>
                   <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.telephone}</TableCell>
                   <TableCell align="center">{user.tickets.length}</TableCell>
                 </TableRow>
               ))}
