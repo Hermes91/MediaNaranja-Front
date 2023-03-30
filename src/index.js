@@ -9,8 +9,7 @@ import { Provider } from "react-redux";
 import Toaster from "./Toaster";
 import store from "./redux/store/storeIndex";
 
-console.log(process.env.REACT_APP_URL_BACK);
-axios.defaults.baseURL = "https://concursos2.lamedianaranja.com.co/";
+axios.defaults.baseURL = process.env.REACT_APP_URL_BACK;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
