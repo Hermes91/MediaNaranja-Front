@@ -24,6 +24,7 @@ import {
   deleteTicket,
 } from "../../redux/actions/actionIndex";
 
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -70,16 +71,23 @@ export default function Clients() {
     sheet: "Users",
   });
 
-  function addTickets(allTickets, allUsers) {
-    for (let i = 0; i < allUsers.length; i++) {
-      allUsers[i]["tickets"] = [];
-      allTickets.map((t) => {
-        if (allUsers[i].id === t.userId) {
-          allUsers[i]["tickets"].push(t);
-        }
-      });
-    }
-    return allUsers;
+  function addTickets(tickets, users) {
+    const groupedTickets = tickets.reduce((acc, ticket) => {
+      const userId = ticket.userId;
+      if (!acc[userId]) {
+        acc[userId] = [];
+      }
+      acc[userId].push(ticket);
+      return acc;
+    }, {});
+
+    return users.map((user) => {
+      const userTickets = groupedTickets[user.id] || [];
+      return {
+        ...user,
+        tickets: userTickets,
+      };
+    });
   }
 
   useEffect(() => {
@@ -141,7 +149,7 @@ export default function Clients() {
         </TableBody>
       </Table>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 50, 100, users.length]}
+        rowsPerPageOptions={[10, 25, 50, 100]}
         component="div"
         count={users.length}
         rowsPerPage={rpg}

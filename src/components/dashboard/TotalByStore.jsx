@@ -18,12 +18,12 @@ const TotalByStore = () => {
     !stores.length && dispatch(getStoresDB());
   }, [stores, dispatch, tickets.length]);
 
-  const list = stores.map((store) => {
+  const list = stores.map((store, idx) => {
     return (
-      <>
-        <div className={style.horizontal}>
+      <li key={idx}>
+        <div className={style.horizontal} >
           <div className={style.storename}>{store.name}:</div>
-          <div className={style.storeslider}>
+          <div className={style.storeslider} >
             <Slider
               color="primary"
               valueLabelDisplay="on"
@@ -38,7 +38,7 @@ const TotalByStore = () => {
             />
           </div>
         </div>
-      </>
+      </li>
     );
   });
 
