@@ -12,6 +12,10 @@
   color: #e95725;
 }
 
+li {
+  list-style: none;
+}
+
 .storeslider {
   width: 85%;
 }

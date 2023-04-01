@@ -4,7 +4,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useDispatch } from "react-redux";
+//import { useDispatch } from "react-redux";
 //import { deleteTicket } from "../../redux/actions/actionIndex";
 
 export default function BasicCard(props) {
