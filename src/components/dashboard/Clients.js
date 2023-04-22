@@ -24,7 +24,6 @@ import {
   deleteTicket,
 } from "../../redux/actions/actionIndex";
 
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -149,7 +148,7 @@ export default function Clients() {
         </TableBody>
       </Table>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 50, 100]}
+        rowsPerPageOptions={[10, 25, 50, 100, users.length]}
         component="div"
         count={users.length}
         rowsPerPage={rpg}

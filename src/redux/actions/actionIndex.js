@@ -19,9 +19,13 @@ export const GET_USER_TICKETS = "GET_USER_TICKETS;";
 export const DELETE_TICKET = "DELETE_TICKET";
 export const GET_CLEAN = "GET_CLEAN";
 
+const config = {
+  headers: { Authorization: `Bearer ${process.env.REACT_APP_TOKEN}` },
+};
+
 export const getAdmin = () => {
   return async function (dispatch) {
-    const adminRes = await axios.get("/admin");
+    const adminRes = await axios.get("/admin", config);
     dispatch({ type: GET_ADMIN, payload: adminRes.data[0] });
   };
 };
@@ -29,7 +33,7 @@ export const getAdmin = () => {
 export const putAdminPassword = ({ password, email }) => {
   return async function (dispatch) {
     try {
-      const adminRes = await axios.put("/admin", { password, email });
+      const adminRes = await axios.put("/admin", { password, email }, config);
       dispatch({ type: PUT_ADMIN_PW, payload: adminRes.data.form });
     } catch (error) {
       console.log(error);
@@ -40,7 +44,7 @@ export const putAdminPassword = ({ password, email }) => {
 export const putAdminCountdown = ({ countdown, email }) => {
   return async function (dispatch) {
     try {
-      const adminRes = await axios.put("/admin", { countdown, email });
+      const adminRes = await axios.put("/admin", { countdown, email }, config);
       dispatch({ type: PUT_ADMIN_COUNTDOWN, payload: adminRes.data.form });
     } catch (error) {
       console.log(error);
@@ -51,9 +55,9 @@ export const putAdminCountdown = ({ countdown, email }) => {
 export const deleteTicket = (code) => {
   return async function (dispatch) {
     try {
-      const deleted = await axios.delete("/tickets", { data: code });
+      const deleted = await axios.delete("/tickets", { data: code }, config);
       dispatch({ type: DELETE_TICKET, payload: code });
-      console.log(deleted)
+      console.log(deleted);
     } catch (error) {
       console.log(error);
     }
@@ -62,28 +66,31 @@ export const deleteTicket = (code) => {
 
 export const getTickets = () => {
   return async function (dispatch) {
-    const ticketResponse = await axios.get(`/tickets`);
+    const ticketResponse = await axios.get("/tickets", config);
     dispatch({ type: GET_TICKETS, payload: ticketResponse.data });
   };
 };
 
 export const getUsers = () => {
   return async function (dispatch) {
-    const usersResponse = await axios.get("/user");
+    const usersResponse = await axios.get("/user", config);
     dispatch({ type: GET_USERS, payload: usersResponse.data });
   };
 };
 
 export const getStoresDB = () => {
   return async function (dispatch) {
-    const storeResponde = await axios.get("/store");
+    const storeResponde = await axios.get("/store", config);
     dispatch({ type: GET_STORES_DB, payload: storeResponde.data });
   };
 };
 
 export const filterByStore = (almacen) => {
   return async function (dispatch) {
-    const ticketsResponse = await axios.get(`/tickets/?almacen=${almacen}`);
+    const ticketsResponse = await axios.get(
+      `/tickets/?almacen=${almacen}`,
+      config
+    );
     dispatch({ type: FILTER_BY_STORE, payload: ticketsResponse.data });
   };
 };
@@ -91,7 +98,7 @@ export const filterByStore = (almacen) => {
 export const searchByCode = (code) => {
   return async function (dispatch) {
     try {
-      const searchResponse = await axios.get(`/tickets/?code=${code}`);
+      const searchResponse = await axios.get(`/tickets/?code=${code}`, config);
       dispatch({ type: SEARCH_BY_CODE, payload: searchResponse.data });
     } catch (error) {
       console.error("Ticket not found: ", error);
@@ -103,7 +110,7 @@ export const searchByCode = (code) => {
 export const postUser = (userInfo) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post("/user", userInfo);
+      const response = await axios.post("/user", userInfo, config);
       dispatch({ type: POST_USER, payload: response.config.data });
     } catch (error) {
       console.log(error);
@@ -115,9 +122,12 @@ export const postUser = (userInfo) => {
 export const searchByDocument = (document) => {
   return async function (dispatch) {
     try {
-      const searchResponse = await axios.get(`/user/?numDocumento=${document}`);
+      const searchResponse = await axios.get(
+        `/user/?numDocumento=${document}`,
+        config
+      );
       dispatch({ type: SEARCH_BY_DOCUMENT, payload: searchResponse.data });
-      console.log(searchResponse)
+      console.log(searchResponse);
     } catch (error) {
       console.log("Document error ", error);
     }
@@ -127,7 +137,7 @@ export const searchByDocument = (document) => {
 export const postTicket = (ticketInfo) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post("/tickets", ticketInfo);
+      const response = await axios.post("/tickets", ticketInfo, config);
       dispatch({ type: POST_TICKET, payload: ticketInfo });
       console.log(response);
     } catch (error) {
@@ -140,7 +150,7 @@ export const postTicket = (ticketInfo) => {
 export const getUserTickets = (numDocumento) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`/tickets/${numDocumento}`);
+      const response = await axios.get(`/tickets/${numDocumento}`, config);
       dispatch({ type: GET_USER_TICKETS, payload: response.data });
     } catch (error) {
       console.log("error:", error);
@@ -153,4 +163,4 @@ export function getClean() {
     type: GET_CLEAN,
     payload: [],
   };
-};
+}
