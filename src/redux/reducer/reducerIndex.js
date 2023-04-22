@@ -1,7 +1,5 @@
 import {
   GET_TICKETS,
-  GET_STORES,
-  GET_STORE,
   GET_USERS,
   FILTER_BY_STORE,
   SEARCH_BY_CODE,
@@ -40,7 +38,7 @@ export const initialState = {
   loggedUser: {},
   user: [],
   admin: {},
-  userTickets : [],
+  userTickets: [],
   orderedChange: false,
   ticketDeleted: false,
 };
@@ -98,8 +96,8 @@ export default function reducer(state = initialState, action) {
     case POST_TICKET:
       return {
         ...state,
-        allTickets: [...state.allTickets, action.payload], 
-        userTickets: [...state.userTickets, action.payload]
+        allTickets: [...state.allTickets, action.payload],
+        userTickets: [...state.userTickets, action.payload],
       };
 
     case SEARCH_BY_DOCUMENT:
@@ -124,7 +122,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         ticketDeleted: !state.ticketDeleted,
-        allTickets: state.allTickets.filter(t => t.code !== action.payload)
+        allTickets: state.allTickets.filter((t) => t.code !== action.payload),
       };
 
     case PUT_ADMIN_COUNTDOWN:
@@ -139,12 +137,12 @@ export default function reducer(state = initialState, action) {
         userTickets: action.payload,
       };
 
-      case GET_CLEAN: {
-        return {
-          ...state,
-          dogsDetail: action.payload,
-        };
-      }
+    case GET_CLEAN: {
+      return {
+        ...state,
+        dogsDetail: action.payload,
+      };
+    }
 
     default:
       return {
